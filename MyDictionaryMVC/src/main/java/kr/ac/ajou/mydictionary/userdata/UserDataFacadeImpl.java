@@ -1,5 +1,7 @@
 package kr.ac.ajou.mydictionary.userdata;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,10 +19,11 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	public int insertUser(String userId) {
 		return 0;
 	}
-
+	
 	@Override
-	public String selectUser(String userId) {
-		String result = mapper.selectUserById(userId).toString();
+	public User selectUser(String userId) {
+		User result = mapper.selectUserById(userId);
+		
 		return result;
 	}
 
@@ -40,7 +43,7 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	}
 
 	@Override
-	public String selectFriend(String userId) {
+	public ArrayList<User> selectFriend(String userId) {
 		return null;
 	}
 
