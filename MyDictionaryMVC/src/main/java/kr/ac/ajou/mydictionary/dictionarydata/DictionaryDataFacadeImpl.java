@@ -8,22 +8,46 @@ import org.springframework.stereotype.Repository;
 
 @Repository("dictionaryDataBaseFacade")
 public class DictionaryDataFacadeImpl implements DictionaryDataFacade {
+	private static final String ESCAPE = "-";
 	@Autowired
 	MongoTemplate mongo;
 
+	private String makeKey(String userId, String keyword) {
+		return userId + ESCAPE + keyword;
+	}
+
+	private Query makeQueryByKey(String userId, String keyword) {
+		return Query.query(Criteria.where("key").is(makeKey(userId, keyword)));
+	}
+	
+	private Query makeQueryByUserId(String userId) {
+		return Query.query(Criteria.where("key").regex(userId + ESCAPE + ".*"));
+	}
+
 	@Override
 	public void setDictionary(String userId, String keyword, String document) {
-		Dictionary dictionary = new Dictionary(userId + keyword, document);
-		
+		Dictionary dictionary = new Dictionary(makeKey(userId, keyword), document);
 		mongo.save(dictionary);
 	}
 
 	@Override
-	public String getDictionary(String userId, String keyword) {
-		Query query = Query.query(Criteria.where("key").is(userId + keyword));
-		Dictionary document = mongo.findOne(query, Dictionary.class);
-		
-		return document.toString();
+	public Dictionary getDictionary(String userId, String keyword) {
+		return mongo.findOne(makeQueryByKey(userId, keyword), Dictionary.class);
+	}
+
+	@Override
+	public void deleteDictionary(String userId, String keyword) {
+		mongo.remove(makeQueryByKey(userId, keyword), Dictionary.class);
+	}
+
+	@Override
+	public long countByUserId(String userId) {
+		return mongo.count(makeQueryByUserId(userId), Dictionary.class);
+	}
+
+	@Override
+	public long countAll() {
+		return mongo.findAll(Dictionary.class).size();
 	}
 
 	/*

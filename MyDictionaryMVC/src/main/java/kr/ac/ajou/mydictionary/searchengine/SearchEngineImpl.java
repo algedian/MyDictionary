@@ -14,6 +14,7 @@ public class SearchEngineImpl implements SearchEngine {
 	
 	@Override
 	public void searchTest() {
+		String result ="";
 		
 	}
 }

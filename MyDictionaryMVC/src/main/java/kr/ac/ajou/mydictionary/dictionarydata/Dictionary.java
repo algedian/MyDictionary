@@ -13,18 +13,16 @@ public class Dictionary {
 	private Date createTime;
 	private Date updateTime;
 
-	// @Field(value = "document");
 	private String document;
 
 	public Dictionary() {
-		createTime = new Date();
-		updateTime = null;
+
 	}
 
 	public Dictionary(String key, String document) {
-		super();
-
 		this.key = key;
+		createTime = new Date();
+		updateTime = null;
 		this.document = document;
 	}
 

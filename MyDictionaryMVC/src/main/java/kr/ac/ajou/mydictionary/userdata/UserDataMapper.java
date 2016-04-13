@@ -16,32 +16,83 @@ public interface UserDataMapper {
 	 * 
 	 * @Result(property = "userId", column = "userId") })
 	 */
-	
+
 	static final String INSERT_USER_QUERY = "INSERT INTO user (userId, email, pictureURL) VALUES (#{userId}, #{email}, #{pictureURL})";
+
 	/**
-	 * Insert an user from user
+	 * Inserts an user to user table
 	 * 
-	 * @param User (do not use index)
-	 * @return int - success:true or fail:false
+	 * @param
+	 * @return int - success:1 or fail:0
 	 * */
 	@Insert(INSERT_USER_QUERY)
 	public int insertUser(User user);
 
-	static final String SELECT_USER_QUERY = "SELECT * FROM user WHERE userId = #{userId}";
+	static final String SELECT_USER_BY_ID_QUERY = "SELECT * FROM user WHERE userId = #{userId}";
+
 	/**
 	 * Returns an user from userId
 	 * 
-	 * @param userId
-	 * @return User
+	 * @param
+	 * @return User fail:null
 	 * */
-	@Select(SELECT_USER_QUERY)
+	@Select(SELECT_USER_BY_ID_QUERY)
 	public User selectUserById(String userId);
 
-	@Update("UPDATE user SET userId = #replacement WHERE userId = #userId")
-	public int updateUser(String userId, String replacement);
+	static final String SELECT_USER_BY_EMAIL_QUERY = "SELECT * FROM user WHERE email = #{email}";
 
-	@Delete("DELETE FROM user WHERE userId = #userId")
+	/**
+	 * Returns an user from email
+	 * 
+	 * @param
+	 * @return User fail:null
+	 * */
+	@Select(SELECT_USER_BY_EMAIL_QUERY)
+	public User selectUserByEmail(String email);
+
+	static final String UPDATE_USER_BY_ID_QUERY = "UPDATE user SET userId = #{1.userId}, email = #{1.email}, pictureURL = #{1.pictureURL} WHERE userId = #{0}";
+
+	/**
+	 * Updates an user to user table from userId
+	 * 
+	 * @param
+	 * @return int - success:1 or fail:0
+	 * */
+	@Update(UPDATE_USER_BY_ID_QUERY)
+	public int updateUserById(String userId, User replacement);
+
+	static final String UPDATE_USER_BY_EMAIL_QUERY = "UPDATE user SET userId = #{1.userId}, email = #{1.email}, pictureURL = #{1.pictureURL} WHERE email = #{0}";
+
+	/**
+	 * Updates an user to user table from email
+	 * 
+	 * @param
+	 * @return int - success:1 or fail:0
+	 * */
+	@Update(UPDATE_USER_BY_EMAIL_QUERY)
+	public int updateUserByEmail(String email, User replacement);
+
+	static final String DELETE_USER_BY_ID_QUERY = "DELETE FROM user WHERE userId = #{userId}";
+
+	/**
+	 * Deletes an user to user table from userId
+	 * 
+	 * @param
+	 * @return int - success:1 or fail:0
+	 * */
+	@Delete(DELETE_USER_BY_ID_QUERY)
 	public int deleteUserById(String userId);
+
+	static final String DELETE_USER_BY_EMAIL_QUERY = "DELETE FROM user WHERE email = #{email}";
+
+	/**
+	 * Deletes an user to user table from email
+	 * 
+	 * @param
+	 * @return int - success:1 or fail:0
+	 * */
+	@Delete(DELETE_USER_BY_EMAIL_QUERY)
+	public int deleteUserByEmail(String email);
 
 	/* friend transaction은 죄다 Join 들어가야 할듯. */
 	@Insert("INSERT INTO friend (userId, friendId) VALUES (#userId, #friendId)")
@@ -73,14 +124,14 @@ public interface UserDataMapper {
 	// @Arg(property = "firstName", column = "first_name")
 	// @Arg(property = "lastName", column = "last_name") })
 	// List<User> getUsers();
-	
+
 	// @Select("select * from users")
 	// @ConstructorArgs({
-	//  @Args(property = "id", column = "id", id = "true"),
+	// @Args(property = "id", column = "id", id = "true"),
 	// })
 	// @Results({
-	//  @Result(property = "firstName", column = "first_name")
-	//  @Result(property = "lastName", column = "last_name")
+	// @Result(property = "firstName", column = "first_name")
+	// @Result(property = "lastName", column = "last_name")
 	// })
 	// List<User> getUsers();
 }

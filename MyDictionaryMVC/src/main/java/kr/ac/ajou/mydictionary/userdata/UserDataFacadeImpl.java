@@ -1,5 +1,7 @@
 package kr.ac.ajou.mydictionary.userdata;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,24 +16,38 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	}
 
 	@Override
-	public int insertUser(String userId) {
-		return 0;
+	public int insertUser(User user) {
+		return mapper.insertUser(user);
+	}
+	
+	@Override
+	public User selectUserById(String userId) {
+		return mapper.selectUserById(userId);
+	}
+	
+	@Override
+	public User selectUserByEmail(String email) {
+		return mapper.selectUserByEmail(email);
+	}
+	
+	@Override
+	public int updateUserById(String userId, User replacement) {
+		return mapper.updateUserById(userId, replacement);
 	}
 
 	@Override
-	public String selectUser(String userId) {
-		String result = mapper.selectUserById(userId).toString();
-		return result;
+	public int updateUserByEmail(String email, User replacement) {
+		return mapper.updateUserByEmail(email, replacement);
 	}
 
 	@Override
-	public int updateUser(String userId, String replacement) {
-		return 0;
+	public int deleteUserById(String userId) {
+		return mapper.deleteUserById(userId);
 	}
-
+	
 	@Override
-	public int deleteUser(String userId) {
-		return 0;
+	public int deleteUserByEmail(String email) {
+		return mapper.deleteUserByEmail(email);
 	}
 
 	@Override
@@ -40,7 +56,7 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	}
 
 	@Override
-	public String selectFriend(String userId) {
+	public ArrayList<User> selectFriend(String userId) {
 		return null;
 	}
 
