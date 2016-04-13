@@ -69,23 +69,50 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView loginGetTest(HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("Get in login get method");
+		ModelAndView mv = new ModelAndView("loginTest");
+		
 		try {
-			userService.login();
-			ModelAndView mv = new ModelAndView();
-			
+			//userService.login();	
 			String result = "";
 			mv.addObject(result);
 			
-			return mv;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			// exception 발생시 실패 페이지로 이동 하면 될듯
 		}
 		
-		return null;
+		return mv;
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, Model model) {
+		System.err.println("Get in login post method");
+		
+		ModelAndView mv = new ModelAndView("loginResult");
+		
+		model.addAttribute("LoginResult", "FAIL");
+		
+		String idTokenString = request.getParameter("idtoken");
+		
+		try {
+			
+			if(userService.login(idTokenString)) {
+				
+				model.addAttribute("LoginResult", "SUCCESS");
+				//친구리스트, 내 사전데이터리스트 등도 같이 보내야 할것 같아염.. 로그인 성공시 뭐뭐 클라로 보내주어야 할지?
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			// exception 발생시 실패 페이지로 이동 하면 될듯
+		}
+		
+		return mv;
 	}
 	
 	@RequestMapping(value = "/loginTest", method = RequestMethod.POST)
