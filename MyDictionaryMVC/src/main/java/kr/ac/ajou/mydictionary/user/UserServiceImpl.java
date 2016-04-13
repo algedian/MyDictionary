@@ -41,6 +41,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void loginTest(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		userDataFacade.selectUser(userId);
+		userDataFacade.selectUserById(userId);
 	}
 }

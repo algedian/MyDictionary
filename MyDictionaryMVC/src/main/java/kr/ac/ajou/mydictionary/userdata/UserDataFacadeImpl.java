@@ -16,25 +16,38 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	}
 
 	@Override
-	public int insertUser(String userId) {
-		return 0;
+	public int insertUser(User user) {
+		return mapper.insertUser(user);
 	}
 	
 	@Override
-	public User selectUser(String userId) {
-		User result = mapper.selectUserById(userId);
-		
-		return result;
+	public User selectUserById(String userId) {
+		return mapper.selectUserById(userId);
+	}
+	
+	@Override
+	public User selectUserByEmail(String email) {
+		return mapper.selectUserByEmail(email);
+	}
+	
+	@Override
+	public int updateUserById(String userId, User replacement) {
+		return mapper.updateUserById(userId, replacement);
 	}
 
 	@Override
-	public int updateUser(String userId, String replacement) {
-		return 0;
+	public int updateUserByEmail(String email, User replacement) {
+		return mapper.updateUserByEmail(email, replacement);
 	}
 
 	@Override
-	public int deleteUser(String userId) {
-		return 0;
+	public int deleteUserById(String userId) {
+		return mapper.deleteUserById(userId);
+	}
+	
+	@Override
+	public int deleteUserByEmail(String email) {
+		return mapper.deleteUserByEmail(email);
 	}
 
 	@Override
