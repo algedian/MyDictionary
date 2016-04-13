@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import kr.ac.ajou.mydictionary.userdata.UserDataFacade;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
@@ -18,7 +20,8 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
-
+	public static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	
 	@Resource(name = "userDataBaseFacade")
 	private UserDataFacade userDataFacade;
 
@@ -50,7 +53,8 @@ public class UserServiceImpl implements UserService {
 		
 		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(httpTransport, JSON_FACTORY)
 				.setAudience(Arrays.asList(CLIENT_ID))
-				.setIssuer("https://accounts.google.com").build();
+				//.setIssuer("https://accounts.google.com").build();
+				.setIssuer("accounts.google.com").build();
 		
 		GoogleIdToken idToken = verifier.verify(idTokenString);
 		
@@ -85,17 +89,9 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 
-	/* 여기서부턴 테스트 */
-
-	/**
-	 * 디비만 테스트
-	 * 
-	 * @exception 로그인
-	 *                실패
-	 */
 	@Override
 	public void loginTest(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		userDataFacade.selectUser(userId);
+		
 	}
 }

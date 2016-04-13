@@ -41,7 +41,7 @@
 			console.log("ID Token: " + id_token);
 			
 			var xhr = new XMLHttpRequest();
-			xhr.open('POST', 'http://localhost:8080/ajou/login');
+			xhr.open('POST', 'http://dijkstra.ajou.ac.kr:8080/MyDictionaryMVC/login');
 			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhr.onload = function() {
 			  console.log('Signed in as: ' + xhr.responseText);
