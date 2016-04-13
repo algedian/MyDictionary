@@ -50,7 +50,7 @@ public interface UserDataMapper {
 	@Select(SELECT_USER_BY_EMAIL_QUERY)
 	public User selectUserByEmail(String email);
 
-	static final String UPDATE_USER_BY_ID_QUERY = "UPDATE user SET userId = #{remplacement.userId}, email = #{email}, pictureURL = #{pictureURL} WHERE userId = #{userId}";
+	static final String UPDATE_USER_BY_ID_QUERY = "UPDATE user SET userId = #{1.userId}, email = #{1.email}, pictureURL = #{1.pictureURL} WHERE userId = #{0}";
 
 	/**
 	 * Updates an user to user table from userId
@@ -61,7 +61,7 @@ public interface UserDataMapper {
 	@Update(UPDATE_USER_BY_ID_QUERY)
 	public int updateUserById(String userId, User replacement);
 
-	static final String UPDATE_USER_BY_EMAIL_QUERY = "UPDATE user SET userId = #{userId}, email = #{remplacement.email}, pictureURL = #{pictureURL} WHERE email = #{remplacement.email}";
+	static final String UPDATE_USER_BY_EMAIL_QUERY = "UPDATE user SET userId = #{1.userId}, email = #{1.email}, pictureURL = #{1.pictureURL} WHERE email = #{0}";
 
 	/**
 	 * Updates an user to user table from email

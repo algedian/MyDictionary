@@ -34,7 +34,6 @@ public class UserDataFacadeTest extends AbstractJUnit4SpringContextTests {
 	@Test
 	public void insertUserTest() {
 		int result = userDataFacade.insertUser(testUser);
-
 		assertEquals(result, 1);
 	}
 
@@ -70,17 +69,27 @@ public class UserDataFacadeTest extends AbstractJUnit4SpringContextTests {
 		assertEquals(result, 1);
 		
 		User node = userDataFacade.selectUserByEmail(replaceUser.getEmail());
+		assertEquals(node.getUserId(), replaceUser.getUserId());
+		assertEquals(node.getEmail(), replaceUser.getEmail());
+		assertEquals(node.getPictureURL(), replaceUser.getPictureURL());
+	}
+	
+	@Test
+	public void updateUserByEmailTest() {
+		int result = userDataFacade.updateUserByEmail(replaceUser.getEmail(), testUser);
+		assertEquals(result, 1);
+		
+		User node = userDataFacade.selectUserByEmail(testUser.getEmail());
 		assertEquals(node.getUserId(), testUser.getUserId());
 		assertEquals(node.getEmail(), testUser.getEmail());
 		assertEquals(node.getPictureURL(), testUser.getPictureURL());
 		
-		
-		
+		// userDataFacade.deleteUserByEmail(testUser.getEmail());
 	}
 
 	@SuppressWarnings("deprecation")
 	@Test
-	public void deleteUserByIdTest() {
+	public void deleteUserByIdTest() {		
 		int result = userDataFacade.deleteUserById(testUser.getUserId());
 		assertEquals(result, 1);
 		
