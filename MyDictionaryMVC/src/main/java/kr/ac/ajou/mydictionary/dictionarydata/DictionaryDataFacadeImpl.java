@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository("dictionaryDataBaseFacade")
 public class DictionaryDataFacadeImpl implements DictionaryDataFacade {
-	private static final String ESCAPE = "-";
+	private static final String ESCAPE = "__";
+	
 	@Autowired
 	MongoTemplate mongo;
 
