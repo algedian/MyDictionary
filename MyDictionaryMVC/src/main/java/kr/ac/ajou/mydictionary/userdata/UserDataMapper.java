@@ -17,7 +17,7 @@ public interface UserDataMapper {
 	 * @Result(property = "userId", column = "userId") })
 	 */
 
-	static final String INSERT_USER_QUERY = "INSERT INTO user (userId, email, pictureURL) VALUES (#{userId}, #{email}, #{pictureURL})";
+	static final String INSERT_USER_QUERY = "INSERT INTO user (userId, name, email, pictureURL) VALUES (#{userId}, #{name}, #{email}, #{pictureURL})";
 
 	/**
 	 * Inserts an user to user table
@@ -50,7 +50,7 @@ public interface UserDataMapper {
 	@Select(SELECT_USER_BY_EMAIL_QUERY)
 	public User selectUserByEmail(String email);
 
-	static final String UPDATE_USER_BY_ID_QUERY = "UPDATE user SET userId = #{1.userId}, email = #{1.email}, pictureURL = #{1.pictureURL} WHERE userId = #{0}";
+	static final String UPDATE_USER_BY_ID_QUERY = "UPDATE user SET userId = #{1.userId}, name = #{1.name}, email = #{1.email}, pictureURL = #{1.pictureURL} WHERE userId = #{0}";
 
 	/**
 	 * Updates an user to user table from userId
@@ -61,7 +61,7 @@ public interface UserDataMapper {
 	@Update(UPDATE_USER_BY_ID_QUERY)
 	public int updateUserById(String userId, User replacement);
 
-	static final String UPDATE_USER_BY_EMAIL_QUERY = "UPDATE user SET userId = #{1.userId}, email = #{1.email}, pictureURL = #{1.pictureURL} WHERE email = #{0}";
+	static final String UPDATE_USER_BY_EMAIL_QUERY = "UPDATE user SET userId = #{1.userId}, name = #{1.name}, email = #{1.email}, pictureURL = #{1.pictureURL} WHERE email = #{0}";
 
 	/**
 	 * Updates an user to user table from email
@@ -94,18 +94,40 @@ public interface UserDataMapper {
 	@Delete(DELETE_USER_BY_EMAIL_QUERY)
 	public int deleteUserByEmail(String email);
 
-	/* friend transaction은 죄다 Join 들어가야 할듯. */
-	@Insert("INSERT INTO friend (userId, friendId) VALUES (#userId, #friendId)")
-	public int insertFriend(String userId, String friendId);
+	static final String INSERT_FRIEND_BY_FRIEND_EMAIL = "INSERT INTO friend(userIndex, friendIndex) VALUES (#{0}, (SELECT user.index FROM user WHERE user.email=#{1}))";
 
-	/* 이거 SQL문 따로 맹들어야뎀, Join으로 */
-	@Select("SELECT * FROM friend WHERE userId = #userId")
-	public ArrayList<User> selectFriend(String userId);
+	/**
+	 * Inserts an friend to friend table from userIndex and friendEmail
+	 * 
+	 * @param
+	 * @return int - success:1 or fail:0
+	 * */
+	@Insert(INSERT_FRIEND_BY_FRIEND_EMAIL)
+	public int insertFriendByFriendEmail(int userIndex, String friendEmail);
+
+	final static String SELECT_FRIEND_BY_USER_INDEX_QUERY = "SELECT user.userId, user.name, user.email, user.pictureURL FROM friend INNER JOIN user ON friend.friendIndex = user.index WHERE friend.userIndex = #{userIndex}";
+
+	/**
+	 * Selects all friends to friend table from userIndex
+	 * 
+	 * @param
+	 * @return ArrayList<User> - success:many or fail:null?
+	 * */
+	@Select(SELECT_FRIEND_BY_USER_INDEX_QUERY)
+	public ArrayList<User> selectFriendByUserIndex(int userIndex);
 
 	/* @Update("UPDATE friend ") 안씁니다 */
 
-	@Delete("DELETE FROM friend WHERE userId = #userId AND friendId = #friendId")
-	public int deletefriend(String userId, String friendId);
+	final static String DELETE_FRIEND_BY_FRIEND_EMAIL = "DELETE FROM friend WHERE userIndex=#{0} AND friendIndex=(SELECT user.index FROM user WHERE user.email=#{1})";
+
+	/**
+	 * Deletes an friend to friend table from userIndex and friendEmail
+	 * 
+	 * @param
+	 * @return int - success:1 or fail:0
+	 * */
+	@Delete(DELETE_FRIEND_BY_FRIEND_EMAIL)
+	public int deletefriend(int userIndex, String friendEmail);
 
 	// public void userInsert(String userId);
 	// public String userSelect(String userId);

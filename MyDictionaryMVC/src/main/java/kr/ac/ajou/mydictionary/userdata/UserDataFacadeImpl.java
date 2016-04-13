@@ -51,13 +51,13 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	}
 
 	@Override
-	public int insertFriend(String userId, String friendId) {
-		return 0;
+	public int insertFriendByFriendEmail(int userIndex, String friendEmail) {
+		return mapper.insertFriendByFriendEmail(userIndex, friendEmail);
 	}
 
 	@Override
-	public ArrayList<User> selectFriend(String userId) {
-		return null;
+	public ArrayList<User> selectFriendByUserIndex(int userIndex) {
+		return mapper.selectFriendByUserIndex(userIndex);
 	}
 
 	@Override
@@ -66,8 +66,8 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	}
 
 	@Override
-	public int deleteFriend(String userId, String friendId) {
-		return 0;
+	public int deletefriend(int userIndex, String friendEmail) {
+		return mapper.deletefriend(userIndex, friendEmail);
 	}
 
 }

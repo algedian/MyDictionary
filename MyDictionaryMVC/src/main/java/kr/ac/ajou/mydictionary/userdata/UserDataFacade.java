@@ -63,8 +63,32 @@ public interface UserDataFacade {
 	 * */
 	public int deleteUserByEmail(String email);
 	
-	public int insertFriend(String userId, String friendId);
-	public ArrayList<User> selectFriend(String userId);
+	/**
+	 * Inserts an friend to friend table from userIndex and friendEmail
+	 * 
+	 * @param
+	 * @return int - success:1 or fail:0
+	 * */
+	public int insertFriendByFriendEmail(int userIndex, String friendEmail);
+	/**
+	 * Selects all friends to friend table from userIndex
+	 * 
+	 * @param
+	 * @return ArrayList<User> - success:many or fail:null?
+	 * */
+	public ArrayList<User> selectFriendByUserIndex(int userIndex);
+	
+	/**
+	 * 안쓸꺼라능
+	 * */
+	@Deprecated
 	public int updateFriend(String userId);
-	public int deleteFriend(String userId, String friendId);
+	
+	/**
+	 * Deletes an friend to friend table from userIndex and friendEmail
+	 * 
+	 * @param
+	 * @return int - success:1 or fail:0
+	 * */
+	public int deletefriend(int userIndex, String friendEmail);
 }

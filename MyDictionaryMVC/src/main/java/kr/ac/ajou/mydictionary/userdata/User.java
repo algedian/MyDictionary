@@ -3,6 +3,7 @@ package kr.ac.ajou.mydictionary.userdata;
 public class User {
 	private Integer index;
 	private String userId;
+	private String name;
 	private String email;
 	private String pictureURL;
 
@@ -10,10 +11,11 @@ public class User {
 		super();
 	}
 
-	public User(Integer index, String userId, String email, String pictureURL) {
+	public User(Integer index, String userId, String name, String email, String pictureURL) {
 		super();
 		this.index = index;
 		this.userId = userId;
+		this.name = name;
 		this.email = email;
 		this.pictureURL = pictureURL;
 	}
@@ -32,6 +34,14 @@ public class User {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -55,6 +65,7 @@ public class User {
 		StringBuilder buf = new StringBuilder(200);
 		buf.append("{index=" + index);
 		buf.append(", userId=" + userId);
+		buf.append(", name=" + name);
 		buf.append(", email=" + email);
 		buf.append("}");
 
