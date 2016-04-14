@@ -8,6 +8,7 @@
 <meta name="google-signin-client_id"
 	content="768889397569-ifca7s46aplo8i4ikt95ba6ihjmmfdlf.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -39,16 +40,65 @@
 			// The ID token you need to pass to your backend:
 			var id_token = googleUser.getAuthResponse().id_token;
 			console.log("ID Token: " + id_token);
-			
+
 			var xhr = new XMLHttpRequest();
-			xhr.open('POST', 'http://dijkstra.ajou.ac.kr:8080/MyDictionaryMVC/login');
-			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			xhr.open('POST', 'http://localhost:8080/ajou/user/login');
+			//xhr.open('POST', 'http://dijkstra.ajou.ac.kr:8080/MyDictionaryMVC/login');
+			xhr.setRequestHeader('Content-Type',
+					'application/x-www-form-urlencoded');
 			xhr.onload = function() {
-			  console.log('Signed in as: ' + xhr.responseText);
+				console.log('Signed in as: ' + xhr.responseText);
+				getUserByEmailTest();
 			};
-			
+
 			xhr.send('idtoken=' + id_token);
 		};
+
+		function getUserByEmailTest() {
+
+			var httpRequest;
+			if (window.XMLHttpRequest) { // 모질라, 사파리등 그외 브라우저, ...
+				httpRequest = new XMLHttpRequest();
+			} else if (window.ActiveXObject) { // IE 8 이상
+				httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+
+			//var email = encodeURI(encodeURIComponent('borichyaa@gmail.com'));
+			var email = 'borichyaa@gmail.com';
+			var emailarr = email.split("@");
+			var id = emailarr[0];
+			var domain = emailarr[1];
+			console.log(domain);
+			/*httpRequest.onreadystatechange = function(data) {
+				if (httpRequest.readyState === 4) {
+					if (httpRequest.status === 200) {
+						console.log(httpRequest.responseText);
+					} else {
+						console.log(data);
+						console.log('There was a problem with the request.');
+					}
+				}
+			};
+			
+			httpRequest.open('POST', 'http://localhost:8080/ajou/user/' + id, true);
+			//httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			httpRequest.setRequestHeader('Accept', 'application/json');
+			httpRequest.send(domain);
+			*/
+			$.ajax({
+				url:'http://localhost:8080/ajou/user/' + id,
+				type: "post",
+				contentType: 'text/plain',
+				data: domain,
+				dataType: 'application/json',
+				success: function(data){
+					console.log(data);
+				},
+				fail: function(err){
+					console.log(err);
+				}
+			});
+		}
 	</script>
 </body>
 </html>

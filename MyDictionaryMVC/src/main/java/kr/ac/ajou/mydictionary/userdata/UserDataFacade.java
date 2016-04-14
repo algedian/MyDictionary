@@ -28,7 +28,7 @@ public interface UserDataFacade {
 	 * @param
 	 * @return UserModel - success:User or User fail:null
 	 * */
-	@Deprecated
+	//@Deprecated 친구검색 시 이메일로 유저검색하는 것이 필요하므로 다시 살려보았사옵니다.
 	public UserModel selectUserByEmail(String email);
 	
 	/**

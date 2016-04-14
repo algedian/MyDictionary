@@ -21,18 +21,17 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	public static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-	
+
 	@Resource(name = "userDataBaseFacade")
 	private UserDataFacade userDataFacade;
-	
-	/** Global instance of the HTTP transport. */
+
 	private static final String CLIENT_ID = "768889397569-ifca7s46aplo8i4ikt95ba6ihjmmfdlf.apps.googleusercontent.com";
-
-	/** Global instance of the HTTP transport. */
-	private static HttpTransport httpTransport;
-
+	
 	/** Global instance of the JSON factory. */
 	private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+	
+	/** Global instance of the HTTP transport. */
+	private static HttpTransport httpTransport;
 
 	public UserServiceImpl() {
 		super();
@@ -40,49 +39,62 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean login(String idTokenString) throws Exception {
-		
+
 		httpTransport = GoogleNetHttpTransport.newTrustedTransport();
-		
+
 		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(httpTransport, JSON_FACTORY)
-				.setAudience(Arrays.asList(CLIENT_ID))
-				//.setIssuer("https://accounts.google.com").build();
-				.setIssuer("accounts.google.com").build();
-		
+				.setAudience(Arrays.asList(CLIENT_ID)).setIssuer("accounts.google.com").build();
+
 		GoogleIdToken idToken = verifier.verify(idTokenString);
-		
-		System.err.println(idTokenString+" => "+idToken);
-		
+
 		if (idToken != null) {
 			Payload payload = idToken.getPayload();
 
-			// Print user identifier
+			// Get user identifier
 			String userId = payload.getSubject();
-			System.out.println("User ID: " + userId);
 
 			// Get profile information from payload
 			String email = payload.getEmail();
 			boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
 			String name = (String) payload.get("name");
-			String pictureUrl = (String) payload.get("picture");
-			String locale = (String) payload.get("locale");
-			String familyName = (String) payload.get("family_name");
-			String givenName = (String) payload.get("given_name");
-			
-			System.err.println("userID:"+userId+" email:"+email+" verified:"+emailVerified+" name:"+name);
-			
-			if(emailVerified) {
-				System.err.println("userID:"+userId+" email:"+email+" verified:"+emailVerified+" name:"+name);
-				// UserDataFacade call to store user info
-				return true;	
-			}
-		}
-		
-		System.err.println("Invalid ID token.");
-		return false;
+			String pictureURL = (String) payload.get("picture");
+
+			if (emailVerified) {
+				
+				if (userDataFacade.selectUserById(userId) != null) 
+					return true;// login success
+				else {
+					//일단은 초기값으로 인덱스를 -1을 넣어놓고... 파사드에서는 insert 시 id는 안읽으니까 상관없을듯합니당.
+					UserModel user = new UserModel(-1, userId, name, email, pictureURL);
+					
+					if (userDataFacade.insertUser(user) == 1)// UserDataFacade call to store user info
+						return true;
+					else
+						return false;
+						
+				}//end user dup check if
+				
+			} else {
+				System.err.println("Email is not verified: " + email);
+				return false;
+			}//end email verifying check if
+		} else {
+			System.err.println("Invalid ID token: " +  idTokenString);
+			return false;
+		}//end token check if
+	}//end login method
+
+	/*
+	 * 사용자를 email로 검색하는 것은 email로 user를 select 해오는 것이 필요하다고 생각되옵니다.
+	 * 그래서 deprecated 된 selectUserByEmail을 부활시켰사옵니다.*/
+	@Override
+	public UserModel getUserByEmail(String email) throws Exception {
+		return userDataFacade.selectUserByEmail(email);
 	}
 
 	@Override
 	public void loginTest(String userId) throws Exception {
 		userDataFacade.insertUser(new UserModel());
 	}
+
 }
