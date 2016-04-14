@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Resource(name = "userDataBaseFacade")
 	private UserDataFacade userDataFacade;
-
+	
 	/** Global instance of the HTTP transport. */
 	private static final String CLIENT_ID = "768889397569-ifca7s46aplo8i4ikt95ba6ihjmmfdlf.apps.googleusercontent.com";
 
@@ -91,7 +91,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void loginTest(String userId) throws Exception {
-		// TODO Auto-generated method stub
-		
+		userDataFacade.insertUser(new UserModel());
 	}
 }

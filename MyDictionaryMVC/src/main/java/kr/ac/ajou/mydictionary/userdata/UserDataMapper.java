@@ -2,6 +2,8 @@ package kr.ac.ajou.mydictionary.userdata;
 
 import java.util.ArrayList;
 
+import kr.ac.ajou.mydictionary.user.UserModel;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -26,7 +28,7 @@ public interface UserDataMapper {
 	 * @return int - success:1 or fail:0
 	 * */
 	@Insert(INSERT_USER_QUERY)
-	public int insertUser(User user);
+	public int insertUser(UserModel user);
 
 	static final String SELECT_USER_BY_ID_QUERY = "SELECT * FROM user WHERE userId = #{userId}";
 
@@ -37,7 +39,7 @@ public interface UserDataMapper {
 	 * @return User fail:null
 	 * */
 	@Select(SELECT_USER_BY_ID_QUERY)
-	public User selectUserById(String userId);
+	public UserModel selectUserById(String userId);
 
 	static final String SELECT_USER_BY_EMAIL_QUERY = "SELECT * FROM user WHERE email = #{email}";
 
@@ -48,7 +50,7 @@ public interface UserDataMapper {
 	 * @return User fail:null
 	 * */
 	@Select(SELECT_USER_BY_EMAIL_QUERY)
-	public User selectUserByEmail(String email);
+	public UserModel selectUserByEmail(String email);
 
 	static final String UPDATE_USER_BY_ID_QUERY = "UPDATE user SET userId = #{1.userId}, name = #{1.name}, email = #{1.email}, pictureURL = #{1.pictureURL} WHERE userId = #{0}";
 
@@ -59,7 +61,7 @@ public interface UserDataMapper {
 	 * @return int - success:1 or fail:0
 	 * */
 	@Update(UPDATE_USER_BY_ID_QUERY)
-	public int updateUserById(String userId, User replacement);
+	public int updateUserById(String userId, UserModel replacement);
 
 	static final String UPDATE_USER_BY_EMAIL_QUERY = "UPDATE user SET userId = #{1.userId}, name = #{1.name}, email = #{1.email}, pictureURL = #{1.pictureURL} WHERE email = #{0}";
 
@@ -70,7 +72,7 @@ public interface UserDataMapper {
 	 * @return int - success:1 or fail:0
 	 * */
 	@Update(UPDATE_USER_BY_EMAIL_QUERY)
-	public int updateUserByEmail(String email, User replacement);
+	public int updateUserByEmail(String email, UserModel replacement);
 
 	static final String DELETE_USER_BY_ID_QUERY = "DELETE FROM user WHERE userId = #{userId}";
 
@@ -114,7 +116,7 @@ public interface UserDataMapper {
 	 * @return ArrayList<User> - success:many or fail:null?
 	 * */
 	@Select(SELECT_FRIEND_BY_USER_INDEX_QUERY)
-	public ArrayList<User> selectFriendByUserIndex(int userIndex);
+	public ArrayList<UserModel> selectFriendByUserIndex(int userIndex);
 
 	/* @Update("UPDATE friend ") 안씁니다 */
 

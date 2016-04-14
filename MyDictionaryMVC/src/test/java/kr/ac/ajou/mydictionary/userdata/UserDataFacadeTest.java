@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import javax.annotation.Resource;
 
+import kr.ac.ajou.mydictionary.user.UserModel;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,21 +24,21 @@ public class UserDataFacadeTest extends AbstractJUnit4SpringContextTests {
 	@Resource(name = "userDataBaseFacade")
 	UserDataFacade userDataFacade;
 
-	User testUser;
-	User replaceUser;
+	UserModel testUser;
+	UserModel replaceUser;
 
 	@Before
 	public void setUp() {
-		testUser = new User(0, "dcoun233", "name", "dcoun08@gmail.com", null);
-		replaceUser = new User(0, "dsfsdf", "name22","dcoun0000@gmail.com", "sdalkjasg;lk");
+		testUser = new UserModel(0, "dcoun233", "name", "dcoun08@gmail.com", null);
+		replaceUser = new UserModel(0, "dsfsdf", "name22","dcoun0000@gmail.com", "sdalkjasg;lk");
 	}
 
-	public void insertUser(User user) {
+	public void insertUser(UserModel user) {
 		int result = userDataFacade.insertUser(user);
 		assertEquals(result, 1);
 	}
 	
-	public void deleteUser(User user) {
+	public void deleteUser(UserModel user) {
 		int result = userDataFacade.deleteUserByEmail(user.getEmail());
 		assertEquals(result, 1);
 	}
@@ -46,7 +48,7 @@ public class UserDataFacadeTest extends AbstractJUnit4SpringContextTests {
 	public void selectUserByIdTest() {
 		insertUser(testUser);
 		
-		User result = userDataFacade.selectUserById(testUser.getUserId());
+		UserModel result = userDataFacade.selectUserById(testUser.getUserId());
 
 		assertEquals(result.getUserId(), testUser.getUserId());
 		assertEquals(result.getEmail(), testUser.getEmail());
@@ -61,7 +63,7 @@ public class UserDataFacadeTest extends AbstractJUnit4SpringContextTests {
 	@Test
 	public void selectUserByEmailTest() {
 		insertUser(testUser);
-		User result = userDataFacade.selectUserByEmail(testUser.getEmail());
+		UserModel result = userDataFacade.selectUserByEmail(testUser.getEmail());
 		
 		assertEquals(result.getUserId(), testUser.getUserId());
 		assertEquals(result.getEmail(), testUser.getEmail());
@@ -81,7 +83,7 @@ public class UserDataFacadeTest extends AbstractJUnit4SpringContextTests {
 		int result = userDataFacade.updateUserById(testUser.getUserId(), replaceUser);
 		assertEquals(result, 1);
 		
-		User node = userDataFacade.selectUserByEmail(replaceUser.getEmail());
+		UserModel node = userDataFacade.selectUserByEmail(replaceUser.getEmail());
 		assertEquals(node.getUserId(), replaceUser.getUserId());
 		assertEquals(node.getName(), replaceUser.getName());
 		assertEquals(node.getEmail(), replaceUser.getEmail());
@@ -97,7 +99,7 @@ public class UserDataFacadeTest extends AbstractJUnit4SpringContextTests {
 		int result = userDataFacade.updateUserByEmail(replaceUser.getEmail(), testUser);
 		assertEquals(result, 1);
 		
-		User node = userDataFacade.selectUserByEmail(testUser.getEmail());
+		UserModel node = userDataFacade.selectUserByEmail(testUser.getEmail());
 		assertEquals(node.getUserId(), testUser.getUserId());
 		assertEquals(node.getName(), testUser.getName());
 		assertEquals(node.getEmail(), testUser.getEmail());

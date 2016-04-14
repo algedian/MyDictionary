@@ -2,6 +2,8 @@ package kr.ac.ajou.mydictionary.userdata;
 
 import java.util.ArrayList;
 
+import kr.ac.ajou.mydictionary.user.UserModel;
+
 public interface UserDataFacade {
 	
 	/**
@@ -10,7 +12,7 @@ public interface UserDataFacade {
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
-	public int insertUser(User user);
+	public int insertUser(UserModel user);
 	
 	/**
 	 * Returns an user from userId
@@ -18,8 +20,7 @@ public interface UserDataFacade {
 	 * @param
 	 * @return User fail:null
 	 * */
-	@Deprecated
-	public User selectUserById(String userId);
+	public UserModel selectUserById(String userId);
 	
 	/**
 	 * Returns an user from email
@@ -27,7 +28,8 @@ public interface UserDataFacade {
 	 * @param
 	 * @return User fail:null
 	 * */
-	public User selectUserByEmail(String email);
+	@Deprecated
+	public UserModel selectUserByEmail(String email);
 	
 	/**
 	 * Updates an user to user table from userId
@@ -35,8 +37,7 @@ public interface UserDataFacade {
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
-	@Deprecated
-	public int updateUserById(String userId, User replacement);
+	public int updateUserById(String userId, UserModel replacement);
 	
 	/**
 	 * Updates an user to user table from email
@@ -44,7 +45,8 @@ public interface UserDataFacade {
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
-	public int updateUserByEmail(String email, User replacement);
+	@Deprecated
+	public int updateUserByEmail(String email, UserModel replacement);
 	
 	/**
 	 * Deletes an user to user table from userId
@@ -52,7 +54,6 @@ public interface UserDataFacade {
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
-	@Deprecated
 	public int deleteUserById(String userId);
 	
 	/**
@@ -61,6 +62,7 @@ public interface UserDataFacade {
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
+	@Deprecated
 	public int deleteUserByEmail(String email);
 	
 	/**
@@ -70,13 +72,14 @@ public interface UserDataFacade {
 	 * @return int - success:1 or fail:0
 	 * */
 	public int insertFriendByFriendEmail(int userIndex, String friendEmail);
+	
 	/**
 	 * Selects all friends to friend table from userIndex
 	 * 
 	 * @param
 	 * @return ArrayList<User> - success:many or fail:null?
 	 * */
-	public ArrayList<User> selectFriendByUserIndex(int userIndex);
+	public ArrayList<UserModel> selectFriendByUserIndex(int userIndex);
 	
 	/**
 	 * 안쓸꺼라능

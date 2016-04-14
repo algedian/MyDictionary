@@ -1,5 +1,7 @@
 package kr.ac.ajou.mydictionary.dictionarydata;
 
+import kr.ac.ajou.mydictionary.document.DocumentModel;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -8,48 +10,49 @@ import org.springframework.stereotype.Repository;
 
 @Repository("dictionaryDataBaseFacade")
 public class DictionaryDataFacadeImpl implements DictionaryDataFacade {
-	private static final String ESCAPE = "__";
-	
 	@Autowired
 	MongoTemplate mongo;
 
-	private String makeKey(String userId, String keyword) {
-		return userId + ESCAPE + keyword;
-	}
-
-	private Query makeQueryByKey(String userId, String keyword) {
-		return Query.query(Criteria.where("key").is(makeKey(userId, keyword)));
-	}
-	
-	private Query makeQueryByUserId(String userId) {
-		return Query.query(Criteria.where("key").regex(userId + ESCAPE + ".*"));
-	}
-
 	@Override
-	public void setDictionary(String userId, String keyword, String document) {
-		Dictionary dictionary = new Dictionary(makeKey(userId, keyword), document);
+	public void setDictionary(Dictionary dictionary) {
 		mongo.save(dictionary);
 	}
 
 	@Override
-	public Dictionary getDictionary(String userId, String keyword) {
-		return mongo.findOne(makeQueryByKey(userId, keyword), Dictionary.class);
+	public DocumentModel getDictionaryByKey(String key) {
+		return mongo.findOne(Query.query(Criteria.where("key").is(key)), DocumentModel.class);
+	}
+	
+	@Override
+	public void updateDictionaryByKey(String key, Dictionary dictionary) {
+		// 몽고디비에서 업데이트 어떻게 하는지를 모ㅋ름ㅋ
 	}
 
 	@Override
-	public void deleteDictionary(String userId, String keyword) {
-		mongo.remove(makeQueryByKey(userId, keyword), Dictionary.class);
+	public void deleteDictionaryByKey(String key) {
+		mongo.remove(Query.query(Criteria.where("key").is(key)), DocumentModel.class);
 	}
 
 	@Override
-	public long countByUserId(String userId) {
-		return mongo.count(makeQueryByUserId(userId), Dictionary.class);
+	public long countByKey(String key) {
+		return mongo.count(Query.query(Criteria.where("key").regex(key)), DocumentModel.class);
 	}
 
 	@Override
 	public long countAll() {
-		return mongo.findAll(Dictionary.class).size();
+		return mongo.findAll(DocumentModel.class).size();
 	}
+
+	/*
+	 * private String makeKey(String userId, String keyword) { return userId +
+	 * ESCAPE + keyword; }
+	 * 
+	 * private Query makeQueryByKey(String userId, String keyword) { return
+	 * Query.query(Criteria.where("key").is(makeKey(userId, keyword))); }
+	 * 
+	 * private Query makeQueryByUserId(String userId) { return
+	 * Query.query(Criteria.where("key").regex(userId + ESCAPE + ".*")); }
+	 */
 
 	/*
 	 * implements MongoRepository<Dictionary, String>

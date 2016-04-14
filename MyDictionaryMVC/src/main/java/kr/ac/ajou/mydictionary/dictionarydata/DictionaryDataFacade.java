@@ -1,10 +1,13 @@
 package kr.ac.ajou.mydictionary.dictionarydata;
 
+import kr.ac.ajou.mydictionary.document.DocumentModel;
+
 public interface DictionaryDataFacade {
-	public void setDictionary(String userId, String keyword, String document);
-	public Dictionary getDictionary(String userId, String keyword);
-	public void deleteDictionary(String userId, String keyword);
+	public void setDictionary(Dictionary dictionary);
+	public DocumentModel getDictionaryByKey(String key);
+	public void updateDictionaryByKey(String key, Dictionary dictionary);
+	public void deleteDictionaryByKey(String key);
 	
-	public long countByUserId(String userId);
+	public long countByKey(String key);
 	public long countAll();
 }

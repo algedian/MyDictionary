@@ -1,18 +1,17 @@
-package kr.ac.ajou.mydictionary.userdata;
+package kr.ac.ajou.mydictionary.user;
 
-public class User {
-	private Integer index;
-	private String userId;
-	private String name;
-	private String email;
-	private String pictureURL;
+public class UserModel {
+	protected Integer index;
+	protected String userId;
+	protected String name;
+	protected String email;
+	protected String pictureURL;
 
-	public User() {
+	public UserModel() {
 		super();
 	}
 
-	public User(Integer index, String userId, String name, String email, String pictureURL) {
-		super();
+	public UserModel(Integer index, String userId, String name, String email, String pictureURL) {
 		this.index = index;
 		this.userId = userId;
 		this.name = name;

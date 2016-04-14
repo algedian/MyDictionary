@@ -2,6 +2,8 @@ package kr.ac.ajou.mydictionary.userdata;
 
 import java.util.ArrayList;
 
+import kr.ac.ajou.mydictionary.user.UserModel;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,27 +18,27 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	}
 
 	@Override
-	public int insertUser(User user) {
+	public int insertUser(UserModel user) {
 		return mapper.insertUser(user);
 	}
 	
 	@Override
-	public User selectUserById(String userId) {
+	public UserModel selectUserById(String userId) {
 		return mapper.selectUserById(userId);
 	}
 	
 	@Override
-	public User selectUserByEmail(String email) {
+	public UserModel selectUserByEmail(String email) {
 		return mapper.selectUserByEmail(email);
 	}
 	
 	@Override
-	public int updateUserById(String userId, User replacement) {
+	public int updateUserById(String userId, UserModel replacement) {
 		return mapper.updateUserById(userId, replacement);
 	}
 
 	@Override
-	public int updateUserByEmail(String email, User replacement) {
+	public int updateUserByEmail(String email, UserModel replacement) {
 		return mapper.updateUserByEmail(email, replacement);
 	}
 
@@ -56,7 +58,7 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	}
 
 	@Override
-	public ArrayList<User> selectFriendByUserIndex(int userIndex) {
+	public ArrayList<UserModel> selectFriendByUserIndex(int userIndex) {
 		return mapper.selectFriendByUserIndex(userIndex);
 	}
 

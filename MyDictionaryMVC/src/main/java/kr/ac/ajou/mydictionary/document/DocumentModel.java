@@ -1,35 +1,33 @@
-package kr.ac.ajou.mydictionary.dictionarydata;
+package kr.ac.ajou.mydictionary.document;
 
 import java.util.Date;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "dictionary")
-public class Dictionary {
-	@Id
-	private String key;
+public class DocumentModel {	
+	private String userId;
+	private String keyword;
 
 	private Date createTime;
 	private Date updateTime;
 
 	private String document;
 
-	public Dictionary() {
+	public DocumentModel() {
 
 	}
 
-	public Dictionary(String key, Date createTime, Date updateTime, String document) {
-		this.key = key;
+	public DocumentModel(String userId, String keyword, Date createTime, String document) {
+		this.userId = userId;
+		this.keyword = keyword;
 		this.createTime = createTime;
-		this.updateTime = updateTime;
 		this.document = document;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder buf = new StringBuilder();
-		buf.append("{key=" + key);
+		buf.append("{");
+		buf.append("userId=" + userId);
+		buf.append(", keyword=" + keyword);
 		buf.append(", createTime=" + createTime);
 		buf.append(", updateTime=" + updateTime);
 		buf.append(", document=" + document);
@@ -38,12 +36,20 @@ public class Dictionary {
 		return buf.toString();
 	}
 
-	public String getKey() {
-		return key;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 	public Date getCreateTime() {
