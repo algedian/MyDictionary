@@ -11,7 +11,7 @@ import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 
 @Configuration
-@ComponentScan(basePackages = "kr.ac.ajou.mydictionary.dictionarydata")
+@ComponentScan(basePackages = {"kr.ac.ajou.mydictionary.dictionarydata", "kr.ac.ajou.mydictionary.searchengine"})
 @EnableMongoRepositories(basePackages = "kr.ac.ajou.mydictionary.dictionarydata")
 public class DictionaryDataConfig extends AbstractMongoConfiguration {
 	private static final String DB_NAME = "MyDictionary";

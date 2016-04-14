@@ -1,7 +1,5 @@
 package kr.ac.ajou.mydictionary.dictionarydata;
 
-import kr.ac.ajou.mydictionary.document.DocumentModel;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -19,8 +17,8 @@ public class DictionaryDataFacadeImpl implements DictionaryDataFacade {
 	}
 
 	@Override
-	public DocumentModel getDictionaryByKey(String key) {
-		return mongo.findOne(Query.query(Criteria.where("key").is(key)), DocumentModel.class);
+	public Dictionary getDictionaryByKey(String key) {		
+		return mongo.findOne(Query.query(Criteria.where("key").is(key)), Dictionary.class);
 	}
 	
 	@Override
@@ -30,17 +28,17 @@ public class DictionaryDataFacadeImpl implements DictionaryDataFacade {
 
 	@Override
 	public void deleteDictionaryByKey(String key) {
-		mongo.remove(Query.query(Criteria.where("key").is(key)), DocumentModel.class);
+		mongo.remove(Query.query(Criteria.where("key").is(key)), Dictionary.class);
 	}
 
 	@Override
 	public long countByKey(String key) {
-		return mongo.count(Query.query(Criteria.where("key").regex(key)), DocumentModel.class);
+		return mongo.count(Query.query(Criteria.where("key").regex(key)), Dictionary.class);
 	}
 
 	@Override
 	public long countAll() {
-		return mongo.findAll(DocumentModel.class).size();
+		return mongo.findAll(Dictionary.class).size();
 	}
 
 	/*

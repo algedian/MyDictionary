@@ -20,7 +20,7 @@ public interface DictionaryDataFacade {
 	 * @param key
 	 * @return DocumentModel
 	 */
-	public DocumentModel getDictionaryByKey(String key);
+	public Dictionary getDictionaryByKey(String key);
 	
 	/**
 	 * Updates a dictionary by key<br><br>
@@ -44,17 +44,15 @@ public interface DictionaryDataFacade {
 		
 	
 	/**
-	 * 같은 키워드를 가진 document의 개수 세기? <br><br>
-	 * key format: userId + ESCAPE + keyword 
 	 * 
 	 * @param key
-	 * @return long - 
+	 * @return
 	 */
 	public long countByKey(String key);
 	
 	/**
-	 * 갖고 있는 모든 document의 개수 세기? <br><br>
-	 * @return long - 
+	 * The number of documents in dictionary DB. <br><br>
+	 * @return long 
 	 */
 	public long countAll();
 }
