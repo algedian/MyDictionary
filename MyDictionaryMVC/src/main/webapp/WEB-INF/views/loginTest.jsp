@@ -87,15 +87,12 @@
 			*/
 			$.ajax({
 				url:'http://localhost:8080/ajou/user/' + id,
-				type: "post",
+				type: 'post',
 				contentType: 'text/plain',
 				data: domain,
-				dataType: 'application/json',
+				dataType: 'json',
 				success: function(data){
 					console.log(data);
-				},
-				fail: function(err){
-					console.log(err);
 				}
 			});
 		}

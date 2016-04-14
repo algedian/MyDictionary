@@ -57,8 +57,8 @@ public class UserController {
 		return "fail";
 	}
 	
-	@RequestMapping(value = "/{emailID}", method = RequestMethod.POST, produces="application/json" , consumes="text/plain")
-	public @ResponseBody UserModel findUserByEmail(@PathVariable String emailID, @RequestBody String domain ) {
+	@RequestMapping(value = "/{emailID}", method = RequestMethod.POST)//, produces="application/json" , consumes="text/plain")
+	public @ResponseBody UserModel findUserByEmail(@PathVariable String emailID, @RequestBody String domain) {
 		System.err.println("Get in findUserByEmail method");
 		UserModel user = null;
 		
