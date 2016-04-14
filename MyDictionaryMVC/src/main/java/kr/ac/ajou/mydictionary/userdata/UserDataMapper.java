@@ -33,10 +33,10 @@ public interface UserDataMapper {
 	static final String SELECT_USER_BY_ID_QUERY = "SELECT * FROM user WHERE userId = #{userId}";
 
 	/**
-	 * Returns an user from userId
+	 * Returns an user using userId
 	 * 
 	 * @param
-	 * @return User fail:null
+	 * @return UserModel - success:UserModel or fail:null
 	 * */
 	@Select(SELECT_USER_BY_ID_QUERY)
 	public UserModel selectUserById(String userId);
@@ -44,10 +44,10 @@ public interface UserDataMapper {
 	static final String SELECT_USER_BY_EMAIL_QUERY = "SELECT * FROM user WHERE email = #{email}";
 
 	/**
-	 * Returns an user from email
+	 * Returns an user using email
 	 * 
 	 * @param
-	 * @return User fail:null
+	 * @return UserModel - success:UserModel or fail:null
 	 * */
 	@Select(SELECT_USER_BY_EMAIL_QUERY)
 	public UserModel selectUserByEmail(String email);
@@ -55,7 +55,7 @@ public interface UserDataMapper {
 	static final String UPDATE_USER_BY_ID_QUERY = "UPDATE user SET userId = #{1.userId}, name = #{1.name}, email = #{1.email}, pictureURL = #{1.pictureURL} WHERE userId = #{0}";
 
 	/**
-	 * Updates an user to user table from userId
+	 * Updates an user to user table using userId
 	 * 
 	 * @param
 	 * @return int - success:1 or fail:0
@@ -66,7 +66,7 @@ public interface UserDataMapper {
 	static final String UPDATE_USER_BY_EMAIL_QUERY = "UPDATE user SET userId = #{1.userId}, name = #{1.name}, email = #{1.email}, pictureURL = #{1.pictureURL} WHERE email = #{0}";
 
 	/**
-	 * Updates an user to user table from email
+	 * Updates an user to user table using email
 	 * 
 	 * @param
 	 * @return int - success:1 or fail:0
@@ -77,7 +77,7 @@ public interface UserDataMapper {
 	static final String DELETE_USER_BY_ID_QUERY = "DELETE FROM user WHERE userId = #{userId}";
 
 	/**
-	 * Deletes an user to user table from userId
+	 * Deletes an user to user table using userId
 	 * 
 	 * @param
 	 * @return int - success:1 or fail:0
@@ -88,7 +88,7 @@ public interface UserDataMapper {
 	static final String DELETE_USER_BY_EMAIL_QUERY = "DELETE FROM user WHERE email = #{email}";
 
 	/**
-	 * Deletes an user to user table from email
+	 * Deletes an user to user table using email
 	 * 
 	 * @param
 	 * @return int - success:1 or fail:0
@@ -99,7 +99,7 @@ public interface UserDataMapper {
 	static final String INSERT_FRIEND_BY_FRIEND_EMAIL = "INSERT INTO friend(userIndex, friendIndex) VALUES (#{0}, (SELECT user.index FROM user WHERE user.email=#{1}))";
 
 	/**
-	 * Inserts an friend to friend table from userIndex and friendEmail
+	 * Inserts an friend to friend table using userIndex and friendEmail
 	 * 
 	 * @param
 	 * @return int - success:1 or fail:0
@@ -110,10 +110,10 @@ public interface UserDataMapper {
 	final static String SELECT_FRIEND_BY_USER_INDEX_QUERY = "SELECT user.userId, user.name, user.email, user.pictureURL FROM friend INNER JOIN user ON friend.friendIndex = user.index WHERE friend.userIndex = #{userIndex}";
 
 	/**
-	 * Selects all friends to friend table from userIndex
+	 * Selects all friends from friend table using userIndex
 	 * 
 	 * @param
-	 * @return ArrayList<User> - success:many or fail:null?
+	 * @return ArrayList<UserModel> - success:many or fail:null?
 	 * */
 	@Select(SELECT_FRIEND_BY_USER_INDEX_QUERY)
 	public ArrayList<UserModel> selectFriendByUserIndex(int userIndex);
@@ -123,7 +123,7 @@ public interface UserDataMapper {
 	final static String DELETE_FRIEND_BY_FRIEND_EMAIL = "DELETE FROM friend WHERE userIndex=#{0} AND friendIndex=(SELECT user.index FROM user WHERE user.email=#{1})";
 
 	/**
-	 * Deletes an friend to friend table from userIndex and friendEmail
+	 * Deletes an friend to friend table using userIndex and friendEmail
 	 * 
 	 * @param
 	 * @return int - success:1 or fail:0

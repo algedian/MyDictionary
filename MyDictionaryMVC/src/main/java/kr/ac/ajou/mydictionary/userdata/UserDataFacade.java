@@ -18,7 +18,7 @@ public interface UserDataFacade {
 	 * Returns an user from userId
 	 * 
 	 * @param
-	 * @return User fail:null
+	 * @return UserModel - success:User or fail:null
 	 * */
 	public UserModel selectUserById(String userId);
 	
@@ -26,7 +26,7 @@ public interface UserDataFacade {
 	 * Returns an user from email
 	 * 
 	 * @param
-	 * @return User fail:null
+	 * @return UserModel - success:User or User fail:null
 	 * */
 	@Deprecated
 	public UserModel selectUserByEmail(String email);
@@ -82,13 +82,19 @@ public interface UserDataFacade {
 	public ArrayList<UserModel> selectFriendByUserIndex(int userIndex);
 	
 	/**
-	 * 안쓸꺼라능
-	 * */
+	 * Updates friend table using userId
+	 *  
+	 * **do not use this function**
+	 * 
+	 * 
+	 * @param userId
+	 * @return
+	 */
 	@Deprecated
 	public int updateFriend(String userId);
 	
 	/**
-	 * Deletes an friend to friend table from userIndex and friendEmail
+	 * Deletes an friend to friend table using userIndex and friendEmail
 	 * 
 	 * @param
 	 * @return int - success:1 or fail:0

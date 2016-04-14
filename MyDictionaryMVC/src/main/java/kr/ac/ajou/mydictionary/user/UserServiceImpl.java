@@ -38,14 +38,6 @@ public class UserServiceImpl implements UserService {
 		super();
 	}
 
-	/**
-	 * 구글 author 하고, mysql db에 사용자 정보 있는지 확인하고 성공 & 실패 그래서 아마도 parameter는 받을 필요
-	 * 없을거 같은뎅??
-	 * 
-	 * @exception 로그인
-	 *                실패
-	 */
-
 	@Override
 	public boolean login(String idTokenString) throws Exception {
 		
