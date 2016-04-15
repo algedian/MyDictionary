@@ -16,7 +16,7 @@ public class SearchEngineImpl implements SearchEngine {
 	private static final String ESCAPE = "__";
 	
 	@Resource(name = "dictionaryDataBaseFacade")
-	DictionaryDataFacade dictionaryDataFacade;
+	private DictionaryDataFacade dictionaryDataFacade;
 	
 	public SearchEngineImpl() {
 		super();

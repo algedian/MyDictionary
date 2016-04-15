@@ -12,7 +12,7 @@ public class DocumentServiceImpl implements DocumentService {
 	private static final String ESCAPE = "__";
 	
 	@Resource(name = "dictionaryDataBaseFacade")
-	DictionaryDataFacade dictionaryDataFacade;
+	private DictionaryDataFacade dictionaryDataFacade;
 
 	@Override
 	public void documentSetTest() {

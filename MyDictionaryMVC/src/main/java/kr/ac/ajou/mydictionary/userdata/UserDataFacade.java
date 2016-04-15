@@ -99,5 +99,5 @@ public interface UserDataFacade {
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
-	public int deletefriend(int userIndex, String friendEmail);
+	public int deleteFriend(int userIndex, String friendEmail);
 }

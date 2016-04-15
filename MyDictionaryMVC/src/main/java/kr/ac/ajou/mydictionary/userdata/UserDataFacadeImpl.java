@@ -68,7 +68,7 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	}
 
 	@Override
-	public int deletefriend(int userIndex, String friendEmail) {
+	public int deleteFriend(int userIndex, String friendEmail) {
 		return mapper.deletefriend(userIndex, friendEmail);
 	}
 

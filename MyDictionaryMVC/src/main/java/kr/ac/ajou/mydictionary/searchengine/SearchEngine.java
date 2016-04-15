@@ -28,4 +28,5 @@ public interface SearchEngine {
 	 */
 	public ArrayList<DocumentModel> getFriendDocuments(ArrayList<UserModel> friends, String keyword);
 	
+	//한 사람의 모든 도큐먼트를 긁어오는 건 필요없나 ?
 }

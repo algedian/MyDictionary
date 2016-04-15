@@ -25,7 +25,8 @@ public class DictionaryDataConfig extends AbstractMongoConfiguration {
     }
 
     @Override
-    public @Bean Mongo mongo() throws Exception {
+    @Bean
+    public Mongo mongo() throws Exception {
         // ServerAddress serverAddress = new ServerAddress("localhost", 27017);
         // MongoCredential credential = MongoCredential.createMongoCRCredential("storeUser", getDatabaseName(), "storePass".toCharArray());
         // MongoClientOptions options = MongoClientOptions.builder().connectionsPerHost(4).socketKeepAlive(true).build();

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository("dictionaryDataBaseFacade")
 public class DictionaryDataFacadeImpl implements DictionaryDataFacade {
 	@Autowired
-	MongoTemplate mongo;
+	private MongoTemplate mongo;
 
 	@Override
 	public void setDictionary(Dictionary dictionary) {
@@ -24,6 +24,7 @@ public class DictionaryDataFacadeImpl implements DictionaryDataFacade {
 	@Override
 	public void updateDictionaryByKey(String key, Dictionary dictionary) {
 		// 몽고디비에서 업데이트 어떻게 하는지를 모ㅋ름ㅋ
+		// save 이용해도 괜찮을 것 같은데요 ..?
 	}
 
 	@Override
