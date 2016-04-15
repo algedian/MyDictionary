@@ -17,6 +17,18 @@ public class UserDataFacadeImpl implements UserDataFacade {
 		super();
 	}
 
+	/*-----------------------------------------------------------------------------------------------
+	 * normal user service related methods*/
+	
+	@Override
+	public boolean isUserExistByIndex(int userIndex) {
+		
+		if(mapper.selectUserCountByIndex(userIndex) <= 0)
+			return false;
+		else
+			return true;
+	}
+	
 	@Override
 	public int insertUser(UserModel user) {
 		return mapper.insertUser(user);
@@ -51,18 +63,41 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	public int deleteUserByEmail(String email) {
 		return mapper.deleteUserByEmail(email);
 	}
+	
+	
+	/*-----------------------------------------------------------------------------------------------
+	 * friend service related methods*/
+	
+	@Override
+	public boolean isAlreadyFriendByIndex(int userIndex, int friendIndex) {
+		
+		if(mapper.selectFriendCountByIndex(userIndex, friendIndex) <= 0)
+			return false;
+		else
+			return true;
+	}
+	
+	@Override
+	public int insertFriendByIndex(int userIndex, int friendIndex) {
+		return mapper.insertFriendByIndex(userIndex, friendIndex);
+	}
+
+	@Override
+	public ArrayList<UserModel> selectFriendListByUserIndex(int userIndex) {
+		return mapper.selectFriendListByUserIndex(userIndex);
+	}
+
+	@Override
+	public int deleteFriendByIndex(int userIndex, int friendIndex) {
+		return mapper.deleteFriendByIndex(userIndex, friendIndex);
+	}
 
 	@Override
 	public int insertFriendByFriendEmail(int userIndex, String friendEmail) {
 		return mapper.insertFriendByFriendEmail(userIndex, friendEmail);
 	}
 
-	@Override
-	public ArrayList<UserModel> selectFriendByUserIndex(int userIndex) {
-		return mapper.selectFriendByUserIndex(userIndex);
-	}
-
-	@Override
+	/*@Override
 	public int updateFriend(String userId) {
 		return 0;
 	}
@@ -70,6 +105,5 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	@Override
 	public int deleteFriend(int userIndex, String friendEmail) {
 		return mapper.deletefriend(userIndex, friendEmail);
-	}
-
+	}*/
 }

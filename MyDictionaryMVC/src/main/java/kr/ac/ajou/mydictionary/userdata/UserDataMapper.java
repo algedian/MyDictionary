@@ -19,6 +19,20 @@ public interface UserDataMapper {
 	 * @Result(property = "userId", column = "userId") })
 	 */
 
+	/*-----------------------------------------------------------------------------------------------
+	 * normal user service related queries and methods*/
+	
+	static final String SELECT_USER_COUNT_BY_INDEX_QUERY = "SELECT COUNT( user.index ) FROM user WHERE user.index = ${userIndex}";
+
+	/**
+	 * Get counts of users from user table whose user index is userIndex
+	 * 
+	 * @param
+	 * @return int - counts of matching users
+	 * */
+	@Insert(SELECT_USER_COUNT_BY_INDEX_QUERY)
+	public int selectUserCountByIndex(int userIndex);
+	
 	static final String INSERT_USER_QUERY = "INSERT INTO user (userId, name, email, pictureURL) VALUES (#{userId}, #{name}, #{email}, #{pictureURL})";
 
 	/**
@@ -96,10 +110,37 @@ public interface UserDataMapper {
 	@Delete(DELETE_USER_BY_EMAIL_QUERY)
 	public int deleteUserByEmail(String email);
 
-	static final String INSERT_FRIEND_BY_FRIEND_EMAIL = "INSERT INTO friend(userIndex, friendIndex) VALUES (#{0}, (SELECT user.index FROM user WHERE user.email=#{1}))";
 
+	
+	/*-----------------------------------------------------------------------------------------------
+	 * friend service related queries and methods*/
+
+	static final String SELECT_FRIEND_COUNT_BY_INDEX = "SELECT COUNT( * ) FROM  `friend` WHERE userIndex = ${userIndex} AND friendIndex = ${friendIndex}";
+	
 	/**
-	 * Inserts an friend to friend table using userIndex and friendEmail
+	 * Get counts of user-friend relation data from friend table with userIndex and friendIndex
+	 * 
+	 * @param
+	 * @return int - counts of matching relations
+	 * */
+	@Insert(SELECT_FRIEND_COUNT_BY_INDEX)
+	public int selectFriendCountByIndex(int userIndex, int friendIndex);
+	
+	static final String INSERT_FRIEND_BY_INDEX = "INSERT INTO friend(userIndex, friendIndex) VALUES (#{userIndex}, #{friendIndex})";
+	
+	/**
+	 * Inserts a user-friend relation data to friend table using userIndex and friendIdex
+	 * 
+	 * @param
+	 * @return int - success:1 or fail:0
+	 * */
+	@Insert(INSERT_FRIEND_BY_INDEX)
+	public int insertFriendByIndex(int userIndex, int friendIndex);
+
+	static final String INSERT_FRIEND_BY_FRIEND_EMAIL = "INSERT INTO friend(userIndex, friendIndex) VALUES (#{0}, (SELECT user.index FROM user WHERE user.email=#{1}))";
+	
+	/**
+	 * Inserts a user-friend relation data to friend table using userIndex and friendEmail
 	 * 
 	 * @param
 	 * @return int - success:1 or fail:0
@@ -116,20 +157,31 @@ public interface UserDataMapper {
 	 * @return ArrayList<UserModel> - success:many or fail:null?
 	 * */
 	@Select(SELECT_FRIEND_BY_USER_INDEX_QUERY)
-	public ArrayList<UserModel> selectFriendByUserIndex(int userIndex);
+	public ArrayList<UserModel> selectFriendListByUserIndex(int userIndex);
 
 	/* @Update("UPDATE friend ") 안씁니다 */
-
-	final static String DELETE_FRIEND_BY_FRIEND_EMAIL = "DELETE FROM friend WHERE userIndex=#{0} AND friendIndex=(SELECT user.index FROM user WHERE user.email=#{1})";
+	
+	final static String DELETE_FRIEND_BY_INDEX = "DELETE FROM friend WHERE userIndex=#{userIndex} AND friendIndex=#{friendIndex}";
 
 	/**
-	 * Deletes an friend to friend table using userIndex and friendEmail
+	 * Deletes a user-friend relation data from friend table using userIndex and friendIndex
 	 * 
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
 	@Delete(DELETE_FRIEND_BY_FRIEND_EMAIL)
-	public int deletefriend(int userIndex, String friendEmail);
+	public int deleteFriendByIndex(int userIndex, int friendIndex);
+
+	final static String DELETE_FRIEND_BY_FRIEND_EMAIL = "DELETE FROM friend WHERE userIndex=#{0} AND friendIndex=(SELECT user.index FROM user WHERE user.email=#{1})";
+
+	/**
+	 * Deletes  a user-friend relation data from friend table using userIndex and friendEmail
+	 * 
+	 * @param
+	 * @return int - success:1 or fail:0
+	 * */
+	@Delete(DELETE_FRIEND_BY_FRIEND_EMAIL)
+	public int deleteFriend(int userIndex, String friendEmail);
 
 	// public void userInsert(String userId);
 	// public String userSelect(String userId);
