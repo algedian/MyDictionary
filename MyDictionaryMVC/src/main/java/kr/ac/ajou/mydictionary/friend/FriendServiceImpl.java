@@ -24,8 +24,18 @@ public class FriendServiceImpl implements FriendService {
 	/* 10000개 넘어가기전엔 array가 더 빠름ㅋ */
 	private ArrayList<UserModel> friends;
 
+	public ArrayList<UserModel> getFriends() {
+		return friends;
+	}
+
 	public FriendServiceImpl() {
 		super();
+	}
+	
+	public boolean setFriends(int userIndex) {
+		friends = userDataFacade.selectFriendListByUserIndex(userIndex);
+		
+		return true;
 	}
 
 	/*
