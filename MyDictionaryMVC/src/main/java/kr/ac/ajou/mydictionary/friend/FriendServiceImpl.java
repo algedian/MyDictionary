@@ -20,6 +20,9 @@ public class FriendServiceImpl implements FriendService {
 
 	@Resource(name = "userDataBaseFacade")
 	private UserDataFacade userDataFacade;
+	
+	/* 10000개 넘어가기전엔 array가 더 빠름ㅋ */
+	private ArrayList<UserModel> friends;
 
 	public FriendServiceImpl() {
 		super();
