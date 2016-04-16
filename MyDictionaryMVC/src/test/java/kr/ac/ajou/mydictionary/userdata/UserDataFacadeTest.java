@@ -1,36 +1,24 @@
 package kr.ac.ajou.mydictionary.userdata;
 
 import static org.junit.Assert.assertEquals;
-
-import javax.annotation.Resource;
-
 import kr.ac.ajou.mydictionary.user.UserModel;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-//@WebAppConfiguration
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = UserDataConfig.class)
-public class UserDataFacadeTest extends AbstractJUnit4SpringContextTests {
-	public static final Logger logger = LoggerFactory.getLogger(UserDataFacadeTest.class);
-
-	@Resource(name = "userDataBaseFacade")
-	UserDataFacade userDataFacade;
-
-	UserModel testUser;
-	UserModel replaceUser;
-
+public class UserDataFacadeTest extends AbstractUserDataFacadeTest {
+	
+	@Override
 	@Before
 	public void setUp() {
-		testUser = new UserModel(0, "dcoun233", "name", "dcoun08@gmail.com", null);
-		replaceUser = new UserModel(0, "dsfsdf", "name22","dcoun0000@gmail.com", "sdalkjasg;lk");
+		super.setUp();
+	}
+
+	@Override
+	@After
+	public void cleanUp() {
+		super.cleanUp();
 	}
 
 	public void insertUser(UserModel user) {
@@ -39,48 +27,58 @@ public class UserDataFacadeTest extends AbstractJUnit4SpringContextTests {
 	}
 	
 	public void deleteUser(UserModel user) {
-		int result = userDataFacade.deleteUserByEmail(user.getEmail());
+		int result = userDataFacade.deleteUserById(user.getUserId());
 		assertEquals(result, 1);
 	}
+	
+	@Test
+	public void selectUserCountByIndexTest() {
+		insertUser(testUser[0]);
+		
+		UserModel result = userDataFacade.selectUserById(testUser[0].getUserId());
+		assertEquals(userDataFacade.isUserExistByIndex(result.getIndex()), true);
+		
+		deleteUser(testUser[0]);
+		assertEquals(userDataFacade.isUserExistByIndex(result.getIndex()), false);
+	}
 
-	@SuppressWarnings("deprecation")
 	@Test
 	public void selectUserByIdTest() {
-		insertUser(testUser);
+		insertUser(testUser[0]);
 		
-		UserModel result = userDataFacade.selectUserById(testUser.getUserId());
+		UserModel result = userDataFacade.selectUserById(testUser[0].getUserId());
 
-		assertEquals(result.getUserId(), testUser.getUserId());
-		assertEquals(result.getEmail(), testUser.getEmail());
-		assertEquals(result.getPictureURL(), testUser.getPictureURL());
-
-		result = userDataFacade.selectUserById("sdasd");
+		assertEquals(result.getUserId(), testUser[0].getUserId());
+		assertEquals(result.getEmail(), testUser[0].getEmail());
+		assertEquals(result.getPictureURL(), testUser[0].getPictureURL());
+		
+		deleteUser(testUser[0]);
+		
+		result = userDataFacade.selectUserById(testUser[0].getUserId());
 		assertEquals(result, null);
-		
-		deleteUser(testUser);
 	}
 	
 	@Test
 	public void selectUserByEmailTest() {
-		insertUser(testUser);
-		UserModel result = userDataFacade.selectUserByEmail(testUser.getEmail());
+		insertUser(testUser[0]);
 		
-		assertEquals(result.getUserId(), testUser.getUserId());
-		assertEquals(result.getEmail(), testUser.getEmail());
-		assertEquals(result.getPictureURL(), testUser.getPictureURL());
+		UserModel result = userDataFacade.selectUserByEmail(testUser[0].getEmail());
 		
-		result = userDataFacade.selectUserByEmail("sdasd");
+		assertEquals(result.getUserId(), testUser[0].getUserId());
+		assertEquals(result.getEmail(), testUser[0].getEmail());
+		assertEquals(result.getPictureURL(), testUser[0].getPictureURL());
+		
+		deleteUser(testUser[0]);
+		
+		result = userDataFacade.selectUserByEmail(testUser[0].getEmail());
 		assertEquals(result, null);
-		
-		deleteUser(testUser);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void updateUserByIdTest() {
-		insertUser(testUser);
+		insertUser(testUser[0]);
 		
-		int result = userDataFacade.updateUserById(testUser.getUserId(), replaceUser);
+		int result = userDataFacade.updateUserById(testUser[0].getUserId(), replaceUser);
 		assertEquals(result, 1);
 		
 		UserModel node = userDataFacade.selectUserByEmail(replaceUser.getEmail());
@@ -92,41 +90,33 @@ public class UserDataFacadeTest extends AbstractJUnit4SpringContextTests {
 		deleteUser(replaceUser);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void updateUserByEmailTest() {
 		insertUser(replaceUser);
 		
-		int result = userDataFacade.updateUserByEmail(replaceUser.getEmail(), testUser);
+		int result = userDataFacade.updateUserByEmail(replaceUser.getEmail(), testUser[0]);
 		assertEquals(result, 1);
 		
-		UserModel node = userDataFacade.selectUserByEmail(testUser.getEmail());
-		assertEquals(node.getUserId(), testUser.getUserId());
-		assertEquals(node.getName(), testUser.getName());
-		assertEquals(node.getEmail(), testUser.getEmail());
-		assertEquals(node.getPictureURL(), testUser.getPictureURL());
+		UserModel node = userDataFacade.selectUserByEmail(testUser[0].getEmail());
+		assertEquals(node.getUserId(), testUser[0].getUserId());
+		assertEquals(node.getName(), testUser[0].getName());
+		assertEquals(node.getEmail(), testUser[0].getEmail());
+		assertEquals(node.getPictureURL(), testUser[0].getPictureURL());
 		
-		deleteUser(testUser);
+		deleteUser(testUser[0]);
 	}
 
-	/* 아래는 위에서 커버 가능 */
-/*	@SuppressWarnings("deprecation")
-	@Test
-	public void deleteUserByIdTest() {		
-		int result = userDataFacade.deleteUserById(testUser.getUserId());
-		assertEquals(result, 1);
-		
-		result = userDataFacade.deleteUserById(testUser.getUserId());
-		assertEquals(result, 0);
-	}
-	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void deleteUserByEmailTest() {
-		userDataFacade.insertUser(testUser);
+		insertUser(testUser[0]);
 		
-		int result = userDataFacade.deleteUserByEmail(testUser.getEmail());
+		int result = userDataFacade.deleteUserByEmail(testUser[0].getEmail());
 		assertEquals(result, 1);
 		
-		result = userDataFacade.deleteUserByEmail(testUser.getEmail());
+		result = userDataFacade.deleteUserByEmail(testUser[0].getEmail());
 		assertEquals(result, 0);
-	}*/
+	
+	}
 }

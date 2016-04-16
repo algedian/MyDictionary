@@ -14,49 +14,62 @@ import kr.ac.ajou.mydictionary.user.UserModel;
 @Service("searchEngine")
 public class SearchEngineImpl implements SearchEngine {
 	private static final String ESCAPE = "__";
-	
+
 	@Resource(name = "dictionaryDataBaseFacade")
 	private DictionaryDataFacade dictionaryDataFacade;
-	
+
 	public SearchEngineImpl() {
 		super();
 	}
-	
-	@Override
-	public void searchTest() {
-		
+
+	protected Dictionary castDictionary(DocumentModel document) {
+		if (document != null) {
+			return new Dictionary(document.getUserId() + ESCAPE + document.getKeyword(), document.getCreateTime(),
+					document.getUpdateTime(), document.getDocument());
+		} else {
+			return null;
+		}
+
 	}
-	
-	public Dictionary castDictionary(DocumentModel document) {
-		return new Dictionary(document.getUserId() + ESCAPE + document.getKeyword(), document.getCreateTime(), document.getUpdateTime(), document.getDocument());
+
+	protected DocumentModel castDocument(Dictionary dictionary) {
+		if (dictionary != null) {
+			String str[] = dictionary.getKey().split(ESCAPE);
+			DocumentModel dm = new DocumentModel(str[0], str[1], dictionary.getCreateTime(),
+					dictionary.getUpdateTime(), dictionary.getDocument());
+
+			return dm;
+		} else {
+			return null;
+		}
 	}
-	
-	public DocumentModel castDocument(Dictionary dictionary) {
-		String str[] = dictionary.getKey().split(ESCAPE);
-		DocumentModel dm = new DocumentModel(str[0], str[1], dictionary.getCreateTime(), dictionary.getDocument());
-		dm.setUpdateTime(dictionary.getUpdateTime());
-		
-		return dm;
+
+	protected String makeKey(String userId, String keyword) {
+		return userId + ESCAPE + keyword;
 	}
 
 	@Override
 	public DocumentModel getUserDocument(String userId, String keyword) {
-		String key = userId + ESCAPE + keyword;
-		
-		Dictionary dic = dictionaryDataFacade.getDictionaryByKey(key);
-		DocumentModel dm = castDocument(dic);
+		Dictionary dictionary = dictionaryDataFacade.getDictionaryByKey(makeKey(userId, keyword));
+		DocumentModel dm = castDocument(dictionary);
+
 		return dm;
 	}
 
 	@Override
 	public ArrayList<DocumentModel> getFriendDocuments(ArrayList<UserModel> friends, String keyword) {
 		ArrayList<DocumentModel> documentModelList = new ArrayList<DocumentModel>();
-		for(UserModel um : friends){
-			String key = um.getUserId() + ESCAPE + keyword;
-			DocumentModel tempdm = castDocument(dictionaryDataFacade.getDictionaryByKey(key));
-			documentModelList.add(tempdm);
+		ArrayList<String> keyArray = new ArrayList<String>();
+
+		for (UserModel um : friends) {
+			keyArray.add(makeKey(um.getUserId(), keyword));
 		}
-				
+
+		ArrayList<Dictionary> result = dictionaryDataFacade.getDictionaryByKeys(keyArray);
+		for (Dictionary dictionary : result) {
+			documentModelList.add(castDocument(dictionary));
+		}
+
 		return documentModelList;
 	}
 }

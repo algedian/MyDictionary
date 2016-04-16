@@ -1,6 +1,5 @@
 package kr.ac.ajou.mydictionary.dictionarymanager;
 
-import org.springframework.stereotype.Component;
 
 //@Component
 public class LoginBean {

@@ -22,6 +22,14 @@ public class DocumentModel {
 		this.document = document;
 	}
 
+	public DocumentModel(String userId, String keyword, Date createTime, Date updateTime, String document) {
+		this.userId = userId;
+		this.keyword = keyword;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.document = document;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder buf = new StringBuilder();

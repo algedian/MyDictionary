@@ -8,6 +8,8 @@ import kr.ac.ajou.mydictionary.userdata.UserDataFacade;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
@@ -18,6 +20,7 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	public static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -26,12 +29,14 @@ public class UserServiceImpl implements UserService {
 	private UserDataFacade userDataFacade;
 
 	private static final String CLIENT_ID = "768889397569-ifca7s46aplo8i4ikt95ba6ihjmmfdlf.apps.googleusercontent.com";
-	
+
 	/** Global instance of the JSON factory. */
 	private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-	
+
 	/** Global instance of the HTTP transport. */
 	private static HttpTransport httpTransport;
+	
+	private UserModel currentUser;
 
 	public UserServiceImpl() {
 		super();
@@ -60,41 +65,44 @@ public class UserServiceImpl implements UserService {
 			String pictureURL = (String) payload.get("picture");
 
 			if (emailVerified) {
-				
-				if (userDataFacade.selectUserById(userId) != null) 
+
+				if ((currentUser = userDataFacade.selectUserById(userId)) != null)
 					return true;// login success
 				else {
-					//일단은 초기값으로 인덱스를 -1을 넣어놓고... 파사드에서는 insert 시 id는 안읽으니까 상관없을듯합니당.
+					// 일단은 초기값으로 인덱스를 -1을 넣어놓고... 파사드에서는 insert 시 id는 안읽으니까
+					// 상관없을듯합니당.
 					UserModel user = new UserModel(-1, userId, name, email, pictureURL);
-					
-					if (userDataFacade.insertUser(user) == 1)// UserDataFacade call to store user info
+
+					// UserDataFacade call to store user info
+					if (userDataFacade.insertUser(user) == 1) {
+						currentUser = userDataFacade.selectUserByEmail(email);
 						return true;
-					else
+					} else {
 						return false;
-						
-				}//end user dup check if
-				
+					}
+
+				} // end user dup check if
 			} else {
 				System.err.println("Email is not verified: " + email);
 				return false;
-			}//end email verifying check if
+			} // end email verifying check if
 		} else {
-			System.err.println("Invalid ID token: " +  idTokenString);
+			System.err.println("Invalid ID token: " + idTokenString);
 			return false;
-		}//end token check if
-	}//end login method
+		} // end token check if
+	} // end login method
 
 	/*
-	 * 사용자를 email로 검색하는 것은 email로 user를 select 해오는 것이 필요하다고 생각되옵니다.
-	 * 그래서 deprecated 된 selectUserByEmail을 부활시켰사옵니다.*/
+	 * 사용자를 email로 검색하는 것은 email로 user를 select 해오는 것이 필요하다고 생각되옵니다. 그래서
+	 * deprecated 된 selectUserByEmail을 부활시켰사옵니다.
+	 */
 	@Override
-	public UserModel getUserByEmail(String email) throws Exception {
+	public UserModel getUserByEmail(String email) {
 		return userDataFacade.selectUserByEmail(email);
 	}
-
+	
 	@Override
-	public void loginTest(String userId) throws Exception {
-		userDataFacade.insertUser(new UserModel());
+	public UserModel getCurrentUser() {
+		return currentUser;
 	}
-
 }

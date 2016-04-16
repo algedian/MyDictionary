@@ -1,10 +1,13 @@
 package kr.ac.ajou.mydictionary.dictionarydata;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import junit.framework.Assert;
-import kr.ac.ajou.mydictionary.document.DocumentModel;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,39 +23,98 @@ public class DictionaryDataFacadeTest {
 
 	@Resource(name = "dictionaryDataBaseFacade")
 	DictionaryDataFacade repo;
+	
+	private static final String ESCAPE = "__";
 
 	String userId;
 	String keyword;
 	String document;
+	
+	Dictionary dictionary;
 
 	@Before
 	public void makeData() {
 		userId = "dcoun";
 		keyword = "keyword";
 		document = "documentasdfdsgsdg";
+		
+		dictionary = new Dictionary(userId + ESCAPE + keyword, new Date(), null, document);
+		
+		setDictionaryTest();
+	}
+	
+	@After
+	public void cleanUp() {
+		deleteDictionaryByKeyTest();
 	}
 
-/*	@Test
-	public void insertTest() {
-		repo.setDictionary(userId, keyword, document);
+	public void setDictionaryTest() {
+		repo.setDictionary(dictionary);
 	}
 
 	@Test
-	public void selectTest() {
-		DocumentModel result = repo.getDictionary(userId, keyword);
-		System.out.println(result.toString());
-		Assert.assertEquals(result.getKey(), "dcoun" + "-" +"keyword");
-		Assert.assertEquals(result.getDocument(), document);
+	public void getDictionaryByKeyTest() {
+		Dictionary result = repo.getDictionaryByKey(dictionary.getKey());
+		Assert.assertEquals(result.toString(), dictionary.toString());
 	}
 	
 	@Test
-	public void countByUserIdTest() {
-		long result = repo.countByUserId(userId);
-		System.out.println(result + "");
+	public void getDictionaryByKeysTest() {
+		ArrayList<Dictionary> expected = new ArrayList<Dictionary>();
+		ArrayList<Dictionary> dictionaries = new ArrayList<Dictionary>();
+		for(int i = 0; i < 5; i++) {
+			Dictionary dictionary = new Dictionary(userId + i + ESCAPE + keyword, new Date(), null, document);
+			expected.add(dictionary);
+			dictionaries.add(dictionary);
+		}
+		dictionaries.add(new Dictionary(userId + 1 + ESCAPE + keyword + "afs", new Date(), null, document));
+		dictionaries.add(new Dictionary(userId + 1 + ESCAPE + "afs" + keyword, new Date(), null, document));
+		
+		for(Dictionary dictionary : dictionaries) {
+			repo.setDictionary(dictionary);
+		}
+		
+		ArrayList<String> keyArrary = new ArrayList<String>();
+		for(Dictionary dictionary : expected) {
+			keyArrary.add(dictionary.getKey());
+		}
+		
+		ArrayList<Dictionary> result = repo.getDictionaryByKeys(keyArrary);
+		Assert.assertEquals(result.toString(), expected.toString());
+		
+		for(Dictionary dictionary : dictionaries) {
+			repo.deleteDictionaryByKey(dictionary.getKey());
+		}
 	}
 	
 	@Test
-	public void deleteTest() {
-		repo.deleteDictionary(userId, keyword);
-	}*/
+	public void updateDictionaryByKeyTest() {
+		Dictionary test = new Dictionary(userId + "111" + ESCAPE + keyword, new Date(), null, document);
+		Dictionary replacer = new Dictionary(userId + "111" + ESCAPE + keyword, null, new Date(), document + "2353252");
+		
+		repo.setDictionary(test);
+		repo.updateDictionary(replacer);
+		
+		replacer.setCreateTime(test.getCreateTime());
+		
+		Assert.assertEquals(repo.getDictionaryByKey(replacer.getKey()).toString(), replacer.toString());
+		
+		repo.deleteDictionaryByKey(replacer.getKey());
+	}
+	
+	public void deleteDictionaryByKeyTest() {
+		repo.deleteDictionaryByKey(dictionary.getKey());
+	}
+	
+	@Test
+	public void countByKeyTest() {
+		long result = repo.countByKey(dictionary.getKey());
+		Assert.assertEquals(result, 1);
+	}
+	
+	@Test
+	public void countAllTest() {
+		long result = repo.countAll();
+		Assert.assertEquals(result, 1);
+	}
 }

@@ -1,5 +1,7 @@
 package kr.ac.ajou.mydictionary.dictionarydata;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -22,9 +24,17 @@ public class DictionaryDataFacadeImpl implements DictionaryDataFacade {
 	}
 	
 	@Override
-	public void updateDictionaryByKey(String key, Dictionary dictionary) {
-		// 몽고디비에서 업데이트 어떻게 하는지를 모ㅋ름ㅋ
-		// save 이용해도 괜찮을 것 같은데요 ..?
+	public ArrayList<Dictionary> getDictionaryByKeys(ArrayList<String> key) {
+		return (ArrayList<Dictionary>) mongo.find(Query.query(Criteria.where("key").in(key)), Dictionary.class);
+	}
+	
+	@Override
+	public void updateDictionary(Dictionary dictionary) {
+		Dictionary current = getDictionaryByKey(dictionary.getKey());
+		current.setUpdateTime(dictionary.getUpdateTime());
+		current.setDocument(dictionary.getDocument());
+		
+		mongo.save(current);
 	}
 
 	@Override

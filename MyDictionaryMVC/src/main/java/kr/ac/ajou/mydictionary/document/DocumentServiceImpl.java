@@ -10,25 +10,39 @@ import org.springframework.stereotype.Service;
 @Service("documentService")
 public class DocumentServiceImpl implements DocumentService {
 	private static final String ESCAPE = "__";
-	
+
 	@Resource(name = "dictionaryDataBaseFacade")
 	private DictionaryDataFacade dictionaryDataFacade;
 
 	@Override
 	public void documentSetTest() {
-		
+
 	}
 
-	public Dictionary castDictionary(DocumentModel document) {
-		return new Dictionary(document.getUserId() + ESCAPE + document.getKeyword(), document.getCreateTime(), document.getUpdateTime(), document.getDocument());
+	protected Dictionary castDictionary(DocumentModel document) {
+		if (document != null) {
+			return new Dictionary(document.getUserId() + ESCAPE + document.getKeyword(), document.getCreateTime(),
+					document.getUpdateTime(), document.getDocument());
+		} else {
+			return null;
+		}
+
 	}
-	
-	public DocumentModel castDocument(Dictionary dictionary) {
-		String str[] = dictionary.getKey().split(ESCAPE);
-		DocumentModel dm = new DocumentModel(str[0], str[1], dictionary.getCreateTime(), dictionary.getDocument());
-		dm.setUpdateTime(dictionary.getUpdateTime());
-		
-		return dm;
+
+	protected DocumentModel castDocument(Dictionary dictionary) {
+		if (dictionary != null) {
+			String str[] = dictionary.getKey().split(ESCAPE);
+			DocumentModel dm = new DocumentModel(str[0], str[1], dictionary.getCreateTime(),
+					dictionary.getUpdateTime(), dictionary.getDocument());
+
+			return dm;
+		} else {
+			return null;
+		}
+	}
+
+	protected String makeKey(String userId, String keyword) {
+		return userId + ESCAPE + keyword;
 	}
 
 }

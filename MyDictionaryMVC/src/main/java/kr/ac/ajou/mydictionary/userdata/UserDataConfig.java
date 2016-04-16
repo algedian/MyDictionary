@@ -43,22 +43,25 @@ public class UserDataConfig {
 
 		return sessionFactory.getObject();
 	}
-	
-//    @Bean(destroyMethod="")
-//    public SqlSessionTemplate sqlSessionTemplate() throws Exception{
-//        SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory());
-//        return sqlSessionTemplate;
-//    }
-    
-//    @Bean
-//    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-//       return new PropertySourcesPlaceholderConfigurer();
-//    }
+
+	// @Bean(destroyMethod="")
+	// public SqlSessionTemplate sqlSessionTemplate() throws Exception{
+	// SqlSessionTemplate sqlSessionTemplate = new
+	// SqlSessionTemplate(sqlSessionFactory());
+	// return sqlSessionTemplate;
+	// }
+
+	// @Bean
+	// public static PropertySourcesPlaceholderConfigurer
+	// propertySourcesPlaceholderConfigurer() {
+	// return new PropertySourcesPlaceholderConfigurer();
+	// }
 	/*
-	@SuppressWarnings("resource")
-	@Bean
-	public UserDataMapper userDataMapper() throws Exception {
-		return new SqlSessionTemplate(sqlSessionFactory()).getMapper(UserDataMapper.class);
-	}
-	*/
+	 * @SuppressWarnings("resource")
+	 * 
+	 * @Bean public UserDataMapper userDataMapper() throws Exception { return
+	 * new
+	 * SqlSessionTemplate(sqlSessionFactory()).getMapper(UserDataMapper.class);
+	 * }
+	 */
 }

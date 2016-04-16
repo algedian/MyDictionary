@@ -1,6 +1,7 @@
 package kr.ac.ajou.mydictionary.dictionarydata;
 
-import kr.ac.ajou.mydictionary.document.DocumentModel;
+import java.util.ArrayList;
+
 
 public interface DictionaryDataFacade {
 	/**
@@ -11,16 +12,28 @@ public interface DictionaryDataFacade {
 	public void setDictionary(Dictionary dictionary);
 	
 	/**
-	 * Gets DocumentModel from MongoDB <br><br>
+	 * Gets Dictionary from MongoDB <br><br>
 	 * 
 	 * key format: userId + ESCAPE + keyword 
 	 * 
 	 *  
 	 * 
 	 * @param key
-	 * @return DocumentModel
+	 * @return Dictionary
 	 */
 	public Dictionary getDictionaryByKey(String key);
+	
+	/**
+	 * Gets Dictionaries from MongoDB using or operation  <br><br>
+	 * 
+	 * key format: userId + ESCAPE + keyword 
+	 * 
+	 *  
+	 * 
+	 * @param keys
+	 * @return ArrayList<Dictionary>
+	 */
+	public ArrayList<Dictionary> getDictionaryByKeys(ArrayList<String> key);
 	
 	/**
 	 * Updates a dictionary by key<br><br>
@@ -30,7 +43,7 @@ public interface DictionaryDataFacade {
 	 * @param key
 	 * @param dictionary
 	 */
-	public void updateDictionaryByKey(String key, Dictionary dictionary);
+	public void updateDictionary(Dictionary dictionary);
 	
 	/**
 	 * Deletes a dictionary by key <br><br>
@@ -41,9 +54,8 @@ public interface DictionaryDataFacade {
 	 */
 	public void deleteDictionaryByKey(String key);
 	
-		
-	
 	/**
+	 * The number of key
 	 * 
 	 * @param key
 	 * @return

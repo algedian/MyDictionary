@@ -16,7 +16,7 @@ public interface FriendService {
 	 * @exception UserNotExist, AlreadyFriend
 	 * @return boolean - success:true or fail:false
 	 * */
-	public boolean followFriend(int userIndex, int friendIndex) throws Exception;
+	public boolean followFriend(int userIndex, int friendIndex);
 
 	
 	/**
@@ -29,7 +29,7 @@ public interface FriendService {
 	 * @exception UserNotExist, NotFriend
 	 * @return boolean - success:true or fail:false
 	 * */
-	public boolean unfollowFriend(int userIndex, int friendIndex) throws Exception;
+	public boolean unfollowFriend(int userIndex, int friendIndex);
 
 	/**
 	 * returns friend list of user:userIndex<br>
@@ -40,6 +40,6 @@ public interface FriendService {
 	 * @exception
 	 * @return ArrayList<UserModel> - success:ArrayList<UserModel> object or fail:null
 	 * */
-	public ArrayList<UserModel> getFriendList(int userIndex) throws Exception;
+	public ArrayList<UserModel> getFriendList(int userIndex);
 
 }

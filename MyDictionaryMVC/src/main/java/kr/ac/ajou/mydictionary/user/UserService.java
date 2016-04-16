@@ -27,7 +27,7 @@ public interface UserService {
 	 * @exception 해당 이메일 주소를 가진 유저가 존재하지 않음.
 	 * @return UserModel - success:UserModel object or fail:null
 	 * */
-	public UserModel getUserByEmail(String email) throws Exception;
+	public UserModel getUserByEmail(String email);
 	
-	public void loginTest(String userId) throws Exception;
+	public UserModel getCurrentUser();
 }
