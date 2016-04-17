@@ -30,27 +30,27 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public UserModel login(HttpServletRequest request, HttpServletResponse response) {
-		logger.info("[/login]", "Get in login method");
+		logger.info("[/login]" + " - " + "Get in login method");
 		try {
 			UserModel userModel = userService.login(request.getParameter("idtoken"));
 			if (userModel != null) { // idTokenString
-				logger.info("[/login]", "success");
+				logger.info("[/login]" + " - " + "success");
 
 				return userModel;
 			}
 		} catch (Exception e) {
-			logger.info("[/login]", "Catch Exception:", e);
+			logger.info("[/login]" + " - " + "Catch Exception:", e);
 		}
 
-		logger.info("[/login]", "fail");
+		logger.info("[/login]" + " - " + "fail");
 		return null;
 	}
 
 	@RequestMapping(value = "/getUserByEmail", method = RequestMethod.POST)
 	// , produces="application/json" , consumes="text/plain") /{emailID}
 	public @ResponseBody UserModel findUserByEmail(@RequestBody String email) {
-		logger.info("[/getUserByEmail]", "Get in findUserByEmail method");
-		logger.info("[/getUserByEmail]", email);
+		logger.info("[/getUserByEmail]" + " - " + "Get in findUserByEmail method");
+		logger.info("[/getUserByEmail]" + " - " + email);
 		
 		// String emailStr = email + "@" + domain.replace("=", "");
 		// System.err.println(emailStr);
@@ -58,7 +58,7 @@ public class UserController {
 		// email = URLDecoder.decode(email,"UTF-8");
 
 		UserModel user = userService.getUserByEmail(email);
-		logger.info("[/getUserByEmail]", user.toString());
+		logger.info("[/getUserByEmail]" + " - " + user.toString());
 
 		return user;
 	}

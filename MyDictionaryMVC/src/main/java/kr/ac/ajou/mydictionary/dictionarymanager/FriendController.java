@@ -28,39 +28,39 @@ public class FriendController {
 	
 	@RequestMapping(value = "/followFriend", method = RequestMethod.POST)
 	public @ResponseBody String followFriend(@RequestBody int userIndex, @RequestBody int friendIndex) {
-		logger.info("[/followFriend]", "Get in followFriend method");
-		logger.info("[/followFriend]", userIndex + ", " + friendIndex);
+		logger.info("[/followFriend]" + " - " + "Get in followFriend method");
+		logger.info("[/followFriend]" + " - " + userIndex + ", " + friendIndex);
 
 		if(friendService.followFriend(userIndex, friendIndex)) {
-			logger.info("[/followFriend]", userIndex + ", " + friendIndex + " success");
+			logger.info("[/followFriend]" + " - " + userIndex + ", " + friendIndex + " success");
 			return "success";
 		} else {
-			logger.info("[/followFriend]", userIndex + ", " + friendIndex + " fail");
+			logger.info("[/followFriend]" + " - " + userIndex + ", " + friendIndex + " fail");
 			return "fail";
 		}
 	}
 	
 	@RequestMapping(value = "/unfollowFriend", method = RequestMethod.POST)
 	public @ResponseBody String unfollowFriend(@RequestBody int userIndex, @RequestBody int friendIndex) {
-		logger.info("[/unfollowFriend]", "Get in unfollowFriend method");
-		logger.info("[/unfollowFriend]", userIndex + ", " + friendIndex);
+		logger.info("[/unfollowFriend]" + " - " + "Get in unfollowFriend method");
+		logger.info("[/unfollowFriend]" + " - " + userIndex + ", " + friendIndex);
 
 		if(friendService.unfollowFriend(userIndex, friendIndex)) {
-			logger.info("[/unfollowFriend]", userIndex + ", " + friendIndex + " success");
+			logger.info("[/unfollowFriend]" + " - " + userIndex + ", " + friendIndex + " success");
 			return "success";
 		} else {
-			logger.info("[/unfollowFriend]", userIndex + ", " + friendIndex + " fail");
+			logger.info("[/unfollowFriend]" + " - " + userIndex + ", " + friendIndex + " fail");
 			return "fail";
 		}
 	}
 	
 	@RequestMapping(value = "/getFriendsByUserIndex", method = RequestMethod.POST)
 	public @ResponseBody ArrayList<UserModel> getFriendsByUserIndex(@RequestBody int userIndex) {
-		logger.info("[/getFriendsByUserIndex]", "Get in getFriendsByUserIndex method");
-		logger.info("[/getFriendsByUserIndex]", userIndex);
+		logger.info("[/getFriendsByUserIndex]" + " - " + "Get in getFriendsByUserIndex method");
+		logger.info("[/getFriendsByUserIndex]" + " - " + userIndex);
 
 		ArrayList<UserModel> friends = friendService.getFriendList(userIndex);
-		logger.info("[/getUserByEmail]", friends.toString());
+		logger.info("[/getFriendsByUserIndex]" + " - " + friends.toString());
 
 		return friends;
 	}
