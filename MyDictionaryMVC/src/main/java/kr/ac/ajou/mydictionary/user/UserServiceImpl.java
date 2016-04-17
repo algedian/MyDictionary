@@ -8,8 +8,6 @@ import kr.ac.ajou.mydictionary.userdata.UserDataFacade;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
@@ -20,7 +18,7 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
-@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+//@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	public static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -35,16 +33,13 @@ public class UserServiceImpl implements UserService {
 
 	/** Global instance of the HTTP transport. */
 	private static HttpTransport httpTransport;
-	
-	private UserModel currentUser;
 
 	public UserServiceImpl() {
 		super();
 	}
 
 	@Override
-	public boolean login(String idTokenString) throws Exception {
-
+	public UserModel login(String idTokenString) throws Exception {
 		httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 
 		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(httpTransport, JSON_FACTORY)
@@ -64,31 +59,30 @@ public class UserServiceImpl implements UserService {
 			String name = (String) payload.get("name");
 			String pictureURL = (String) payload.get("picture");
 
+			UserModel user;
 			if (emailVerified) {
-
-				if ((currentUser = userDataFacade.selectUserById(userId)) != null)
-					return true;// login success
-				else {
+				if ((user = userDataFacade.selectUserById(userId)) != null) {
+					return user;// login success
+				} else {
 					// 일단은 초기값으로 인덱스를 -1을 넣어놓고... 파사드에서는 insert 시 id는 안읽으니까
 					// 상관없을듯합니당.
-					UserModel user = new UserModel(-1, userId, name, email, pictureURL);
+					user = new UserModel(-1, userId, name, email, pictureURL);
 
 					// UserDataFacade call to store user info
 					if (userDataFacade.insertUser(user) == 1) {
-						currentUser = userDataFacade.selectUserByEmail(email);
-						return true;
+						return userDataFacade.selectUserById(userId);
 					} else {
-						return false;
+						return null;
 					}
 
 				} // end user dup check if
 			} else {
-				System.err.println("Email is not verified: " + email);
-				return false;
+				logger.info("[login]", "Email is not verified: " + email);
+				return null;
 			} // end email verifying check if
 		} else {
-			System.err.println("Invalid ID token: " + idTokenString);
-			return false;
+			logger.info("[login]", "Invalid ID token: " + idTokenString);
+			return null;
 		} // end token check if
 	} // end login method
 
@@ -99,10 +93,5 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserModel getUserByEmail(String email) {
 		return userDataFacade.selectUserByEmail(email);
-	}
-	
-	@Override
-	public UserModel getCurrentUser() {
-		return currentUser;
 	}
 }

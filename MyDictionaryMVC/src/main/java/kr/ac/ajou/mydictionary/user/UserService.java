@@ -6,17 +6,17 @@ public interface UserService {
 	 * Log in by idTokenString given by Google OAuth API. <br>	  
 	 * Verify idTokenString and check user's information in mysql DB. <br><br> 
 	 * 
-	 * if there is an user then return true /
-	 * else return false <br><br>
+	 * if there is an user then return user /
+	 * else return null <br><br>
 	 * 
 	 * 구글 author 하고, mysql db에 사용자 정보 있는지 확인하고 성공 & 실패 그래서 아마도 parameter는 받을 필요
 	 * 없을거 같은뎅??=>토큰인증을 위해, idTokenString은 받아와야할 듯 하옵니다.
 	 * 
 	 * @exception 로그인
 	 *                실패
-	 * @return boolean - success:true or fail: false
+	 * @return UserModel - success:UserModel or fail:null
 	 */
-	public boolean login(String idTokenString) throws Exception;
+	public UserModel login(String idTokenString) throws Exception;
 	
 	/**
 	 * Get User by email string.<br>
@@ -28,6 +28,4 @@ public interface UserService {
 	 * @return UserModel - success:UserModel object or fail:null
 	 * */
 	public UserModel getUserByEmail(String email);
-	
-	public UserModel getCurrentUser();
 }

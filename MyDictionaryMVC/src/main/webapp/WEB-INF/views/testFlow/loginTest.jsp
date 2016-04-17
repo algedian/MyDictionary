@@ -81,16 +81,16 @@
 				}
 			};
 			
-			httpRequest.open('POST', 'http://localhost:8080/ajou/user/' + id, true);
+			httpRequest.open('POST', 'http://localhost:8080/ajou/user/' + "'" + 'borichyaa@gmail.com' + "'", true);
 			//httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 			httpRequest.setRequestHeader('Accept', 'application/json');
 			httpRequest.send(domain);
 			*/
 			$.ajax({
-				url:'http://localhost:8080/ajou/user/' + id,
+				url:'http://localhost:8080/ajou/user/getUserByEmail',
 				type: 'post',
 				contentType: 'text/plain',
-				data: domain,
+				data: email,
 				dataType: 'json',
 				success: function(data){
 					console.log(data);

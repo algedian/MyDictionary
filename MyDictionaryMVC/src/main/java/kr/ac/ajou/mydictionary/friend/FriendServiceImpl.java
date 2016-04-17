@@ -9,33 +9,18 @@ import kr.ac.ajou.mydictionary.userdata.UserDataFacade;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
-@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+//@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Service("friendService")
 public class FriendServiceImpl implements FriendService {
 	public static final Logger logger = LoggerFactory.getLogger(FriendServiceImpl.class);
 
 	@Resource(name = "userDataBaseFacade")
 	private UserDataFacade userDataFacade;
-	
-	/* 10000개 넘어가기전엔 array가 더 빠름ㅋ */
-	private ArrayList<UserModel> friends;
-
-	public ArrayList<UserModel> getFriends() {
-		return friends;
-	}
 
 	public FriendServiceImpl() {
 		super();
-	}
-	
-	public boolean setFriends(int userIndex) {
-		friends = userDataFacade.selectFriendListByUserIndex(userIndex);
-		
-		return true;
 	}
 
 	/*
