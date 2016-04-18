@@ -26,13 +26,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SearchEngineController {
 	private static final Logger logger = LoggerFactory.getLogger(SearchEngineController.class);
 
+	private static final String APPLICATION_JSON_UTF8 = "application/json;charset=UTF-8";
+	
 	@Resource(name = "searchEngine")
 	private SearchEngine searchEngine;
 
 	@Resource(name = "friendService")
 	private FriendService friendService;
 
-	@RequestMapping(value = "/getUserDocument", method = RequestMethod.POST)
+	@RequestMapping(value = "/getUserDocument", method = RequestMethod.POST, consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
 	public @ResponseBody DocumentModel getUserDocument(@RequestBody SearchModel searchModel) {
 		logger.info("[/getUserDocument]" + " - " + "Get in getUserDocument method");
 		logger.info("[/getUserDocument]" + " - " + searchModel.toString());
@@ -48,7 +50,7 @@ public class SearchEngineController {
 		}
 	}
 
-	@RequestMapping(value = "/getFriendDocuments", method = RequestMethod.POST)
+	@RequestMapping(value = "/getFriendDocuments", method = RequestMethod.POST, consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
 	public @ResponseBody ArrayList<DocumentModel> getFriendDocuments(@RequestBody SearchModel searchModel) {
 		logger.info("[/getFriendDocuments]" + " - " + "Get in getFriendDocuments method");
 		logger.info("[/getFriendDocuments]" + " - " + searchModel.toString());

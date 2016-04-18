@@ -70,4 +70,37 @@ public class UserModel {
 
 		return buf.toString();
 	}
+	
+	public String toJson() {
+		//{"index":1471,"userId":"testUser1","name":"name1","email":"testUser1@gmail.com","pictureURL":null}
+		String json = "{" + "\"" + "index" + "\"" + ":" + index;
+		
+		if (userId == null) {
+			json += "," + "\"" + "userId" + "\"" + ":" + "null";
+		} else {
+			json += "," + "\"" + "userId" + "\"" + ":" + "\"" + userId + "\"";
+		}
+		
+		if(name == null) {
+			json += ","  + "\"" + "name" + "\"" + ":"  + "null";
+		} else {
+			json += ","  + "\"" + "name" + "\"" + ":"  + "\"" + name + "\"";
+		}
+		
+		if(email == null) {
+			json += ","  + "\"" + "email" + "\"" + ":" + "null";
+		} else {
+			json += ","  + "\"" + "email" + "\"" + ":"  + "\"" + email + "\"";
+		}
+		
+		if(pictureURL == null) {
+			json += ","  + "\"" + "pictureURL" + "\"" + ":"  + "null";
+		} else {
+			json += ","  + "\"" + "pictureURL" + "\"" + ":"  + "\"" + pictureURL + "\"";
+		}
+		
+		json += "}";
+		
+		return json; 
+	}
 }

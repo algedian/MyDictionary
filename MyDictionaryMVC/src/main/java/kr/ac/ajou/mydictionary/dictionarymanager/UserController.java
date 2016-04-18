@@ -24,10 +24,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
+	private static final String APPLICATION_JSON_UTF8 = "application/json;charset=UTF-8";
+	
 	@Resource(name = "userService")
 	private UserService userService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
 	@ResponseBody
 	public UserModel login(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("[/login]" + " - " + "Get in login method");
@@ -46,18 +48,31 @@ public class UserController {
 		return null;
 	}
 
-	@RequestMapping(value = "/getUserByEmail", method = RequestMethod.POST) //{emailID}
-	public @ResponseBody UserModel findUserByEmail(@RequestBody String email) {
+	
+	/**
+	 * @author universe
+	 * @date 2016. 4. 18. 오후 10:56:01
+	 * @description
+	 * 		만약에 email에 상응하는 사용자가 없으면, 빈 user (다 null) return
+	 */
+	@RequestMapping(value = "/getUserByEmail", method = RequestMethod.POST, consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8) //{emailID}
+	public @ResponseBody UserModel findUserByEmail(@RequestBody UserModel userModel) {
 		logger.info("[/getUserByEmail]" + " - " + "Get in findUserByEmail method");
-		logger.info("[/getUserByEmail]" + " - " + email);
+		logger.info("[/getUserByEmail]" + " - " + userModel.toString());
 		
 		// String emailStr = email + "@" + domain.replace("=", "");
 		// System.err.println(emailStr);
 		// logger.info("emailStr=" + emailStr);
 		// email = URLDecoder.decode(email,"UTF-8");
 
-		UserModel user = userService.getUserByEmail(email);
-		logger.info("[/getUserByEmail]" + " - " + user.toString());
+		UserModel user = userService.getUserByEmail(userModel.getEmail());
+		
+		if ( user != null) {
+			logger.info("[/getUserByEmail]" + " - " + user.toString());
+		} else {
+			logger.info("[/getUserByEmail]" + " - " + "null");
+			user = new UserModel();
+		}
 
 		return user;
 	}

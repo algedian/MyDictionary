@@ -86,11 +86,13 @@
 			httpRequest.setRequestHeader('Accept', 'application/json');
 			httpRequest.send(domain);
 			*/
+			var userModel = new Object();
+			userModel.email = email;
 			$.ajax({
 				url:'http://localhost:8080/ajou/user/getUserByEmail',
 				type: 'post',
 				contentType: 'application/json;charset=UTF-8',
-				data: email,
+				data: JSON.stringify(userModel),
 				dataType: 'json',
 				success: function(data){
 					console.log(data);

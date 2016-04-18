@@ -10,7 +10,6 @@ import kr.ac.ajou.mydictionary.user.UserModel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,13 +24,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class FriendController {
 	private static final Logger logger = LoggerFactory.getLogger(FriendController.class);
 	
+	private static final String APPLICATION_JSON_UTF8 = "application/json;charset=UTF-8";
+	
 	@Resource(name = "friendService")
 	private FriendService friendService;
 	
-	@RequestMapping(value = "/followFriend", method = RequestMethod.POST)
+	@RequestMapping(value = "/followFriend", method = RequestMethod.POST, consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
 	public @ResponseBody String followFriend(@RequestBody FriendModel friendModel) {
 		logger.info("[/followFriend]" + " - " + "Get in followFriend method");
-		logger.info("[/followFriend]" + " - " + friendModel.toString());
+		// logger.info("[/followFriend]" + " - " + friendModel.toString());
 
 		if(friendService.followFriend(friendModel.getUserIndex(), friendModel.getFriendIndex())) {
 			logger.info("[/followFriend]" + " - " + friendModel.toString() + " success");
@@ -42,10 +43,10 @@ public class FriendController {
 		}
 	}
 	
-	@RequestMapping(value = "/unfollowFriend", method = RequestMethod.POST)
+	@RequestMapping(value = "/unfollowFriend", method = RequestMethod.POST, consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
 	public @ResponseBody String unfollowFriend(@RequestBody FriendModel friendModel) {
 		logger.info("[/unfollowFriend]" + " - " + "Get in unfollowFriend method");
-		logger.info("[/unfollowFriend]" + " - " + friendModel.toString());
+		// logger.info("[/unfollowFriend]" + " - " + friendModel.toString());
 
 		if(friendService.unfollowFriend(friendModel.getUserIndex(), friendModel.getFriendIndex())) {
 			logger.info("[/unfollowFriend]" + " - " + friendModel.toString() + " success");
@@ -56,31 +57,14 @@ public class FriendController {
 		}
 	}
 	
-	@RequestMapping(value = "/getFriendsByUserIndex", method = RequestMethod.POST)
-	public @ResponseBody ArrayList<UserModel> getFriendsByUserIndex(@RequestBody int userIndex) {
+	@RequestMapping(value = "/getFriendsByUserIndex", method = RequestMethod.POST, consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
+	public @ResponseBody ArrayList<UserModel> getFriendsByUserIndex(@RequestBody FriendModel friendModel) {
 		logger.info("[/getFriendsByUserIndex]" + " - " + "Get in getFriendsByUserIndex method");
-		logger.info("[/getFriendsByUserIndex]" + " - " + userIndex);
+		// logger.info("[/getFriendsByUserIndex]" + " - " + friendModel.getUserIndex() + ", " + friendModel.getFriendIndex());
 
-		ArrayList<UserModel> friends = friendService.getFriendList(userIndex);
+		ArrayList<UserModel> friends = friendService.getFriendList(friendModel.getUserIndex());
 		logger.info("[/getFriendsByUserIndex]" + " - " + friends.toString());
 
 		return friends;
 	}
-	
-//	@RequestMapping(value = "/test", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	@RequestMapping(value = "/test", method = RequestMethod.POST, consumes = "appliaton/json",produces = "appliaton/json")
-	public @ResponseBody String test(@RequestBody int userIndex) {
-		logger.info("[/test]" + " - " + "Get in test method");
-		logger.info("[/test]" + " - " + userIndex);
-
-		return userIndex++ + "";
-	}	
-	
-	@RequestMapping(value = "/ttest", method = RequestMethod.POST)
-	public @ResponseBody String ttest() {
-		logger.info("[/test]" + " - " + "Get in test method");
-		logger.info("[/test]" + " - " + 0);
-
-		return 0 + "";
-	}	
 }
