@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
+import kr.ac.ajou.mydictionary.dictionarymanager.model.SearchModel;
 import kr.ac.ajou.mydictionary.document.DocumentModel;
 import kr.ac.ajou.mydictionary.friend.FriendService;
 import kr.ac.ajou.mydictionary.searchengine.SearchEngine;
@@ -32,11 +33,11 @@ public class SearchEngineController {
 	private FriendService friendService;
 
 	@RequestMapping(value = "/getUserDocument", method = RequestMethod.POST)
-	public @ResponseBody DocumentModel getUserDocument(@RequestBody String userId, @RequestBody String keyword) {
+	public @ResponseBody DocumentModel getUserDocument(@RequestBody SearchModel searchModel) {
 		logger.info("[/getUserDocument]" + " - " + "Get in getUserDocument method");
-		logger.info("[/getUserDocument]" + " - " + userId + ", " + keyword);
+		logger.info("[/getUserDocument]" + " - " + searchModel.toString());
 
-		DocumentModel dm = searchEngine.getUserDocument(userId, keyword);
+		DocumentModel dm = searchEngine.getUserDocument(searchModel.getUserId(), searchModel.getKeyword());
 		logger.error("[/getUserDocument]" + " - " + "여기 리턴값 널인지 빈오브젝트인지 확인해봐야뎀");
 		if (dm != null) {
 			logger.info("[/getUserDocument]" + " - " + dm.toString());
@@ -48,19 +49,18 @@ public class SearchEngineController {
 	}
 
 	@RequestMapping(value = "/getFriendDocuments", method = RequestMethod.POST)
-	public @ResponseBody ArrayList<DocumentModel> getFriendDocuments(@RequestBody int userIndex,
-			@RequestBody String keyword) {
+	public @ResponseBody ArrayList<DocumentModel> getFriendDocuments(@RequestBody SearchModel searchModel) {
 		logger.info("[/getFriendDocuments]" + " - " + "Get in getFriendDocuments method");
-		logger.info("[/getFriendDocuments]" + " - " + userIndex + ", " + keyword);
+		logger.info("[/getFriendDocuments]" + " - " + searchModel.toString());
 
-		ArrayList<UserModel> friends = friendService.getFriendList(userIndex);
-		ArrayList<DocumentModel> result = searchEngine.getFriendDocuments(friends, keyword);
+		ArrayList<UserModel> friends = friendService.getFriendList(searchModel.getUserIndex());
+		ArrayList<DocumentModel> result = searchEngine.getFriendDocuments(friends,  searchModel.getKeyword());
 
 		if (!result.isEmpty()) {
-			logger.info("[/getFriendDocuments]" + " - " + userIndex + ", " + keyword + " success");
+			logger.info("[/getFriendDocuments]" + " - " + searchModel.toString() + " success");
 			return result;
 		} else {
-			logger.info("[/getFriendDocuments]" + " - " + userIndex + ", " + keyword + " is empty");
+			logger.info("[/getFriendDocuments]" + " - " + searchModel.toString() + " is empty");
 			return result;
 		}
 	}

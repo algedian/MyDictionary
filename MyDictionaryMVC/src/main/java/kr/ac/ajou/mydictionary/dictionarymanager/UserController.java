@@ -46,8 +46,7 @@ public class UserController {
 		return null;
 	}
 
-	@RequestMapping(value = "/getUserByEmail", method = RequestMethod.POST)
-	// , produces="application/json" , consumes="text/plain") /{emailID}
+	@RequestMapping(value = "/getUserByEmail", method = RequestMethod.POST) //{emailID}
 	public @ResponseBody UserModel findUserByEmail(@RequestBody String email) {
 		logger.info("[/getUserByEmail]" + " - " + "Get in findUserByEmail method");
 		logger.info("[/getUserByEmail]" + " - " + email);

@@ -89,8 +89,21 @@
 			$.ajax({
 				url:'http://localhost:8080/ajou/user/getUserByEmail',
 				type: 'post',
-				contentType: 'text/plain',
+				contentType: 'application/json;charset=UTF-8',
 				data: email,
+				dataType: 'json',
+				success: function(data){
+					console.log(data);
+				}
+			});
+			var friendModel = new Object();
+			friendModel.userIndex = '11';
+			friendModel.friendIndex = '22';
+			$.ajax({
+				url:'http://localhost:8080/ajou/friend/followFriend',
+				type: 'post',
+				contentType: 'application/json;charset=UTF-8',
+				data: JSON.stringify(friendModel),
 				dataType: 'json',
 				success: function(data){
 					console.log(data);
