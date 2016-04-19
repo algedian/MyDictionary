@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service("documentService")
 public class DocumentServiceImpl implements DocumentService {
-	private static final String ESCAPE = "__";
+	private static final String SYMBOL = "_";
 
 	@Resource(name = "dictionaryDataBaseFacade")
 	private DictionaryDataFacade dictionaryDataFacade;
@@ -21,7 +21,7 @@ public class DocumentServiceImpl implements DocumentService {
 
 	protected Dictionary castDictionary(DocumentModel document) {
 		if (document != null) {
-			return new Dictionary(document.getUserId() + ESCAPE + document.getKeyword(), document.getCreateTime(),
+			return new Dictionary(document.getUserId() + SYMBOL + document.getKeyword(), document.getCreateTime(),
 					document.getUpdateTime(), document.getDocument());
 		} else {
 			return null;
@@ -31,7 +31,7 @@ public class DocumentServiceImpl implements DocumentService {
 
 	protected DocumentModel castDocument(Dictionary dictionary) {
 		if (dictionary != null) {
-			String str[] = dictionary.getKey().split(ESCAPE);
+			String str[] = dictionary.getKey().split(SYMBOL);
 			DocumentModel dm = new DocumentModel(str[0], str[1], dictionary.getCreateTime(),
 					dictionary.getUpdateTime(), dictionary.getDocument());
 
@@ -42,7 +42,7 @@ public class DocumentServiceImpl implements DocumentService {
 	}
 
 	protected String makeKey(String userId, String keyword) {
-		return userId + ESCAPE + keyword;
+		return userId + SYMBOL + keyword;
 	}
 
 }
