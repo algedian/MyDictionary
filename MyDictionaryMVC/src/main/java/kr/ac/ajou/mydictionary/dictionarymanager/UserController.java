@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.ac.ajou.mydictionary.dictionarymanager.model.IdTokenModel;
 import kr.ac.ajou.mydictionary.user.UserModel;
 import kr.ac.ajou.mydictionary.user.UserService;
 
@@ -31,6 +32,25 @@ public class UserController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
 	@ResponseBody
+	public UserModel login(@RequestBody IdTokenModel idToken) {
+		logger.info("[/login]" + " - " + "Get in login method");
+		try {
+			UserModel userModel = userService.login(idToken.getIdToken());
+			if (userModel != null) { // idTokenString
+				logger.info("[/login]" + " - " + "success");
+
+				return userModel;
+			}
+		} catch (Exception e) {
+			logger.info("[/login]" + " - " + "Catch Exception:", e);
+		}
+
+		logger.info("[/login]" + " - " + "fail");
+		return null;
+	}
+	
+	/*@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = APPLICATION_JSON_UTF8, produces = APPLICATION_JSON_UTF8)
+	@ResponseBody
 	public UserModel login(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("[/login]" + " - " + "Get in login method");
 		try {
@@ -46,7 +66,7 @@ public class UserController {
 
 		logger.info("[/login]" + " - " + "fail");
 		return null;
-	}
+	}*/
 
 	
 	/**
