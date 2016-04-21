@@ -36,7 +36,7 @@ public class DictionaryDataFacadeTest {
 	public void makeData() {
 		userId = "dcoun";
 		keyword = "keyword";
-		document = "documentasdfdsgsdg";
+		document = "document";
 		
 		dictionary = new Dictionary(userId + ESCAPE + keyword, new Date(), null, document);
 		
@@ -56,6 +56,9 @@ public class DictionaryDataFacadeTest {
 	public void getDictionaryByKeyTest() {
 		Dictionary result = repo.getDictionaryByKey(dictionary.getKey());
 		Assert.assertEquals(result.toString(), dictionary.toString());
+		
+		result = repo.getDictionaryByKey("some");
+		Assert.assertEquals(result, null);
 	}
 	
 	@Test

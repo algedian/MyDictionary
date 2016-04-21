@@ -49,6 +49,7 @@ public class UserDataFacadeTest extends AbstractUserDataFacadeTest {
 		UserModel result = userDataFacade.selectUserById(testUser[0].getUserId());
 
 		assertEquals(result.getUserId(), testUser[0].getUserId());
+		assertEquals(result.getName(), testUser[0].getName());
 		assertEquals(result.getEmail(), testUser[0].getEmail());
 		assertEquals(result.getPictureURL(), testUser[0].getPictureURL());
 		
