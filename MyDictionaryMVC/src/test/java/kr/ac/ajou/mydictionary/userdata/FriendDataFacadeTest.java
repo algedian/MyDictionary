@@ -4,11 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
-import kr.ac.ajou.mydictionary.user.UserModel;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import kr.ac.ajou.mydictionary.user.UserModel;
 
 public class FriendDataFacadeTest extends AbstractUserDataFacadeTest {
 	@Override
@@ -67,14 +67,14 @@ public class FriendDataFacadeTest extends AbstractUserDataFacadeTest {
 
 	@Test
 	public void insertFriendByIndexTest() {
-		// 위에서 커버
+		/* It covers in 'setFriend' testcase ? */
 		// userDataFacade.insertFriendByIndex(testUser[0].getIndex(),
 		// testUser[1].getIndex());
 	}
 
 	@Test
 	public void insertFriendByFriendEmailTest() {
-		// 위에서 커버
+		/* It covers in '' testcase ?? */
 		// assertEquals(userDataFacade.insertFriendByFriendEmail(testUser[0].getIndex(),
 		// testUser[1].getEmail()), 0);
 	}
@@ -159,7 +159,6 @@ public class FriendDataFacadeTest extends AbstractUserDataFacadeTest {
 
 		assertEquals(userDataFacade.deleteFriendByIndex(node[0].getIndex(), node[1].getIndex()), 0);
 		assertEquals(userDataFacade.deleteFriendByIndex(node[1].getIndex(), node[0].getIndex()), 0);
-
 		for (UserModel userModel : node) {
 			userDataFacade.deleteUserById(userModel.getUserId());
 		}

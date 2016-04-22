@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 import javax.annotation.Resource;
 
-import kr.ac.ajou.mydictionary.userdata.UserDataFacade;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,6 +15,8 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
+
+import kr.ac.ajou.mydictionary.userdata.UserDataFacade;
 
 //@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Service("userService")
@@ -64,8 +64,8 @@ public class UserServiceImpl implements UserService {
 				if ((user = userDataFacade.selectUserById(userId)) != null) {
 					return user;// login success
 				} else {
-					// 일단은 초기값으로 인덱스를 -1을 넣어놓고... 파사드에서는 insert 시 id는 안읽으니까
-					// 상관없을듯합니당.
+					// -1 is just init value.
+					// When insert process, facade does not read id so perhaps it is ok.
 					user = new UserModel(-1, userId, name, email, pictureURL);
 
 					// UserDataFacade call to store user info
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
 						return null;
 					}
 
-				} // end user dup check if
+				} // end user duplication check if
 			} else {
 				logger.info("[login]", "Email is not verified: " + email);
 				return null;
@@ -86,10 +86,8 @@ public class UserServiceImpl implements UserService {
 		} // end token check if
 	} // end login method
 
-	/*
-	 * 사용자를 email로 검색하는 것은 email로 user를 select 해오는 것이 필요하다고 생각되옵니다. 그래서
-	 * deprecated 된 selectUserByEmail을 부활시켰사옵니다.
-	 */
+	// It is need to search user function using user's email
+	// So, return back getUserByEmail function that was deprecated.
 	@Override
 	public UserModel getUserByEmail(String email) {
 		return userDataFacade.selectUserByEmail(email);

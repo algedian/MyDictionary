@@ -3,11 +3,11 @@ package kr.ac.ajou.mydictionary.friend;
 public class FriendModel {
 	protected Integer userIndex;
 	protected Integer friendIndex;
-	
+
 	public FriendModel() {
 		super();
 	}
-	
+
 	public FriendModel(Integer userIndex, Integer friendIndex) {
 		super();
 		this.userIndex = userIndex;
@@ -29,11 +29,12 @@ public class FriendModel {
 	public void setFriendIndex(Integer friendIndex) {
 		this.friendIndex = friendIndex;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder buf = new StringBuilder(200);
-		buf.append("{userIndex=" + userIndex);
+		buf.append("{");
+		buf.append("userIndex=" + userIndex);
 		buf.append(", friendIndex=" + friendIndex);
 		buf.append("}");
 

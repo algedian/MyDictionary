@@ -4,12 +4,6 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
-import kr.ac.ajou.mydictionary.dictionarymanager.model.SearchModel;
-import kr.ac.ajou.mydictionary.document.DocumentModel;
-import kr.ac.ajou.mydictionary.friend.FriendService;
-import kr.ac.ajou.mydictionary.searchengine.SearchEngine;
-import kr.ac.ajou.mydictionary.user.UserModel;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,8 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.ac.ajou.mydictionary.dictionarymanager.model.SearchModel;
+import kr.ac.ajou.mydictionary.document.DocumentModel;
+import kr.ac.ajou.mydictionary.friend.FriendService;
+import kr.ac.ajou.mydictionary.searchengine.SearchEngine;
+import kr.ac.ajou.mydictionary.user.UserModel;
+
 /**
- * Handles requests for the application home page.
+ * Handles requests for search.
  */
 @Controller
 @RequestMapping(value = "/search")
@@ -27,7 +27,7 @@ public class SearchEngineController {
 	private static final Logger logger = LoggerFactory.getLogger(SearchEngineController.class);
 
 	private static final String APPLICATION_JSON_UTF8 = "application/json;charset=UTF-8";
-	
+
 	@Resource(name = "searchEngine")
 	private SearchEngine searchEngine;
 
@@ -40,7 +40,7 @@ public class SearchEngineController {
 		logger.info("[/getUserDocument]" + " - " + searchModel.toString());
 
 		DocumentModel dm = searchEngine.getUserDocument(searchModel.getUserId(), searchModel.getKeyword());
-		logger.error("[/getUserDocument]" + " - " + "여기 리턴값 널인지 빈오브젝트인지 확인해봐야뎀");
+		logger.error("[/getUserDocument]" + " - " + "check whether return value is null or empty object");
 		if (dm != null) {
 			logger.info("[/getUserDocument]" + " - " + dm.toString());
 			return dm;
@@ -66,8 +66,8 @@ public class SearchEngineController {
 			return result;
 		}
 	}
-	
-/*	@RequestMapping(value = "/getFriendDocuments", method = RequestMethod.POST)
+
+	/*	@RequestMapping(value = "/getFriendDocuments", method = RequestMethod.POST)
 	public @ResponseBody ArrayList<DocumentModel> getFriendDocuments(@RequestBody int userIndex,
 			@RequestBody String keyword, @RequestBody ArrayList<UserModel> friends) {
 		logger.info("[/getFriendDocuments]" + " - " + "Get in getFriendDocuments method");
