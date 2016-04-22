@@ -101,7 +101,7 @@ public class SearchEngineTest extends AbstractJUnit4SpringContextTests {
 		ArrayList<DocumentModel> result = searchEngine.getFriendDocuments(friends, keyword);
 		Assert.assertEquals(result.toString(), expected.toString());
 
-		result = searchEngine.getFriendDocuments(friends, keyword + "agsdgsdg");
+		result = searchEngine.getFriendDocuments(friends, keyword + keyword);
 		Assert.assertEquals(result.toString(), new ArrayList<DocumentModel>().toString());
 	}
 }

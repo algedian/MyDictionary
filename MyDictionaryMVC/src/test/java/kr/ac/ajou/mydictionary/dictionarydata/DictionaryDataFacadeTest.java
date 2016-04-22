@@ -70,8 +70,9 @@ public class DictionaryDataFacadeTest {
 			expected.add(dictionary);
 			dictionaries.add(dictionary);
 		}
-		dictionaries.add(new Dictionary(userId + 1 + ESCAPE + keyword + "afs", new Date(), null, document));
-		dictionaries.add(new Dictionary(userId + 1 + ESCAPE + "afs" + keyword, new Date(), null, document));
+		dictionaries.add(new Dictionary(userId + 0 + ESCAPE + "a" + keyword, new Date(), null, document));
+		dictionaries.add(new Dictionary(userId + 0 + ESCAPE + keyword + "a", new Date(), null, document));
+		dictionaries.add(new Dictionary(userId + 00 + ESCAPE + keyword, new Date(), null, document));
 
 		for(Dictionary dictionary : dictionaries) {
 			repo.setDictionary(dictionary);
@@ -96,8 +97,8 @@ public class DictionaryDataFacadeTest {
 
 	@Test
 	public void updateDictionaryByKeyTest() {
-		Dictionary test = new Dictionary(userId + "111" + ESCAPE + keyword, new Date(), null, document);
-		Dictionary replacer = new Dictionary(userId + "111" + ESCAPE + keyword, null, new Date(), document + "2353252");
+		Dictionary test = new Dictionary(userId + "000" + ESCAPE + keyword, new Date(), null, document);
+		Dictionary replacer = new Dictionary(userId + "000" + ESCAPE + keyword, null, new Date(), document + "replacer");
 
 		repo.setDictionary(test);
 		repo.updateDictionary(replacer);
