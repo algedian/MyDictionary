@@ -68,13 +68,15 @@ public class FriendDataFacadeTest extends AbstractUserDataFacadeTest {
 	@Test
 	public void insertFriendByIndexTest() {
 		/* It covers in 'setFriend' testcase ? */
-		// userDataFacade.insertFriendByIndex(testUser[0].getIndex(), testUser[1].getIndex());
+		// userDataFacade.insertFriendByIndex(testUser[0].getIndex(),
+		// testUser[1].getIndex());
 	}
 
 	@Test
 	public void insertFriendByFriendEmailTest() {
 		/* It covers in '' testcase ?? */
-		// assertEquals(userDataFacade.insertFriendByFriendEmail(testUser[0].getIndex(), testUser[1].getEmail()), 0);
+		// assertEquals(userDataFacade.insertFriendByFriendEmail(testUser[0].getIndex(),
+		// testUser[1].getEmail()), 0);
 	}
 
 	@Test
@@ -110,12 +112,12 @@ public class FriendDataFacadeTest extends AbstractUserDataFacadeTest {
 
 	@Test
 	public void selectStrangerFriendListByUserIndexTest() {
-		UserModel node[] = { new UserModel(0, "user00", "name00", "email00@gmail.com", "pictureURL00"),
-				new UserModel(0, "user11", "name11", "email11@gmail.com", "pictureURL11"),
-				new UserModel(0, "user22", "name22", "email22@gmail.com", "pictureURL22")};
+		UserModel node[] = { new UserModel(0, "testUser00", "name00", "testUser00@gmail.com", null),
+				new UserModel(0, "testUser11", "name11", "testUser11@gmail.com", null),
+				new UserModel(0, "testUser22", "name22", "testUser22@gmail.com", null) };
 
 		int i = 0;
-		for(UserModel userModel : node) {
+		for (UserModel userModel : node) {
 			userDataFacade.insertUser(userModel);
 			node[i++] = userDataFacade.selectUserById(userModel.getUserId());
 		}
@@ -133,7 +135,7 @@ public class FriendDataFacadeTest extends AbstractUserDataFacadeTest {
 		userDataFacade.deleteFriendByIndex(node[1].getIndex(), node[0].getIndex());
 		userDataFacade.deleteFriendByIndex(node[2].getIndex(), node[0].getIndex());
 
-		for(UserModel userModel : node) {
+		for (UserModel userModel : node) {
 			userDataFacade.deleteUserById(userModel.getUserId());
 		}
 
@@ -143,11 +145,11 @@ public class FriendDataFacadeTest extends AbstractUserDataFacadeTest {
 
 	@Test
 	public void deleteFriendByIndexTest() {
-		UserModel node[] = { new UserModel(0, "userIDDD", "name", "email@gmail.com", "pictureURL"),
-				new UserModel(0, "userIDDD22", "name222", "email222@gmail.com", "pictureURL222") };
+		UserModel node[] = { new UserModel(0, "testUser00", "name00", "testUser00@gmail.com", null),
+				new UserModel(0, "testUser11", "name11", "testUser11@gmail.com", null) };
 
 		int i = 0;
-		for(UserModel userModel : node) {
+		for (UserModel userModel : node) {
 			userDataFacade.insertUser(userModel);
 			node[i++] = userDataFacade.selectUserById(userModel.getUserId());
 		}
@@ -157,8 +159,7 @@ public class FriendDataFacadeTest extends AbstractUserDataFacadeTest {
 
 		assertEquals(userDataFacade.deleteFriendByIndex(node[0].getIndex(), node[1].getIndex()), 0);
 		assertEquals(userDataFacade.deleteFriendByIndex(node[1].getIndex(), node[0].getIndex()), 0);
-
-		for(UserModel userModel : node) {
+		for (UserModel userModel : node) {
 			userDataFacade.deleteUserById(userModel.getUserId());
 		}
 	}
@@ -166,11 +167,11 @@ public class FriendDataFacadeTest extends AbstractUserDataFacadeTest {
 	@SuppressWarnings("deprecation")
 	@Test
 	public void deleteFriendByFriendEmailTest() {
-		UserModel node[] = { new UserModel(0, "userIDDD", "name", "email@gmail.com", "pictureURL"),
-				new UserModel(0, "userIDDD22", "name222", "email222@gmail.com", "pictureURL222") };
+		UserModel node[] = { new UserModel(0, "testUser00", "name00", "testUser00@gmail.com", null),
+				new UserModel(0, "testUser11", "name11", "testUser11@gmail.com", null) };
 
 		int i = 0;
-		for(UserModel userModel : node) {
+		for (UserModel userModel : node) {
 			userDataFacade.insertUser(userModel);
 			node[i++] = userDataFacade.selectUserById(userModel.getUserId());
 		}
@@ -183,7 +184,7 @@ public class FriendDataFacadeTest extends AbstractUserDataFacadeTest {
 		assertEquals(userDataFacade.deleteFriendByFriendEmail(node[0].getIndex(), node[1].getEmail()), 0);
 		assertEquals(userDataFacade.deleteFriendByFriendEmail(node[1].getIndex(), node[0].getEmail()), 0);
 
-		for(UserModel userModel : node) {
+		for (UserModel userModel : node) {
 			userDataFacade.deleteUserById(userModel.getUserId());
 		}
 	}
