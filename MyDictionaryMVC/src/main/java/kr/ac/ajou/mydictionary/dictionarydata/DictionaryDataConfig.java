@@ -17,31 +17,32 @@ public class DictionaryDataConfig extends AbstractMongoConfiguration {
 	private static final String DB_NAME = "MyDictionary";
 	private static final String DB_URL = "dijkstra.ajou.ac.kr";
 	private static final String BASE_PACKAGE = "kr.ac.ajou.mydictionary.dictionarydata";
-	
-    @Override
-    @Bean
-    protected String getDatabaseName() {
-        return DB_NAME;
-    }
 
-    @Override
-    @Bean
-    public Mongo mongo() throws Exception {
-        // ServerAddress serverAddress = new ServerAddress("localhost", 27017);
-        // MongoCredential credential = MongoCredential.createMongoCRCredential("storeUser", getDatabaseName(), "storePass".toCharArray());
-        // MongoClientOptions options = MongoClientOptions.builder().connectionsPerHost(4).socketKeepAlive(true).build();
-        // Mongo mongo = new MongoClient(serverAddress, Arrays.asList(credential), options);
-        
-        return new MongoClient(DB_URL, 27017);
-    }
-    
-    @Bean// (name = "MongoTemplate")
-    public MongoTemplate mongoTemplate() throws Exception {
-    	return new MongoTemplate(mongo(), getDatabaseName());
-    }
+	@Override
+	@Bean
+	protected String getDatabaseName() {
+		return DB_NAME;
+	}
 
-    @Override
-    protected String getMappingBasePackage() {
-        return BASE_PACKAGE;
-    }
+	@Override
+	@Bean
+	public Mongo mongo() throws Exception {
+		// ServerAddress serverAddress = new ServerAddress("localhost", 27017);
+		// MongoCredential credential = MongoCredential.createMongoCRCredential("storeUser", getDatabaseName(), "storePass".toCharArray());
+		// MongoClientOptions options = MongoClientOptions.builder().connectionsPerHost(4).socketKeepAlive(true).build();
+		// Mongo mongo = new MongoClient(serverAddress, Arrays.asList(credential), options);
+
+		return new MongoClient(DB_URL, 27017);
+	}
+
+	@Override
+	@Bean// (name = "MongoTemplate")
+	public MongoTemplate mongoTemplate() throws Exception {
+		return new MongoTemplate(mongo(), getDatabaseName());
+	}
+
+	@Override
+	protected String getMappingBasePackage() {
+		return BASE_PACKAGE;
+	}
 }

@@ -8,10 +8,6 @@ import java.nio.charset.Charset;
 
 import javax.annotation.Resource;
 
-import kr.ac.ajou.mydictionary.dictionarymanager.model.FriendModel;
-import kr.ac.ajou.mydictionary.user.UserModel;
-import kr.ac.ajou.mydictionary.userdata.UserDataFacade;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +28,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+
+import kr.ac.ajou.mydictionary.dictionarymanager.model.FriendModel;
+import kr.ac.ajou.mydictionary.user.UserModel;
+import kr.ac.ajou.mydictionary.userdata.UserDataFacade;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -96,7 +96,7 @@ public class UserControllerTest extends AbstractJUnit4SpringContextTests {
 	}
 
 	public void loginTest() {
-		// 여긴 스텁에 대한 오버헤드가 너무 큼
+		// It is too heavy overhead with stub to implement this function
 	}
 
 	@Test
@@ -104,19 +104,19 @@ public class UserControllerTest extends AbstractJUnit4SpringContextTests {
 		try {
 			String json = "{" + "\"" + "email" + "\"" + ":" + "\"" + testUser[0].getEmail() + "\"" + "}" ;
 			sendPost(GET_USER_URL, json, testUser[0].toJson());
-			
+
 			json = "{" + "\"" + "email" + "\"" + ":" + "\"" + testUser[1].getEmail() + "\"" + "}" ;
 			sendPost(GET_USER_URL, json, testUser[1].toJson());
-			
+
 			json = "{" + "\"" + "email" + "\"" + ":" + "\"" + testUser[2].getEmail() + "\"" + "}" ;
 			sendPost(GET_USER_URL, json, testUser[2].toJson());
-			
+
 			json = "{" + "\"" + "email" + "\"" + ":" + "\"" + testUser[3].getEmail() + "\"" + "}" ;
 			sendPost(GET_USER_URL, json, testUser[3].toJson());
-			
+
 			json = "{" + "\"" + "email" + "\"" + ":" + "\"" + testUser[4].getEmail() + "\"" + "}" ;
 			sendPost(GET_USER_URL, json, testUser[4].toJson());
-			
+
 			json = "{" + "\"" + "email" + "\"" + ":" + "\"" + testUser[0].getEmail() + testUser[1].getEmail() + "\"" + "}" ;
 			sendPost(GET_USER_URL, json, new UserModel().toJson());
 		} catch (Exception e) {

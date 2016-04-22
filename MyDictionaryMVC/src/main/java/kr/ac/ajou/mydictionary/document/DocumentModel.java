@@ -2,7 +2,7 @@ package kr.ac.ajou.mydictionary.document;
 
 import java.util.Date;
 
-public class DocumentModel {	
+public class DocumentModel {
 	private String userId;
 	private String keyword;
 
@@ -40,7 +40,7 @@ public class DocumentModel {
 		buf.append(", updateTime=" + updateTime);
 		buf.append(", document=" + document);
 		buf.append("}");
-		
+
 		return buf.toString();
 	}
 

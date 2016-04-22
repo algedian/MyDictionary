@@ -7,11 +7,11 @@ import kr.ac.ajou.mydictionary.user.UserModel;
 public interface UserDataFacade {
 
 	/*-----------------------------------------------------------------------------------------------
-	 * normal user service related methods*/
+	 * general user service related methods*/
 
 	/**
-	 * Return boolean value if the user exist or not using userIndex
-	 * 
+	 * Returns boolean value if the user exist or not using userIndex
+	 *
 	 * @param
 	 * @return boolean - exists:true or not-exists:false
 	 * */
@@ -19,7 +19,7 @@ public interface UserDataFacade {
 
 	/**
 	 * Inserts an user to user table
-	 * 
+	 *
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
@@ -27,7 +27,7 @@ public interface UserDataFacade {
 
 	/**
 	 * Returns an user from userId
-	 * 
+	 *
 	 * @param
 	 * @return UserModel - success:User or fail:null
 	 * */
@@ -35,16 +35,18 @@ public interface UserDataFacade {
 
 	/**
 	 * Returns an user from email
-	 * 
+	 *
 	 * @param
 	 * @return UserModel - success:User or User fail:null
 	 * */
-	// @Deprecated 친구검색 시 이메일로 유저검색하는 것이 필요하므로 다시 살려보았사옵니다.
+	// @Deprecated
+	// When search friend, it is need a function that using friend's email.
+	// So function's state was set back available
 	public UserModel selectUserByEmail(String email);
 
 	/**
 	 * Updates an user to user table from userId
-	 * 
+	 *
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
@@ -52,7 +54,7 @@ public interface UserDataFacade {
 
 	/**
 	 * Deletes an user to user table from userId
-	 * 
+	 *
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
@@ -60,7 +62,7 @@ public interface UserDataFacade {
 
 	/**
 	 * Deletes an user to user table from email
-	 * 
+	 *
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
@@ -69,7 +71,7 @@ public interface UserDataFacade {
 
 	/**
 	 * Updates an user to user table from email
-	 * 
+	 *
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
@@ -82,7 +84,7 @@ public interface UserDataFacade {
 	/**
 	 * Checks if a user is already following the friend whose index is
 	 * friendIndex
-	 * 
+	 *
 	 * @param
 	 * @return boolean - following:1 or not following:0
 	 * */
@@ -91,7 +93,7 @@ public interface UserDataFacade {
 	/**
 	 * Inserts a user-friend relation data to friend table using userIndex and
 	 * userIndex of friend
-	 * 
+	 *
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
@@ -99,7 +101,7 @@ public interface UserDataFacade {
 
 	/**
 	 * Inserts an friend to friend table from userIndex and friendEmail
-	 * 
+	 *
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
@@ -108,7 +110,7 @@ public interface UserDataFacade {
 
 	/**
 	 * Selects all friends from friend table using userIndex
-	 * 
+	 *
 	 * @param
 	 * @return ArrayList<User> - success:ArrayList<UserModel> or fail:null
 	 * */
@@ -116,7 +118,7 @@ public interface UserDataFacade {
 
 	/**
 	 * Selects all friends added user from friend table using userIndex
-	 * 
+	 *
 	 * @param
 	 * @return ArrayList<UserModel> - success:many or fail:empty array
 	 * */
@@ -125,7 +127,7 @@ public interface UserDataFacade {
 	/**
 	 * Deletes user-friend relation data from Friend table using userIndex and
 	 * userIndex of friend
-	 * 
+	 *
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */
@@ -134,7 +136,7 @@ public interface UserDataFacade {
 	/**
 	 * Deletes user-friend relation data from Friend table using userIndex and
 	 * email of friend
-	 * 
+	 *
 	 * @param
 	 * @return int - success:1 or fail:0
 	 * */

@@ -2,10 +2,10 @@ package kr.ac.ajou.mydictionary.userdata;
 
 import java.util.ArrayList;
 
-import kr.ac.ajou.mydictionary.user.UserModel;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import kr.ac.ajou.mydictionary.user.UserModel;
 
 @Repository("userDataBaseFacade")
 public class UserDataFacadeImpl implements UserDataFacade {
@@ -18,7 +18,7 @@ public class UserDataFacadeImpl implements UserDataFacade {
 	}
 
 	/*-----------------------------------------------------------------------------------------------
-	 * normal user service related methods*/
+	 * general user service related methods*/
 
 	@Override
 	public boolean isUserExistByIndex(int userIndex) {
@@ -108,7 +108,7 @@ public class UserDataFacadeImpl implements UserDataFacade {
 
 	/*
 	 * @Override public int updateFriend(String userId) { return 0; }
-	 * 
+	 *
 	 * @Override public int deleteFriend(int userIndex, String friendEmail) {
 	 * return mapper.deletefriend(userIndex, friendEmail); }
 	 */
