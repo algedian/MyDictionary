@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.ajou.mydictionary.dictionarydata.Dictionary;
 import kr.ac.ajou.mydictionary.dictionarydata.DictionaryDataFacade;
+import kr.ac.ajou.mydictionary.document.DocumentService;
 
 @Service("documentService")
 public class DocumentServiceImpl implements DocumentService {
