@@ -34,7 +34,7 @@ public class DictionaryDataFacadeTest {
 
 	@Before
 	public void makeData() {
-		userId = "dcoun";
+		userId = "userId";
 		keyword = "keyword";
 		document = "document";
 		
@@ -88,6 +88,10 @@ public class DictionaryDataFacadeTest {
 		for(Dictionary dictionary : dictionaries) {
 			repo.deleteDictionaryByKey(dictionary.getKey());
 		}
+		
+		result = repo.getDictionaryByKeys(keyArrary);
+		expected.clear();
+		Assert.assertEquals(result.toString(), expected.toString());
 	}
 	
 	@Test
