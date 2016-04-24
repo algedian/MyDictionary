@@ -28,7 +28,7 @@ public interface UserDataMapper {
 	@Select(SELECT_USER_COUNT_BY_INDEX_QUERY)
 	public int selectUserCountByIndex(int userIndex);
 
-	static final String INSERT_USER_QUERY = "INSERT INTO user (userId, name, email, pictureURL) VALUES (#{0.userId}, #{0.name}, #{0.email}, #{0.pictureURL})";
+	static final String INSERT_USER_QUERY = "INSERT INTO user (userId, name, email, pictureURL) VALUES (#{userId}, #{name}, #{email}, #{pictureURL})";
 
 	/**
 	 * Inserts an user to user table
