@@ -45,7 +45,7 @@ public class FriendServiceTest extends AbstractJUnit4SpringContextTests {
 			testUser[i] = userDataFacade.selectUserById(testUser[i].getUserId());
 		}
 
-		fakeUser = new UserModel(-100, "fakeUserId", "fakeUserName", "fakeUserEmail", "fakeUserPictureURL");
+		fakeUser = new UserModel(-100, "fakeUserId", "fakeUserName", "fakeUserEmail@gmail.com", "fakeUserPictureURL");
 	}
 
 	@After
