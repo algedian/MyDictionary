@@ -1,8 +1,9 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 
-<title>Main Page</title>
+<title>Login With Google Page</title>
 
 <meta charset="utf-8">
 
@@ -23,8 +24,6 @@
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
 
-<!-- link href="../css/result.css" rel="stylesheet"> -->
-
 <!-- Google Platfom Library api -->
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
@@ -33,35 +32,11 @@
 <meta name="google-signin-client_id"
 	content="768889397569-ifca7s46aplo8i4ikt95ba6ihjmmfdlf.apps.googleusercontent.com">
 
+<script src="<c:url value="/resources/js/demo.js"/>"></script>
+
 </head>
 <body>
 	<div class="g-signin2" data-onsuccess="onSignIn"></div>
 	<a href="#" onclick="signOut();">Sign out</a>
-	<ul>
-		<li><a href="#" onclick="toFriendService();">Friend Service</a></li>
-		<li><a href="#" onclick="toDocumentService();">Document Service</a></li>
-		<li><a href="#" onclick="toSearchService();">Search Service</a></li>
-	</ul>
-	
-	<script>
-		function signOut() {
-			var auth2 = gapi.auth2.getAuthInstance();
-			auth2.signOut().then(function() {
-				console.log('User signed out.');
-				window.location = './';
-			});
-		}
-		
-		function toFriendService() {
-			window.location = './friend';
-		}
-		
-		function toDocumentService() {
-			window.location = './document';
-		}
-		
-		function toSearchService() {
-			window.location = './search';
-		}
-	</script>
+	<a href="#" onclick="toHome();">Home</a>
 </body>
