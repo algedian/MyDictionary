@@ -25,7 +25,7 @@ public class FriendServiceImpl implements FriendService {
 
 	@Override
 	public boolean followFriend(int userIndex, int friendIndex) {
-		if (userDataFacade.isUserExistByIndex(userIndex) && userDataFacade.isUserExistByIndex(friendIndex)) {
+		if (userDataFacade.isUserExistByIndex(userIndex) && userDataFacade.isUserExistByIndex(friendIndex) && (userIndex!=friendIndex)) {
 			// Check - if user exists
 			if (!userDataFacade.isAlreadyFriendByIndex(userIndex, friendIndex)) {
 				// Check - if already follow
