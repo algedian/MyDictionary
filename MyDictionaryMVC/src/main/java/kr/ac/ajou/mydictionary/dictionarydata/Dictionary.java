@@ -29,12 +29,13 @@ public class Dictionary {
 	@Override
 	public String toString() {
 		StringBuilder buf = new StringBuilder();
-		buf.append("{key=" + key);
+		buf.append("{");
+		buf.append("key=" + key);
 		buf.append(", createTime=" + createTime);
 		buf.append(", updateTime=" + updateTime);
 		buf.append(", document=" + document);
 		buf.append("}");
-		
+
 		return buf.toString();
 	}
 

@@ -9,10 +9,6 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
-import kr.ac.ajou.mydictionary.dictionarymanager.model.FriendModel;
-import kr.ac.ajou.mydictionary.user.UserModel;
-import kr.ac.ajou.mydictionary.userdata.UserDataFacade;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +29,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+
+import kr.ac.ajou.mydictionary.dictionarymanager.model.FriendModel;
+import kr.ac.ajou.mydictionary.user.UserModel;
+import kr.ac.ajou.mydictionary.userdata.UserDataFacade;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -143,7 +143,8 @@ public class FriendControllerTest extends AbstractJUnit4SpringContextTests {
 			sendPost(UNFOLLOW_URL, friendModel, "fail");
 
 			friendModel = new FriendModel(testUser[0].getIndex(), testUser[1].getIndex());
-			// 위에서 커버
+
+			/* It covers in 'followFriendTest' testcase */
 			// sendPost(unfollowURL, friendModel, "success");
 
 			sendPost(UNFOLLOW_URL, friendModel, "fail");
@@ -153,16 +154,19 @@ public class FriendControllerTest extends AbstractJUnit4SpringContextTests {
 		}
 	}
 
-	/**
-	 * case 1: 2,3,4,5 2: 3,5 3: 1,2 4: 2 5: 칭구가 없음..
-	 * */
+	/* testcase */
+	// case 1: 2,3,4,5
+	// 		2: 3,5
+	// 		3: 1,2
+	// 		4: 2
+	// 		5: no friend
 	@Test
 	public void getFriendsByUserIndexTest() {
 		try {
 			ArrayList<UserModel> expecte = new ArrayList<UserModel>();
 
 			FriendModel friendModel = new FriendModel(-10, -1);
-			// index가 없는 경우: 예상 불가 ㅋ
+			// If there is no index, no expectation..
 			sendPost(GET_FRIENDS_URL, friendModel, expecte.toString());
 
 			makeData();

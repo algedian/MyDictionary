@@ -6,10 +6,6 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
-import kr.ac.ajou.mydictionary.dictionarymanager.AppConfig;
-import kr.ac.ajou.mydictionary.user.UserModel;
-import kr.ac.ajou.mydictionary.userdata.UserDataFacade;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,10 +16,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kr.ac.ajou.mydictionary.dictionarymanager.AppConfig;
+import kr.ac.ajou.mydictionary.user.UserModel;
+import kr.ac.ajou.mydictionary.userdata.UserDataFacade;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AppConfig.class)
-public class FirendServiceTest extends AbstractJUnit4SpringContextTests {
-	public static final Logger logger = LoggerFactory.getLogger(FirendServiceTest.class);
+public class FriendServiceTest extends AbstractJUnit4SpringContextTests {
+	public static final Logger logger = LoggerFactory.getLogger(FriendServiceTest.class);
 
 	@Resource(name = "friendService")
 	private FriendService friendService;
@@ -45,7 +45,7 @@ public class FirendServiceTest extends AbstractJUnit4SpringContextTests {
 			testUser[i] = userDataFacade.selectUserById(testUser[i].getUserId());
 		}
 
-		fakeUser = new UserModel(-100, "fakeUserId", "fakeUserName", "fakeUserEmail", "fakeUserPictureURL");
+		fakeUser = new UserModel(-100, "fakeUserId", "fakeUserName", "fakeUserEmail@gmail.com", "fakeUserPictureURL");
 	}
 
 	@After
@@ -60,40 +60,40 @@ public class FirendServiceTest extends AbstractJUnit4SpringContextTests {
 		followFriendTest();
 		unfollowFriendTest();
 	}
-	
+
 	public void followFriendTest() {
-		// 사용자 존재 여부
+		// Check whether user exists
 		assertEquals(friendService.followFriend(fakeUser.getIndex(), testUser[0].getIndex()), false);
 		assertEquals(friendService.followFriend(testUser[0].getIndex(), fakeUser.getIndex()), false);
-		
+
 		assertEquals(friendService.followFriend(testUser[0].getIndex(), testUser[1].getIndex()), true);
-		
-		//이미 팔로우를 하고 있는지 체크
+
+		// Check whether user follows/unfollows
 		assertEquals(friendService.followFriend(testUser[0].getIndex(), testUser[1].getIndex()), false);
 	}
 
 	public void unfollowFriendTest() {
 		assertEquals(friendService.unfollowFriend(fakeUser.getIndex(), testUser[0].getIndex()), false);
 		assertEquals(friendService.unfollowFriend(testUser[0].getIndex(), fakeUser.getIndex()), false);
-		
-		//이미 팔로우를 하고 있는지 체크
+
+		// Check whether user follows/unfollows
 		assertEquals(friendService.unfollowFriend(testUser[1].getIndex(), testUser[0].getIndex()), false);
-		
+
 		assertEquals(friendService.unfollowFriend(testUser[0].getIndex(), testUser[1].getIndex()), true);
 	}
 
 	@Test
 	public void getFriendListTest() {
 		ArrayList<UserModel> expected = new ArrayList<UserModel>();
-		
+
 		for(int i = 1; i < MAX_SIZE; i++) {
 			friendService.followFriend(testUser[0].getIndex(), testUser[i].getIndex());
 			expected.add(testUser[i]);
 		}
-		
+
 		ArrayList<UserModel> result = friendService.getFriendList(testUser[0].getIndex());
 		assertEquals(result.toString(), expected.toString());
-		
+
 		for(int i = 1; i < MAX_SIZE; i++) {
 			friendService.unfollowFriend(testUser[0].getIndex(), testUser[i].getIndex());
 		}

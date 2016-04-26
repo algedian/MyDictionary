@@ -58,7 +58,7 @@ public class UserDataConfig {
 	// }
 	/*
 	 * @SuppressWarnings("resource")
-	 * 
+	 *
 	 * @Bean public UserDataMapper userDataMapper() throws Exception { return
 	 * new
 	 * SqlSessionTemplate(sqlSessionFactory()).getMapper(UserDataMapper.class);

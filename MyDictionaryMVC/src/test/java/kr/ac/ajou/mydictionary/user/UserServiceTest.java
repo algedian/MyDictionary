@@ -6,6 +6,6 @@ import javax.annotation.Resource;
 public class UserServiceTest {
 	@Resource(name = "userService")
 	private UserService userService;
-	
+
 
 }

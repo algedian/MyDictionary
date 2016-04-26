@@ -23,52 +23,52 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class HomeController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	@Resource(name = "userService")
 	private UserService userService;
-	
-/*	@Resource(name = "dictionaryDataBaseFacade")
+
+	/*	@Resource(name = "dictionaryDataBaseFacade")
 	DictionaryDataFacade dictionaryDataFacade;
 
 	public void documentSetTest() {
 		dictionaryDataFacade.setDictionary("dcoun", "dictionary", "sdaflkajsdglkhdfglkjsdfhglkjsdfghlkdfsjh");
 	}*/
-	
-//	@Resource(name = "documentService")
-//	private DocumentService documentService;
-	
+
+	//	@Resource(name = "documentService")
+	//	private DocumentService documentService;
+
 	//@Resource(name = "searchEngine")
 	//private SearchEngine searchEngine;
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		
+
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
+
 		String formattedDate = dateFormat.format(date);
-		
+
 		model.addAttribute("serverTime", formattedDate );
-		
-		
+
+
 		ModelAndView mv = new ModelAndView("home");
-		LoginBean loginBean = new LoginBean();
-		
-		mv.addObject("loginBean", loginBean);
-		
+//		LoginBean loginBean = new LoginBean();
+
+//		mv.addObject("loginBean", loginBean);
+
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView testFlow(HttpServletRequest request, HttpServletResponse response) {		
+	public ModelAndView testFlow(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("testFlow/loginTest");
-		
+
 		return mv;
 	}
 
@@ -79,35 +79,35 @@ public class HomeController {
 			logger.info(loginBean.getUserId());
 			userService.loginTest(loginBean.getUserId());
 			ModelAndView mv = new ModelAndView();
-			
+
 			String result = "";
 			mv.addObject(result);
-			
+
 			return mv;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			// exception 발생시 실패 페이지로 이동 하면 될듯
+			// when exception occurs, move to fail page
 		}
-		
+
 		return null;
 	}*/
-	
+
 	@RequestMapping(value = "/dictionaryTest", method = RequestMethod.GET)
 	public ModelAndView dictionaryTest(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
-		
-//		documentService.documentSetTest();
-		
+
+		//		documentService.documentSetTest();
+
 		return mv;
 	}
-	
-//	@RequestMapping(value = "/dictionarySearchTest", method = RequestMethod.GET)
-//	public ModelAndView dictionarySearchTest(HttpServletRequest request, HttpServletResponse response) {
-//		ModelAndView mv = new ModelAndView();
-		
-		// searchEngine
-		
-//		return mv;
-//	}
+
+	//	@RequestMapping(value = "/dictionarySearchTest", method = RequestMethod.GET)
+	//	public ModelAndView dictionarySearchTest(HttpServletRequest request, HttpServletResponse response) {
+	//		ModelAndView mv = new ModelAndView();
+
+	// searchEngine
+
+	//		return mv;
+	//	}
 }

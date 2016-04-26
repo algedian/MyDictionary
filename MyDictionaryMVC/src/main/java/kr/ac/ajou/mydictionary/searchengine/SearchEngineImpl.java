@@ -24,7 +24,7 @@ public class SearchEngineImpl implements SearchEngine {
 
 	protected Dictionary castDictionary(DocumentModel document) {
 		if (document != null) {
-			return new Dictionary(document.getUserId() + ESCAPE + document.getKeyword(), document.getCreateTime(),
+			return new Dictionary(makeKey(document.getUserId(), document.getKeyword()), document.getCreateTime(),
 					document.getUpdateTime(), document.getDocument());
 		} else {
 			return null;
