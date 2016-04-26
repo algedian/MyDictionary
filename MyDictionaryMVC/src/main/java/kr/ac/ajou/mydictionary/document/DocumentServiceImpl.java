@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service("documentService")
 public class DocumentServiceImpl implements DocumentService {
-	private static final String ESCAPE = "__";
+	private static final String ESCAPE = "_";
 
 	@Resource(name = "dictionaryDataBaseFacade")
 	private DictionaryDataFacade dictionaryDataFacade;
@@ -76,7 +76,7 @@ public class DocumentServiceImpl implements DocumentService {
 		Dictionary dictionary = castDictionary(documentModel);
 		Dictionary selectResult = dictionaryDataFacade.getDictionaryByKey(dictionary.getKey());
 
-		// 여기서 이전 문서 유지 할 것인지 폐기 할 것인지 결정 해야 하긴 함.
+		//
 		if (selectResult != null) {
 			dictionary.setUpdateTime(dictionary.getCreateTime());
 			dictionary.setCreateTime(selectResult.getCreateTime());
@@ -89,7 +89,7 @@ public class DocumentServiceImpl implements DocumentService {
 
 			return true;
 		}
-		// unreachable - 근데 나중에 바낄지도 모르니.
+		// unreachable
 		// return false;
 	}
 
@@ -108,8 +108,7 @@ public class DocumentServiceImpl implements DocumentService {
 		Dictionary dictionary = castDictionary(documentModel);
 		Dictionary result = dictionaryDataFacade.getDictionaryByKey(dictionary.getKey());
 		
-		// document를 죄다 비교하는 경우 타임이 .. 많이 잡아먹으니
-		// 앞서 set 인터페이스가 같은 키에 대해서, document가 다른 경우를 제거한다고 확신
+		// 
 		if(result != null) {
 			dictionaryDataFacade.deleteDictionaryByKey(result.getKey());
 			return true;
