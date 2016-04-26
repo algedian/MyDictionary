@@ -4,7 +4,7 @@
   <class id="1" language="java" name="kr.ac.ajou.mydictionary.document.DocumentModel" project="MyDictionaryMVC" 
     file="/MyDictionaryMVC/src/main/java/kr/ac/ajou/mydictionary/document/DocumentModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="405" width="250" x="166" y="49"/>    
+    <position height="405" width="250" x="137" y="-7"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -14,7 +14,7 @@
   <class id="2" language="java" name="kr.ac.ajou.mydictionary.document.DocumentServiceImpl" project="MyDictionaryMVC" 
     file="/MyDictionaryMVC/src/main/java/kr/ac/ajou/mydictionary/document/DocumentServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="207" width="258" x="456" y="49"/>    
+    <position height="207" width="258" x="427" y="-7"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -24,7 +24,7 @@
   <interface id="3" language="java" name="kr.ac.ajou.mydictionary.document.DocumentService" project="MyDictionaryMVC" 
     file="/MyDictionaryMVC/src/main/java/kr/ac/ajou/mydictionary/document/DocumentService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="99" width="228" x="456" y="494"/>    
+    <position height="99" width="228" x="427" y="438"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

@@ -48,8 +48,8 @@
     project="MyDictionaryMVC" 
     file="/MyDictionaryMVC/src/main/java/kr/ac/ajou/mydictionary/dictionarymanager/DocumentController.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="214" y="404"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="175" width="236" x="99" y="319"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    

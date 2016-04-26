@@ -5,7 +5,7 @@
     project="MyDictionaryMVC" 
     file="/MyDictionaryMVC/src/main/java/kr/ac/ajou/mydictionary/dictionarydata/DictionaryDataFacadeImpl.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="225" width="328" x="185" y="45"/>    
+    <position height="225" width="328" x="138" y="67"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -15,7 +15,7 @@
   <class id="2" language="java" name="kr.ac.ajou.mydictionary.dictionarydata.Dictionary" project="MyDictionaryMVC" 
     file="/MyDictionaryMVC/src/main/java/kr/ac/ajou/mydictionary/dictionarydata/Dictionary.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="333" width="191" x="553" y="45"/>    
+    <position height="333" width="191" x="506" y="67"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -26,7 +26,7 @@
     project="MyDictionaryMVC" 
     file="/MyDictionaryMVC/src/main/java/kr/ac/ajou/mydictionary/dictionarydata/DictionaryDataConfig.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="207" width="186" x="784" y="45"/>    
+    <position height="207" width="186" x="737" y="67"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -37,7 +37,7 @@
     project="MyDictionaryMVC" 
     file="/MyDictionaryMVC/src/main/java/kr/ac/ajou/mydictionary/dictionarydata/DictionaryDataFacade.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="328" x="185" y="418"/>    
+    <position height="189" width="328" x="138" y="440"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
