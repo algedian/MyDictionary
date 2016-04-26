@@ -99,10 +99,17 @@ function deleteFriend(index) {
 			url : 'http://localhost:8080/ajou/friend/unfollowFriend',
 			type : 'post',
 			contentType : 'application/json;charset=UTF-8',
-			dataType : 'json',
+			dataType : 'text',
 			data : JSON.stringify(friendModel),
 			success : function(result, status) {
 				console.log(result);
+				if(result == "success"){
+					window.location.reload();
+				}
+				else {
+					alert("cannot delete friend");
+					window.location.reload();
+				}
 			}
 		});
 	}
@@ -123,10 +130,16 @@ function addFriend(index) {
 			url : 'http://localhost:8080/ajou/friend/followFriend',
 			type : 'post',
 			contentType : 'application/json;charset=UTF-8',
-			dataType : 'json',
+			dataType : 'text',
 			data : JSON.stringify(friendModel),
 			success : function(result, status) {
-				console.log(result);
+				if(result == "success"){
+					window.location.reload();
+				}
+				else {
+					alert("cannot add friend");
+					window.location.reload();
+				}
 			}
 		});
 	}
