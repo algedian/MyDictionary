@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service("documentService")
 public class DocumentServiceImpl implements DocumentService {
-	private static final String ESCAPE = "_";
+	private static final String ESCAPE = "__";
 
 	@Resource(name = "dictionaryDataBaseFacade")
 	private DictionaryDataFacade dictionaryDataFacade;
