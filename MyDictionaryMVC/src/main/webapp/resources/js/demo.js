@@ -68,22 +68,6 @@ function getFriendList() {
 	}
 }
 
-function makeFriendListHtml() {
-
-	var friendList = JSON.parse(localStorage.getItem("friendList"));
-
-	for (var i = 0; i < friendList.length; i++) {
-		var user = friendList[i];
-		var listHtml = '<li class="list-group-item">'
-				+ '<strong>Name</strong> ' + user.name
-				+ '   <strong>email</strong> ' + user.email
-				+ ' <button class="btn btn-default" onclick="deleteFriend('
-				+ user.index + ')">delete</button></li>'
-		//console.log($("#friendList"));
-		$("#friendList").append(listHtml);
-	}
-}
-
 function deleteFriend(index) {
 
 	var userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -145,10 +129,10 @@ function addFriend(index) {
 	}
 }
 
-function searchFriends() {
+function searchFriend() {
 	var searchEmail = $("#searchFriendByEmail").val();
 	$("#searchFriendByEmail").val(null);
-	console.log(searchEmail);
+	//console.log(searchEmail);
 	
 	var userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -175,16 +159,144 @@ function searchFriends() {
 						//console.log($("#friendList"));
 						$("#searchFriendList").append(listHtml);
 				} else {
-					var errorHtml = "There is no result for email '" + searchEmail + "'";
-					$("#searchFriendList").append(errorHtml);
+					alert("There is no result for email '" + searchEmail + "'");
 				}
 			}
 		});
 	}
 }
 
-// move location
-// ------------------------------------------------------------------------
+//document ------------------------------------------------------------------------------
+
+function createDocument() {
+	var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+	if (userInfo.index != null) {
+		setDocument(userInfo.userId, $("#newKeyword").val(), $("#newDocument").val());
+		$("#newKeyword").val(null);
+		$("#newDocument").val(null);
+		window.location.reload();
+	}
+}
+function saveDocument(keyword) {
+
+	var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+	if (userInfo.index != null) {
+		setDocument(userInfo.userId, keyword, $("#userDocumentContent").val());
+	}
+}
+function setDocument(userId, keyword, document) {
+	
+	var documentModel = new Object();
+
+	documentModel.userId = userId;
+	documentModel.keyword = keyword;
+	documentModel.document = document;
+	
+	$.ajax({
+		url : 'http://localhost:8080/ajou/document/setDocument',
+		type : 'post',
+		contentType : 'application/json;charset=UTF-8',
+		dataType : 'text',
+		data : JSON.stringify(documentModel),
+		success : function(result, status) {
+			// console.log(result);
+			if(result == "success"){
+				window.location.reload();
+			}
+			else {
+				alert("cannot delete the document");
+				//window.location.reload();
+			}
+		}
+	});
+}
+
+function deleteDocument(keyword) {
+	var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+	if (userInfo.index != null) {
+		var documentModel = new Object();
+
+		documentModel.userId = userInfo.userId;
+		documentModel.keyword = keyword;
+		
+		$.ajax({
+			url : 'http://localhost:8080/ajou/document/deleteDocument',
+			type : 'post',
+			contentType : 'application/json;charset=UTF-8',
+			dataType : 'text',
+			data : JSON.stringify(documentModel),
+			success : function(result, status) {
+				// console.log(result);
+				if(result == "success"){
+					window.location.reload();
+				}
+				else {
+					alert("cannot delete the document");
+					//window.location.reload();
+				}
+			}
+		});
+	}
+}
+
+//search --------------------------------------------------------------------------------
+function searchDocument() {
+	var keyword = $("#searchDocumentsByKeyword").val();
+	$("#searchDocumentsByKeyword").val(null);
+	searchDocumentbyKeyword(keyword);
+}
+
+function searchDocumentbyKeyword(keyword) {
+	var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+	if (userInfo.index != null) {
+		var searchModel = new Object();
+		searchModel.userIndex = userInfo.index;
+		searchModel.userId = userInfo.userId;
+		searchModel.keyword = keyword;
+		
+		getUserDocument(searchModel);
+		/*
+		 *in case of getting search result from friends
+		 * */
+		//getDocumentsOfFriends(searchModel);
+	}
+}
+
+function getUserDocument(searchModel) {
+	var userDocument = new Object();
+	$.ajax({
+		url : 'http://localhost:8080/ajou/search/getUserDocument',
+		type : 'post',
+		contentType : 'application/json;charset=UTF-8',
+		dataType : 'json',
+		data : JSON.stringify(searchModel),
+		success : function(result, status) {
+			//console.log(result);
+			makeUserDocumentHtml(result);
+		}
+	});
+}
+/*
+function getDocumentsOfFriends(searchModel) {
+	$.ajax({
+		url : 'http://localhost:8080/ajou/search/getFriendDocuments',
+		type : 'post',
+		contentType : 'application/json;charset=UTF-8',
+		dataType : 'json',
+		data : JSON.stringify(searchModel),
+		success : function(result, status) {
+			//console.log(result);
+			makeFriendDocumentListHtml(result);
+		}
+	});
+}
+*/
+
+// move location ------------------------------------------------------------------------
 function toHome() {
 	window.location = "./home";
 }
@@ -199,4 +311,86 @@ function toDocumentService() {
 
 function toSearchService() {
 	window.location = './search';
+}
+
+// building UI -------------------------------------------------------------------------
+function makeFriendListHtml() {
+
+	var friendList = JSON.parse(localStorage.getItem("friendList"));
+
+	for (var i = 0; i < friendList.length; i++) {
+		var user = friendList[i];
+		var listHtml = '<li class="list-group-item">'
+				+ '<strong>Name</strong> ' + user.name
+				+ '   <strong>email</strong> ' + user.email
+				+ ' <button class="btn btn-default" onclick="deleteFriend('
+				+ user.index + ')">delete</button></li>'
+		//console.log($("#friendList"));
+		$("#friendList").append(listHtml);
+	}
+}
+var keyword = null;
+function makeUserDocumentHtml(userDocument) {
+	keyword = userDocument.keyword;
+	if(keyword != null) {
+		var documentHtml = '<div class="panel-heading">'+
+		'<h3 class="panel-title">'+userDocument.keyword+'</h3>'+
+		'<button class="btn btn-link btn-xs" type="button" data-toggle="modal" data-target="#userDocument">edit</button>'+
+		'<button class="btn btn-link btn-xs" type="button" onclick="deleteDocument(keyword);">delete</button>'+
+		'<!-- User Document Modal -->'+
+		'<div class="modal fade" id="userDocument" tabindex="-1 role="dialog" aria-labelledby="userDocumentKeyword">'+
+		'<div class="modal-dialog" role="document">'+
+		'<div class="modal-content">'+
+		'<div class="modal-header">'+
+		'<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+		'<span aria-hidden="true">&times;</span></button>'+
+		'<h4 class="modal-title" id="userDocumentKeyword">'+userDocument.keyword+'</h4>'+
+		'</div>'+
+		'<div class="modal-body">'+
+		'<textarea class="form-control" id="userDocumentContent">'+userDocument.document+'</textarea>'+
+		'</div>'+
+		'<div class="modal-footer">'+
+		'<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+		'<button type="button" class="btn btn-primary" onclick="saveDocument(keyword);">Save</button>'+
+		'</div>'+
+		'</div>'+
+		'</div>'+
+		'</div><!-- User Document Modal -->'+
+		'</div>'+
+		'<div class="panel-body">'+
+		'<p>'+userDocument.document+'</p>'+
+		'<p>by user, created:'+userDocument.createTime+', updated:'+userDocument.updateTime+'</p>'+
+		'</div>';
+		
+		$("#searchedUserDocument").append(documentHtml);
+	}
+}
+/*
+function makeFriendDocumentListHtml(friendsDocuments) {
+	
+	for (var i = 0; i < friendsDocuments.length; i++) {
+		var fd = friendsDocuments[i];
+		//console.log(fd);
+		var friend = getFriendInfoByUserId(fd.userId);
+		//console.log(friend);
+		var documentListHtml = '<li class="list-group-item">'+
+		'<h4 class="list-group-item-heading">'+fd.keyword+'</h4>'+
+		'<p class="list-group-item-text">'+fd.document+'</p>'+
+		'<p class="list-group-item-text">by '+friend.name+'('+friend.email+'), created:'+fd.createTime+', updated:'+fd.updateTime+'</p>'+
+		'</li>';
+		
+		$("#searchDocumentList").append(documentListHtml);
+	}
+}
+*/
+//find from localStorage
+function getFriendInfoByUserId(userId) {
+	var friend = new Object();
+	var friendList = JSON.parse(localStorage.getItem("friendList"));
+	
+	for(var i=0; i<friendList.length; i++) {
+		if(friendList[i].userId == userId) {
+			return friendList[i];
+		}
+	}
 }

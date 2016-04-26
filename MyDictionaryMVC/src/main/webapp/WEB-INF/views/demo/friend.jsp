@@ -40,6 +40,7 @@
 	content="768889397569-ifca7s46aplo8i4ikt95ba6ihjmmfdlf.apps.googleusercontent.com">
 
 <script src="<c:url value="/resources/js/demo.js"/>"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/demo.css"/>">
 
 </head>
 <body onload="getFriendList();">
@@ -47,7 +48,7 @@
 		<div class="inline">
 			<label for="searchFriendByEmail">Search Friend</label>
 			<input type="text" id="searchFriendByEmail" placeholder="Search a Friend By Email">
-			<button type="button" class="btn btn-default" onclick="searchFriends();">Find</button>
+			<button type="button" class="btn btn-default" onclick="searchFriend();">Find</button>
 		</div>
 		<div>
 			<h2>Search Result</h2>

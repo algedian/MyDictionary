@@ -35,6 +35,7 @@
 	content="768889397569-ifca7s46aplo8i4ikt95ba6ihjmmfdlf.apps.googleusercontent.com">
 
 <script src="<c:url value="/resources/js/demo.js"/>"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/demo.css"/>">
 
 </head>
 <body>
