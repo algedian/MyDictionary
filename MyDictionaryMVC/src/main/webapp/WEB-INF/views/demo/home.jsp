@@ -41,29 +41,6 @@
 <body>
 	<ul>
 		<li><a href="#" onclick="toFriendService();">Friend Service</a></li>
-		<li><a href="#" onclick="toDocumentService();">Document
-				Service</a></li>
-		<li><a href="#" onclick="toSearchService();">Search Service</a></li>
+		<li><a href="#" onclick="toDocumentService();">Document Service</a></li>
 	</ul>
-	<script>
-		/*function signOut() {
-			var auth2 = gapi.auth2.getAuthInstance();
-			auth2.signOut().then(function() {
-				console.log('User signed out.');
-				window.location = './';
-			});
-		}
-		
-		function toFriendService() {
-			window.location = './friend';
-		}
-
-		function toDocumentService() {
-			window.location = './document';
-		}
-
-		function toSearchService() {
-			window.location = './search';
-		}*/
-	</script>
 </body>

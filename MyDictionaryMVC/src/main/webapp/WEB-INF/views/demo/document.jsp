@@ -3,7 +3,14 @@
 * Show document list
 * Create a new document
 * Edit documents
-* Delete documents -->
+* Delete documents 
+
+Search Service
+
+* Search By keyword
+	* show the document of the user's
+	* show the documents of friends'
+	-->
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -64,11 +71,11 @@
 		
 		</div>
 		
-		<!-- 
+		
 		<h4>results from friends'</h4>
 		<ul id="searchDocumentList" class="list-group">
 		</ul>
- 		-->
+ 		
 		
 		<!-- Create btn Modal -->
 		<div class="modal fade" id="createModal" tabindex="-1" role="dialog"

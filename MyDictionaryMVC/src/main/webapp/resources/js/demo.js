@@ -262,7 +262,7 @@ function searchDocumentbyKeyword(keyword) {
 		/*
 		 *in case of getting search result from friends
 		 * */
-		//getDocumentsOfFriends(searchModel);
+		getDocumentsOfFriends(searchModel);
 	}
 }
 
@@ -280,7 +280,7 @@ function getUserDocument(searchModel) {
 		}
 	});
 }
-/*
+
 function getDocumentsOfFriends(searchModel) {
 	$.ajax({
 		url : 'http://localhost:8080/ajou/search/getFriendDocuments',
@@ -294,7 +294,7 @@ function getDocumentsOfFriends(searchModel) {
 		}
 	});
 }
-*/
+
 
 // move location ------------------------------------------------------------------------
 function toHome() {
@@ -365,7 +365,7 @@ function makeUserDocumentHtml(userDocument) {
 		$("#searchedUserDocument").append(documentHtml);
 	}
 }
-/*
+
 function makeFriendDocumentListHtml(friendsDocuments) {
 	
 	for (var i = 0; i < friendsDocuments.length; i++) {
@@ -382,7 +382,7 @@ function makeFriendDocumentListHtml(friendsDocuments) {
 		$("#searchDocumentList").append(documentListHtml);
 	}
 }
-*/
+
 //find from localStorage
 function getFriendInfoByUserId(userId) {
 	var friend = new Object();
