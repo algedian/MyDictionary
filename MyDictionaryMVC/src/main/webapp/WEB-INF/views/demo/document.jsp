@@ -71,12 +71,10 @@ Search Service
 		
 		</div>
 		
-		
 		<h4>results from friends'</h4>
 		<ul id="searchDocumentList" class="list-group">
 		</ul>
- 		
-		
+
 		<!-- Create btn Modal -->
 		<div class="modal fade" id="createModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel">
