@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package metasearch.config;
+package metasearch.common;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -23,7 +23,7 @@ public class ApplicationConfig extends Application {
     }
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(metasearch.common.MetaSearch.class);
+        resources.add(metasearch.manager.MetaSearch.class);
     }
 
 }

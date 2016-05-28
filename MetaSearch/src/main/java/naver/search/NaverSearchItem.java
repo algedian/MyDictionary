@@ -1,4 +1,4 @@
-package naver._general;
+package naver.search;
 
 /**
  *

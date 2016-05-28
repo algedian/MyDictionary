@@ -5,10 +5,6 @@
  */
 package metasearch.common;
 
-import java.util.HashMap;
-import metasearch.enums.SearchCategory;
-import metasearch.enums.Vendor;
-
 /**
  *
  * @author Yewon Kim - Administrator

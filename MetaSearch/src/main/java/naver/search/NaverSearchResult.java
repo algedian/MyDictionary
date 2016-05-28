@@ -1,10 +1,9 @@
-package naver._general;
+package naver.search;
 
 import java.util.ArrayList;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
-import naver.blog.NaverBlogSearchItem;
 
 /**
  *
@@ -61,11 +60,4 @@ public class NaverSearchResult {
         this.items = items;
     }
     
-    public void test() {
-    items = new ArrayList<NaverSearchItem>();
-    
-        NaverBlogSearchItem i = new NaverBlogSearchItem();
-        items.add(i);
-        
-    }
 }

@@ -1,4 +1,4 @@
-package metasearch.enums;
+package metasearch.common;
 
 /**
  *

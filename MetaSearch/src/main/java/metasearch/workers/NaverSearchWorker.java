@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package metasearch.workers;
 
-import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
-import metasearch.enums.SearchCategory;
-import metasearch.enums.Vendor;
+import metasearch.common.Vendor;
+import naver.search.NaverSearcher;
+import naver.search.NaverSearcherFactory;
+import naver.search.NaverSearcherFactoryImpl;
 
 /**
  *
@@ -17,19 +17,29 @@ import metasearch.enums.Vendor;
  */
 public class NaverSearchWorker extends MetaSearchWorker {
 
-    public NaverSearchWorker(CountDownLatch latch, String keyword) {
-        super(latch, keyword);
+    NaverSearcherFactory factory;
+    NaverSearcher searcher;
+    
+    public NaverSearchWorker(CountDownLatch latch, String keyword, String category) {
+        super(latch, keyword, category);
         this.setVendor(Vendor.NAVER);
+        factory = new NaverSearcherFactoryImpl();
     }
 
     @Override
-    public void doSearch(String keyword) {
+    public void doSearch(String keyword, String category) {
+        System.out.println("NaverSearchWorker.doSearch");
         
-        HashMap<SearchCategory, HashMap> map = new HashMap<SearchCategory, HashMap>();
+        //factory.getNaverSearcher(category);
+        searcher = factory.getNaverSearcher(category);
         
-        //각각의 검색결과를 받아온 뒤에 그 결과값을 넣어줌
-        map.put(SearchCategory.BLOG, new HashMap());
+        searcher.search(keyword);
         
-        super.setSearchResult(map);
+        /*HashMap<SearchCategory, HashMap> map = new HashMap<SearchCategory, HashMap>();
+        
+         //각각의 검색결과를 받아온 뒤에 그 결과값을 넣어줌
+         map.put(SearchCategory.BLOG, new HashMap());
+        
+         super.setSearchResult(map);*/
     }
 }

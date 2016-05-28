@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package naver.image;
+package naver.searchImpl;
 
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -14,7 +14,7 @@ import javax.ejb.LocalBean;
  */
 @Stateless
 @LocalBean
-public class NaverImageSearch {
+public class NaverImageSearcher {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
