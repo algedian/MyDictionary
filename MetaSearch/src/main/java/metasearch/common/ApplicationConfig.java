@@ -9,8 +9,9 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 
 /**
- *
- * @author Yewon Kim - Administrator
+ * 설정 클래스입니다만..?
+ * 
+ * @author Yewon Kim
  */
 @javax.ws.rs.ApplicationPath("service")
 public class ApplicationConfig extends Application {

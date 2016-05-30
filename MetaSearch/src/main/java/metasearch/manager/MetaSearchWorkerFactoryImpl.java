@@ -6,6 +6,8 @@
 package metasearch.manager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import javax.ejb.Stateless;
 import metasearch.common.SearchCategory;
@@ -14,15 +16,26 @@ import metasearch.workers.NaverSearchWorker;
 import metasearch.common.Vendor;
 
 /**
+ * Implementation of MetaSearchWorkerFactory
  *
- * @author Yewon Kim - Administrator
+ * @author Yewon Kim
  */
 @Stateless
 public class MetaSearchWorkerFactoryImpl implements MetaSearchWorkerFactory {
 
+    /**
+     * - returns specific NaverSearcher class by category.
+     *
+     * @param vendor
+     * @param latch
+     * @param category
+     * @param keyword
+     * @return MetaSearchWorker: specific search worker object
+     */
     @Override
     public MetaSearchWorker getMetaSearchWorker(String vendor, CountDownLatch latch, String keyword, String category) {
         System.out.println("MetaSearchWorkerFactoryImpl.getMetaSearchWorker");
+
         if (vendor.equals(Vendor.DAUM.getName())) {
             System.out.println("--returns DAUM");
             return null;
@@ -37,9 +50,16 @@ public class MetaSearchWorkerFactoryImpl implements MetaSearchWorkerFactory {
         return null;
     }
 
+    /**
+     * - provide vendors which provide search service for specific category.
+     *
+     * @param category
+     * @return Vendor[]: array of Vendors
+     */
     @Override
     public Vendor[] getVendors(String category) {
         System.out.println("MetaSearchWorkerFactoryImpl.getVendors");
+        
         ArrayList<Vendor> vendors = new ArrayList<Vendor>();
 
         if (category.equals(SearchCategory.BLOG.getName())

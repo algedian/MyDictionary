@@ -6,8 +6,8 @@
 package naver.search;
 
 /**
- *
- * @author Yewon Kim - Administrator
+ * - Factory interface for NaverSearchers
+ * @author Yewon Kim
  */
 public interface NaverSearcherFactory {
     public NaverSearcher getNaverSearcher(String category);

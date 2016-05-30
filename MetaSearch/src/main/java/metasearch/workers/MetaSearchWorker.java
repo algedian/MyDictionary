@@ -6,32 +6,43 @@ import metasearch.common.SearchCategory;
 import metasearch.common.Vendor;
 
 /**
+ * - 각 api에 대한 검색작업을 진행하는 추상 스레드 클래스
+ * - An abstract thread class that is responsible for searhing works.
+ * - Each search workers of specific api vendor extends this class.
  *
- * @author Yewon Kim - Administrator
+ * @author Yewon Kim
  */
 public abstract class MetaSearchWorker extends Thread {
 
     private CountDownLatch latch;
     private Vendor vendor;
-    private String keyword, category;
-    private HashMap<SearchCategory, HashMap> searchResult;
+    private String keyword;
+    private String category;
+    private HashMap<String, HashMap> searchResult;
 
-    MetaSearchWorker(CountDownLatch latch, String keyword, String category) {
+    public MetaSearchWorker(CountDownLatch latch, String keyword, String category) {
         this.latch = latch;
         this.keyword = keyword;
         this.category = category;
-        this.searchResult = null;
+        this.searchResult = new HashMap<>();
     }
+
+    //abstract method
+    public abstract HashMap doSearch(String keyword, String category);
 
     @Override
     public void run() {
         System.out.println("MetaSearchWorker.run");
-        doSearch(keyword, category);
+        
+        HashMap map = doSearch(keyword, category);
+        
+        searchResult.put(vendor.getName(),map);
+        
+        //각각의 스레드가 작업을 마치면 latch의 count가 줄어든다.
         latch.countDown();
+        
+        System.out.println("MetaSearchWorker work finished");
     }
-
-    /* 이 함수를 오버라이드해서 쓸 수 있도록?*/
-    public abstract void doSearch(String keyword, String category);
 
     public Vendor getVendor() {
         return vendor;
@@ -41,12 +52,12 @@ public abstract class MetaSearchWorker extends Thread {
         this.vendor = vendor;
     }
 
-    public HashMap<SearchCategory, HashMap> getSearchResult() {
+    public HashMap<String, HashMap> getSearchResult() {
         return searchResult;
     }
 
-    public void setSearchResult(HashMap<SearchCategory, HashMap> searchResult) {
+    public void setSearchResult(HashMap<String, HashMap> searchResult) {
         this.searchResult = searchResult;
     }
-    
+
 }

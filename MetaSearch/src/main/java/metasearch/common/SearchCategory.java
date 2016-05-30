@@ -1,8 +1,9 @@
 package metasearch.common;
 
 /**
- *
- * @author Yewon Kim - Administrator 검색 카테고리에 대한 enum 클래스
+ * 검색 카테고리에 대한 enum 클래스
+ * 
+ * @author Yewon Kim
  */
 public enum SearchCategory {
 

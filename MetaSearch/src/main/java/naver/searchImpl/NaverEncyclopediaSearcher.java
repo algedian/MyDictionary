@@ -13,26 +13,26 @@ import naver.search.NaverSearchResult;
 import naver.search.NaverSearcher;
 
 /**
- * - Searcher class for Naver Web search.
- * 
+ * - Searcher class for Naver Encyclopedia search.
+ *
  * @author Yewon Kim
  */
 @Stateless
 @LocalBean
-public class NaverWebSearcher extends NaverSearcher {
+public class NaverEncyclopediaSearcher extends NaverSearcher {
 
-    public NaverWebSearcher() {
+    public NaverEncyclopediaSearcher() {
         
     }
 
     @Override
     public HashMap search(String keyword) {
-        System.out.println("NaverWebSearcher.search");
+        System.out.println("NaverEncyclopediaSearcher.search");
 
-        url += "webkr.xml?display=" + display + "&start=" + start;
-
-        result = new NaverSearchResult(SearchCategory.WEB.getName());
-
+        url += "encyc.xml?display=" + display + "&start=" + start;
+        
+        result = new NaverSearchResult(SearchCategory.ENCYCLOPEDIA.getName());
+        
         result.parseXml(requestToNaver(keyword));
 
         return result.getResultHashMap();

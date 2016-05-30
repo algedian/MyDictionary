@@ -1,12 +1,15 @@
 package metasearch.common;
 
 /**
- *
- * @author Yewon Kim - Administrator 검색 api 에 대한 enum 클래스
+ * 검색 api 에 대한 enum 클래스
+ * 
+ * @author Yewon Kim
  */
 public enum Vendor {
 
-    NAVER("naver"), DAUM("daum"), YOUTUBE("youtube");
+    NAVER("naver"),
+    DAUM("daum"),
+    YOUTUBE("youtube");
     
     public static final int size = Vendor.values().length;
     

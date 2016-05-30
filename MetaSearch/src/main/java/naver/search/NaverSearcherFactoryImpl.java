@@ -5,29 +5,40 @@
  */
 package naver.search;
 
-import javax.ejb.Stateless;
 import metasearch.common.SearchCategory;
 import naver.searchImpl.NaverBlogSearcher;
+import naver.searchImpl.NaverEncyclopediaSearcher;
+import naver.searchImpl.NaverImageSearcher;
+import naver.searchImpl.NaverNewsSearcher;
+import naver.searchImpl.NaverWebSearcher;
 
 /**
+ * - implementation of NaverSearcherFactory
  *
- * @author Yewon Kim - Administrator
+ * @author Yewon Kim
  */
 public class NaverSearcherFactoryImpl implements NaverSearcherFactory {
 
+    /**
+     * - returns specific NaverSearcher class by category.
+     *
+     * @param category
+     * @return NaverSearcher: specific searcher object
+     */
     @Override
     public NaverSearcher getNaverSearcher(String category) {
         System.out.println("NaverSearcherFactory.getNaverSearcher");
+
         if (category.equals(SearchCategory.BLOG.getName())) {
             return new NaverBlogSearcher();
         } else if (category.equals(SearchCategory.IMAGE.getName())) {
-            return null;
+            return new NaverImageSearcher();
         } else if (category.equals(SearchCategory.WEB.getName())) {
-            return null;
+            return new NaverWebSearcher();
         } else if (category.equals(SearchCategory.NEWS.getName())) {
-            return null;
+            return new NaverNewsSearcher();
         } else if (category.equals(SearchCategory.ENCYCLOPEDIA.getName())) {
-            return null;
+            return new NaverEncyclopediaSearcher();
         } else {
             System.out.println("No such search category in NAVER:" + category);
             return null;
