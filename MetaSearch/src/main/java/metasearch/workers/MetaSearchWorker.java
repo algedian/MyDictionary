@@ -20,7 +20,11 @@ public abstract class MetaSearchWorker extends Thread {
     private String category;
     private HashMap<String, HashMap> searchResult;
 
-    public MetaSearchWorker(CountDownLatch latch, String keyword, String category) {
+    public MetaSearchWorker() {
+    
+    }
+    
+    public void initialize(CountDownLatch latch, String keyword, String category) {
         this.latch = latch;
         this.keyword = keyword;
         this.category = category;

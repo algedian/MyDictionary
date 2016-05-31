@@ -1,5 +1,6 @@
 package metasearch.manager;
 
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.ejb.EJB;
@@ -26,14 +27,16 @@ public class MetaSearch {
      * @return
      */
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON+";charset=utf8")
     public String getSearchResult(@QueryParam("q") String keyword, @QueryParam("category") String category) {
         System.out.println("MetaSearch.getSearchResult");
         
-        ArrayList<HashMap> map = search.search(keyword, category);
+        ArrayList<HashMap> result = search.search(keyword, category);
         
-        System.out.println(map);
+        System.out.println(result);
         
-        return keyword;
+        String json = new Gson().toJson(result);
+        
+        return json;
     }
 }

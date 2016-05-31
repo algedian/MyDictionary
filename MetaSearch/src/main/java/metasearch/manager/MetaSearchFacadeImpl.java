@@ -33,6 +33,8 @@ public class MetaSearchFacadeImpl implements MetaSearchFacade {
     public ArrayList<HashMap> search(String keyword, String category) {
         System.out.println("MetaSearchFacadeImpl.search");
 
+        resultList.clear();
+        
         //해당 카테고리에 대한 검색을 지원하는 vendor들 얻어온다.
         Vendor[] vendors = factory.getVendors(category);
 

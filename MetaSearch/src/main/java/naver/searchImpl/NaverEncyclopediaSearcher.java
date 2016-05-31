@@ -6,6 +6,7 @@
 package naver.searchImpl;
 
 import java.util.HashMap;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import metasearch.common.SearchCategory;
@@ -22,7 +23,7 @@ import naver.search.NaverSearcher;
 public class NaverEncyclopediaSearcher extends NaverSearcher {
 
     public NaverEncyclopediaSearcher() {
-        
+
     }
 
     @Override
@@ -30,7 +31,7 @@ public class NaverEncyclopediaSearcher extends NaverSearcher {
         System.out.println("NaverEncyclopediaSearcher.search");
 
         url += "encyc.xml?display=" + display + "&start=" + start;
-        
+
         result = new NaverSearchResult(SearchCategory.ENCYCLOPEDIA.getName());
         
         result.parseXml(requestToNaver(keyword));

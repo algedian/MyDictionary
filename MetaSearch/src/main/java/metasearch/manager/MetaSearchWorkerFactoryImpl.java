@@ -36,18 +36,19 @@ public class MetaSearchWorkerFactoryImpl implements MetaSearchWorkerFactory {
     public MetaSearchWorker getMetaSearchWorker(String vendor, CountDownLatch latch, String keyword, String category) {
         System.out.println("MetaSearchWorkerFactoryImpl.getMetaSearchWorker");
 
+        MetaSearchWorker worker = null;
+
         if (vendor.equals(Vendor.DAUM.getName())) {
             System.out.println("--returns DAUM");
-            return null;
         } else if (vendor.equals(Vendor.NAVER.getName())) {
             System.out.println("--returns NAVER");
-            return new NaverSearchWorker(latch, keyword, category);
+            worker = new NaverSearchWorker();
+            worker.initialize(latch, keyword, category);
         } else if (vendor.equals(Vendor.YOUTUBE.getName())) {
             System.out.println("--returns YOUTUBE");
-            return null;
         }
 
-        return null;
+        return worker;
     }
 
     /**
@@ -59,7 +60,7 @@ public class MetaSearchWorkerFactoryImpl implements MetaSearchWorkerFactory {
     @Override
     public Vendor[] getVendors(String category) {
         System.out.println("MetaSearchWorkerFactoryImpl.getVendors");
-        
+
         ArrayList<Vendor> vendors = new ArrayList<Vendor>();
 
         if (category.equals(SearchCategory.BLOG.getName())

@@ -6,6 +6,7 @@
 package naver.searchImpl;
 
 import java.util.HashMap;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import metasearch.common.SearchCategory;
@@ -30,15 +31,15 @@ public class NaverBlogSearcher extends NaverSearcher {
     @Override
     public HashMap search(String keyword) {
         System.out.println("NaverBlogSearcher.search");
-        
+
         url += "blog.xml?display=" + display + "&start=" + start + "&sort=" + sort;
-        
+
         result = new NaverSearchResult(SearchCategory.BLOG.getName());
-        
+
         result.parseXml(requestToNaver(keyword));
 
         HashMap map = result.getResultHashMap();
-        
+
         System.out.println("NaverBlogSearcher returns");
         return map;
     }
