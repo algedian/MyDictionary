@@ -13,6 +13,7 @@ import metasearch.workers.MetaSearchWorker;
 import metasearch.workers.NaverSearchWorker;
 import metasearch.common.Vendor;
 import metasearch.workers.DaumSearchWorker;
+import metasearch.workers.YoutubeSearchWorker;
 
 /**
  * Implementation of MetaSearchWorkerFactory
@@ -47,6 +48,8 @@ public class MetaSearchWorkerFactoryImpl implements MetaSearchWorkerFactory {
             worker.initialize(latch, keyword, category);
         } else if (vendor.equals(Vendor.YOUTUBE.getName())) {
             System.out.println("--returns YOUTUBE");
+            worker = new YoutubeSearchWorker();
+            worker.initialize(latch, keyword, category);
         }
 
         return worker;
