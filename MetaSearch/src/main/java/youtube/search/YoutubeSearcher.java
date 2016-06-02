@@ -39,7 +39,7 @@ public class YoutubeSearcher {
     private  final JsonFactory JSON_FACTORY = new JacksonFactory();
      
     //upper limit per page = 50
-    private  final long MAX_RETURNED_SIZE = 15;  //should be long
+    private  final long MAX_RETURNED_SIZE = 15;  //should be long type
      
     // Global instance of Youtube object to make all API requests
     private  YouTube youtube;
@@ -58,7 +58,7 @@ public class YoutubeSearcher {
         result = new YoutubeSearchResult();
 
         result.ParseJson(requestYoutube(keyword));
-//
+
         HashMap map = result.getResultHashMap();
 
         System.out.println("YoutubeSearcher returns");

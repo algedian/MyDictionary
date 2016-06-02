@@ -45,7 +45,7 @@ public class YoutubeSearchResult {
         searchItems.clear();
 
         // JSON.simple parser
-        JSONParser parser = new JSONParser();
+        JSONParser jsonParser = new JSONParser();
         JSONObject jsonObjWhole = new JSONObject();
 
         JSONArray jsonArrItems = new JSONArray();
@@ -53,18 +53,16 @@ public class YoutubeSearchResult {
 
         try {
             if (jsonString != null) {
-                    jsonObjWhole = (JSONObject) parser.parse(jsonString);
+                    jsonObjWhole = (JSONObject) jsonParser.parse(jsonString);
 
                     regionCode = (String) jsonObjWhole.get("regionCode");
-                    System.out.println("Region Code " + regionCode); // test
 
                     jsonObjPageInfo = (JSONObject) jsonObjWhole.get("pageInfo");
                     totalResults = String.valueOf(jsonObjPageInfo.get("totalResults"));
                     resultsPerPage = String.valueOf(jsonObjPageInfo.get("resultsPerPage"));
-                    System.out.println("Total results: " + totalResults + ", result per page: " + resultsPerPage); // test
+                    System.out.println("Total results: " + totalResults + ", result per page: " + resultsPerPage + "Region Code " + regionCode); // test
                     System.out.println("----------------------------------------------------------------------------------------------------------------");
                     jsonArrItems = (JSONArray) jsonObjWhole.get("items");
-                    // System.out.println(item);
 
                     for (int i = 0; i < jsonArrItems.size(); i++) {
                             searchItems.add(parseSearchedItemList(jsonArrItems.get(i)));
@@ -82,6 +80,7 @@ public class YoutubeSearchResult {
 
             JSONObject jsonObjId = (JSONObject)jsonObjItem.get("id");				
             String videoId = (String)jsonObjId.get("videoId");
+            String videoUrl = "https://www.youtube.com/watch?v=" + videoId; 
 
             JSONObject jsonObjSnippet = (JSONObject)jsonObjItem.get("snippet");	
 
@@ -91,22 +90,23 @@ public class YoutubeSearchResult {
             String publishedAt = (String)jsonObjSnippet.get("publishedAt");
             String description = (String)jsonObjSnippet.get("description");
 
-            JSONArray jsonObjThumbnails = (JSONArray)jsonObjItem.get("thumbnails");	
-//	    JSONObject jsonObjThumbDefault = (JSONObject)jsonObjThumbnails.get(0); 	 //Need to fix NullPointerException
-//	    String thumbnailUrl = (String)jsonObjThumbDefault.get("url");
+            JSONObject jsonObjThumbnails = (JSONObject)jsonObjSnippet.get("thumbnails");	
+            JSONObject jsonObjThumbDefault = (JSONObject)jsonObjThumbnails.get("default"); //other 2 options: "medium", "high"
+	    String thumbnailUrl = (String)jsonObjThumbDefault.get("url");
 
             HashMap<String, String> map = new HashMap<>();
 
             map.put("videoId", videoId);
+            map.put("videoUrl", videoUrl);
             map.put("videoTitle", videoTitle);
             map.put("channelId", channelId);
             map.put("channelTitle", channelTitle);
             map.put("publishedAt", publishedAt);				
             map.put("description", description);
-            //map.put("thumbnailUrl", thumbnailUrl);
+            map.put("thumbnailUrl", thumbnailUrl);
 
             System.out.println("videoId: " + videoId + ", videoTitle: " + videoTitle + ",\n channelId: " + channelId + ", channelTitle: " +
-                            channelTitle + ",\n publishedAt: " + publishedAt +  ",\n description: " + description ); //", thumbnailUrl: " + thumbnailUrl				
+                            channelTitle + ",\n publishedAt: " + publishedAt +  ",\n description: " + description + ",\n thumbnailUrl: " + thumbnailUrl); // test				
             System.out.println("----------------------------------------------------------------------------------------------------------------");
 
             return map;
@@ -118,7 +118,7 @@ public class YoutubeSearchResult {
         HashMap map = new HashMap();
         map.put("totalResults", totalResults);
         map.put("resultsPerPage", resultsPerPage);
-        map.put("resultsPerPage", resultsPerPage);
+        map.put("regionCode", regionCode);
         map.put("items", searchItems);
         return map;
     }
