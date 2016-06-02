@@ -6,14 +6,13 @@
 package metasearch.manager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import javax.ejb.Stateless;
 import metasearch.common.SearchCategory;
 import metasearch.workers.MetaSearchWorker;
 import metasearch.workers.NaverSearchWorker;
 import metasearch.common.Vendor;
+import metasearch.workers.DaumSearchWorker;
 
 /**
  * Implementation of MetaSearchWorkerFactory
@@ -40,6 +39,8 @@ public class MetaSearchWorkerFactoryImpl implements MetaSearchWorkerFactory {
 
         if (vendor.equals(Vendor.DAUM.getName())) {
             System.out.println("--returns DAUM");
+            worker = new DaumSearchWorker();
+            worker.initialize(latch, keyword, category);
         } else if (vendor.equals(Vendor.NAVER.getName())) {
             System.out.println("--returns NAVER");
             worker = new NaverSearchWorker();

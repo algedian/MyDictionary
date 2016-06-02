@@ -6,7 +6,6 @@
 package naver.searchImpl;
 
 import java.util.HashMap;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import metasearch.common.SearchCategory;

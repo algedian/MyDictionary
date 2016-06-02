@@ -40,3 +40,6 @@ out
 test-output
 atlassian-ide-plugin.xml
 .gradletasknamecache
+/JavaApplication1/nbproject/private/
+*.class
+MetaSearch/target/maven-archiver/pom.properties
