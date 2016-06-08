@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package metasearch.workers;
 
 import java.util.HashMap;
@@ -14,8 +9,7 @@ import naver.search.NaverSearcherFactory;
 import naver.search.NaverSearcherFactoryImpl;
 
 /**
- * - 네이버 api 에 대한 검색작업을 담당하는 스레드 클래스. - SearchWorker thread class for Naver api,
- * extending MetaSearchWorker.
+ * SearchWorker thread class for Naver search API that extends MetaSearchWorker.
  *
  * @author Yewon Kim
  */
@@ -26,11 +20,11 @@ public class NaverSearchWorker extends MetaSearchWorker {
     NaverSearcher searcher;
 
     public NaverSearchWorker() {
-        
+
     }
 
     /**
-     * - contructor로, latch, keyword, category를 전달받아 지정한다.
+     * it is contructor that is delivered latch, keyword, category and designate them.
      *
      * @param latch
      * @param keyword
@@ -44,8 +38,8 @@ public class NaverSearchWorker extends MetaSearchWorker {
     }
 
     /**
-     * - factory로 부터 category에 따른 searcher를 얻어온 뒤 searcher의 검색함수를 호출하여 그 결과를
-     * 리턴한다.
+     * First, get certain category's searcher from factory. 
+     * Then call searcher's search function. Finally return the results.
      *
      * @param keyword
      * @param category

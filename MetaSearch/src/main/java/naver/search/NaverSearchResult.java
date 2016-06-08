@@ -23,8 +23,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- * 본 클래스는 네이버 검색결과를 감싸는 추상클래스입니당. 네이버 블로그, 뉴스, 백과사전, 웹문서, 이미지 검색결과는 이 클래스를
- * 상속받는다.
+ * This abstract class wraps Naver search result. naver blog, news,
+ * encyclopedia, web, image searcher extend this class.
  *
  * @author Yewon Kim
  */
@@ -32,12 +32,12 @@ import org.xml.sax.SAXException;
 @LocalBean
 public class NaverSearchResult {
 
-    //private Date lastBuildDate;//검색 결과를 생성한 시간이다. 안쓸래!
+    //private Date lastBuildDate; //created time about search result. Do not use.
     private String category;
-    private String total;//검색 결과 문서의 총 개수를 의미한다.
-    private String start;//검색 결과 문서 중, 문서의 시작점을 의미한다.
-    private String display;//검색된 검색 결과의 개수이다.
-    private ArrayList<HashMap<String, String>> searchItems;//item 하나는 개별 검색 결과이며, title, link 및 각 검색에 따른 property를 포함한다.
+    private String total; //whole count of result(estimation)
+    private String start; //starting point in results
+    private String display; //the number of searched result
+    private ArrayList<HashMap<String, String>> searchItems; //each item is one search result including title, link, property according to category.
 
     public NaverSearchResult() {
         searchItems = new ArrayList<>();
@@ -49,35 +49,34 @@ public class NaverSearchResult {
     }
 
     /**
-     *
-     * - parse xml string and set values from extracted data
+     * parse xml string and set values from extracted data
      *
      * @param xmlString
      */
     public void parseXml(String xmlString) {
 
         System.out.println("NaverSearchResult.constructor with xmlString");
-        
+
         searchItems.clear();
-        
-        // xmlString으로 부터 input source 생성
+
+        // make input source from xmlString
         InputSource is = new InputSource(new StringReader(xmlString));
 
         Document document;
 
         try {
-            // XML Document 객체 생성
+            // create XML Document object
             document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
 
-            // xpath 생성
+            // create xpath 
             XPath xpath = XPathFactory.newInstance().newXPath();
 
-            // total, start, display 가져오기
+            // get total, start, display 
             total = (String) xpath.evaluate("/rss/channel/total", document, XPathConstants.STRING);
             start = (String) xpath.evaluate("/rss/channel/start", document, XPathConstants.STRING);
             display = (String) xpath.evaluate("/rss/channel/display", document, XPathConstants.STRING);
 
-            // item list 가져오기
+            // get item list 
             NodeList items = (NodeList) xpath.evaluate("/rss/channel/item", document, XPathConstants.NODESET);
 
             System.out.println(items.getLength());
@@ -96,9 +95,7 @@ public class NaverSearchResult {
     }
 
     /**
-     *
-     * - category에 따라 각기 다른 parse 함수를 호출해주는 함수 - call different parser functions
-     * and get results by category.
+     * call different parser functions and get results by category.
      *
      * @param items
      * @return HashMap: one item hashmap
@@ -121,19 +118,18 @@ public class NaverSearchResult {
     }
 
     /**
-     *
-     * blog search item으로 parse 하여 hashmap에 저장해주는 함수
+     * Function that parses blog search item and saves to hashmap
      *
      * @param items
      * @return HashMap: one blog item map
      */
     private HashMap<String, String> parseBlogSearchItems(Element element) {
 
-        String title = element.getElementsByTagName("title").item(0).getTextContent();//검색 결과 문서의 제목
-        String link = element.getElementsByTagName("link").item(0).getTextContent();//검색 결과 문서의 하이퍼텍스트 link
-        String description = element.getElementsByTagName("description").item(0).getTextContent();//검색 결과 문서의 내용을 요약한 패시지 정보
-        String bloggername = element.getElementsByTagName("bloggername").item(0).getTextContent();//검색 결과 블로그 포스트를 작성한 블로거의 이름
-        String bloggerlink = element.getElementsByTagName("bloggerlink").item(0).getTextContent();//검색 결과 블로그 포스트를 작성한 블로거의 하이퍼텍스트 link
+        String title = element.getElementsByTagName("title").item(0).getTextContent(); //title of search result document 
+        String link = element.getElementsByTagName("link").item(0).getTextContent(); //hyperpext link of search result document 
+        String description = element.getElementsByTagName("description").item(0).getTextContent(); //description of search result document 
+        String bloggername = element.getElementsByTagName("bloggername").item(0).getTextContent(); //blogger name of search result document 
+        String bloggerlink = element.getElementsByTagName("bloggerlink").item(0).getTextContent(); //blogger's hypertext link of search result document 
 
         HashMap<String, String> map = new HashMap<>();
         map.put("title", title);
@@ -146,19 +142,18 @@ public class NaverSearchResult {
     }
 
     /**
-     *
-     * news search item으로 parse 하여 hashmap에 저장해주는 함수
+     * Function that parses news search item and saves to hashmap
      *
      * @param items
      * @return HashMap: one news item map
      */
     private HashMap<String, String> parseNewsSearchItems(Element element) {
 
-        String title = element.getElementsByTagName("title").item(0).getTextContent();//검색 결과 문서의 제목
-        String originallink = element.getElementsByTagName("originallink").item(0).getTextContent();//검색 결과 문서의 제공 언론사 하이퍼텍스트 link
-        String link = element.getElementsByTagName("link").item(0).getTextContent();//검색 결과 문서의 하이퍼텍스트 link
-        String description = element.getElementsByTagName("description").item(0).getTextContent();//검색 결과 문서의 내용을 요약한 패시지 정보
-        String pubDate = element.getElementsByTagName("pubDate").item(0).getTextContent();//검색 결과 문서가 네이버에 제공된 시간
+        String title = element.getElementsByTagName("title").item(0).getTextContent(); //title of search result document 
+        String originallink = element.getElementsByTagName("originallink").item(0).getTextContent(); //provider's hyperpext link of search result document 
+        String link = element.getElementsByTagName("link").item(0).getTextContent(); //hyperpext link of search result document 
+        String description = element.getElementsByTagName("description").item(0).getTextContent(); //description of search result document 
+        String pubDate = element.getElementsByTagName("pubDate").item(0).getTextContent(); //provided time of search result document
 
         HashMap<String, String> map = new HashMap<>();
         map.put("title", title);
@@ -171,18 +166,17 @@ public class NaverSearchResult {
     }
 
     /**
-     *
-     * encyclopedia search item으로 parse 하여 hashmap에 저장해주는 함수
+     * Function that parses encyclopedia search item and saves to hashmap
      *
      * @param items
      * @return HashMap: one encyclopedia item map
      */
     private HashMap<String, String> parseEncyclopediaSearchItems(Element element) {
 
-        String title = element.getElementsByTagName("title").item(0).getTextContent();//검색 결과 사전 정의의 제목
-        String link = element.getElementsByTagName("link").item(0).getTextContent();//사전 정의 정보 및 추가 정보를 볼 수 있는 link
-        String description = element.getElementsByTagName("description").item(0).getTextContent();//검색 결과 문서의 내용을 요약한 패시지 정보
-        String thumbnail = element.getElementsByTagName("thumbnail").item(0).getTextContent();//검색 결과에 이미지가 포함된 경우, 해당 이미지의 썸네일 link url
+        String title = element.getElementsByTagName("title").item(0).getTextContent(); //title of search result document (dictionary definition) 
+        String link = element.getElementsByTagName("link").item(0).getTextContent(); //link of search result document that provide definition's other info 
+        String description = element.getElementsByTagName("description").item(0).getTextContent(); //description of search result document 
+        String thumbnail = element.getElementsByTagName("thumbnail").item(0).getTextContent(); //thumbnail link url of search result document, if there is image in result
 
         HashMap<String, String> map = new HashMap<>();
         map.put("title", title);
@@ -194,17 +188,16 @@ public class NaverSearchResult {
     }
 
     /**
-     *
-     * web search item으로 parse 하여 hashmap에 저장해주는 함수
+     * Function that parses web search item and saves to hashmap
      *
      * @param items
      * @return HashMap: one web item map
      */
     private HashMap<String, String> parseWebSearchItems(Element element) {
 
-        String title = element.getElementsByTagName("title").item(0).getTextContent();//검색 결과 문서의 제목
-        String link = element.getElementsByTagName("link").item(0).getTextContent();//검색 결과 문서의 하이퍼텍스트 link
-        String description = element.getElementsByTagName("description").item(0).getTextContent();//검색 결과 문서의 내용을 요약한 패시지 정보
+        String title = element.getElementsByTagName("title").item(0).getTextContent(); //title of search result document 
+        String link = element.getElementsByTagName("link").item(0).getTextContent(); //hyperpext link of search result document 
+        String description = element.getElementsByTagName("description").item(0).getTextContent(); //description of search result document 
 
         HashMap<String, String> map = new HashMap<>();
         map.put("title", title);
@@ -215,19 +208,18 @@ public class NaverSearchResult {
     }
 
     /**
-     *
-     * image search item으로 parse 하여 hashmap에 저장해주는 함수
+     * Function that parses image search item and saves to hashmap
      *
      * @param items
      * @return HashMap: one image item map
      */
     private HashMap<String, String> parseImageSearchItems(Element element) {
 
-        String title = element.getElementsByTagName("title").item(0).getTextContent();//검색 결과 이미지의 제목
-        String link = element.getElementsByTagName("link").item(0).getTextContent();//검색 결과 이미지의 하이퍼텍스트 link
-        String thumbnail = element.getElementsByTagName("thumbnail").item(0).getTextContent();//검색 결과 이미지의 썸네일 link
-        String sizeheight = element.getElementsByTagName("sizeheight").item(0).getTextContent();//검색 결과 이미지의 썸네일 높이(pixel)
-        String sizewidth = element.getElementsByTagName("sizewidth").item(0).getTextContent();//검색 결과 이미지의 썸네일 너비(pixel)
+        String title = element.getElementsByTagName("title").item(0).getTextContent(); //title of search result image
+        String link = element.getElementsByTagName("link").item(0).getTextContent(); //hypertext link of search result image 
+        String thumbnail = element.getElementsByTagName("thumbnail").item(0).getTextContent(); //thumbnail link of search result image 
+        String sizeheight = element.getElementsByTagName("sizeheight").item(0).getTextContent(); //height of search result image (pixel)
+        String sizewidth = element.getElementsByTagName("sizewidth").item(0).getTextContent(); //width of search result image (pixel)
 
         HashMap<String, String> map = new HashMap<>();
         map.put("title", title);
@@ -240,8 +232,7 @@ public class NaverSearchResult {
     }
 
     /**
-     *
-     * 최종 검색 결과를 담은 hashmap을 만들어 return하는 함수.
+     * makes hashmap about final search results and returns.
      *
      * @return HashMap: total search result hashmap
      */

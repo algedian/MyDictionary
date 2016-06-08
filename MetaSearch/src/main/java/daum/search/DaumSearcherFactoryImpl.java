@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package daum.search;
 
 import daum.searchImpl.DaumBlogSearcher;
@@ -12,17 +7,17 @@ import daum.searchImpl.DaumWebSearcher;
 import metasearch.common.SearchCategory;
 
 /**
- * - implementation of DaumSearcherFactory
- * 
- * @author user
+ * implementation of DaumSearcherFactory
+ *
+ * @author kyeonghee
  */
-public class DaumSearcherFactoryImpl implements DaumSearcherFactory{
+public class DaumSearcherFactoryImpl implements DaumSearcherFactory {
 
     /**
-     * - returns specific DaumSearcher class by category.
+     * returns specific DaumSearcher class by category.
      *
      * @param category
-     * @return NaverSearcher: specific searcher object
+     * @return DaumSearcher: specific searcher object (blog, image, video, web)
      */
     @Override
     public DaumSearcher getDaumSearcher(String category) {
@@ -41,5 +36,4 @@ public class DaumSearcherFactoryImpl implements DaumSearcherFactory{
             return null;
         }
     }
-    
 }

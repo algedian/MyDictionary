@@ -43,3 +43,5 @@ atlassian-ide-plugin.xml
 /JavaApplication1/nbproject/private/
 *.class
 MetaSearch/target/maven-archiver/pom.properties
+*.class
+*.class

@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 import metasearch.common.Vendor;
 
 /**
- * 다른 api로의 검색을 invoke 시키고, 그 결과값들을 모아 가공하여 리턴하는 인터페이스의 구현체
+ * Implementation about MetaSearchFacade
  *
  * @author Yewon Kim
  */
@@ -21,8 +21,8 @@ public class MetaSearchFacadeImpl implements MetaSearchFacade {
     @EJB
     private MetaSearchWorkerFactory factory;
 
-    private ArrayList<HashMap> resultList;//최종적으로 MetaSearch 쪽으로 리턴할 결과 컨테이너 hashmap
-    private CountDownLatch latch;//각 thread 작업들이 모두 끝난 후 취합을 위해 latch counter가 필요함.
+    private ArrayList<HashMap> resultList; //최종적으로 MetaSearch 쪽으로 리턴할 결과 컨테이너 hashmap
+    private CountDownLatch latch; //It is need to have a latch counter that collect all thread's finished job
 
     public MetaSearchFacadeImpl() {
         super();
@@ -34,30 +34,30 @@ public class MetaSearchFacadeImpl implements MetaSearchFacade {
         System.out.println("MetaSearchFacadeImpl.search");
 
         resultList.clear();
-        
-        //해당 카테고리에 대한 검색을 지원하는 vendor들 얻어온다.
+
+        //get vendor that supports certain category.
         Vendor[] vendors = factory.getVendors(category);
 
-        //검색 제공자의 수 만큼 counter를 설정한다. Search worker num == api vendors 이기 때문.
+        //set the number of counter as much as the number of vendors. because of Search worker num == api vendors num.
         latch = new CountDownLatch(vendors.length);
 
-        //해당 vendor 수 만큼을 수용하는 worker array 생성.
+        //create worker array that accepts workers(# or certain vendor) 
         MetaSearchWorker[] workers = new MetaSearchWorker[vendors.length];
 
         int countGosts = 0;
-        //각 worker들 마다..
+        //each worker..
         for (int i = 0; i < workers.length; ++i) {
-            //vendor에 따른 worker 인스턴스를 얻어온다.
+            //get worker instance about vendor
             workers[i] = factory.getMetaSearchWorker(vendors[i].getName(), latch, keyword, category);
 
-            //해당 worker가 존재하고, 잘 받아졌다면...
+            //if there exists the worker and successes to get instance...
             if (workers[i] != null) {
                 System.out.println("start worker[" + i + "]");
 
-                //각 worker들을 동작시킨다.
+                //start each workers.
                 workers[i].start();
             } else {
-                countGosts++;//null인 worker 수 만큼 latch가 카운트다운이 안될테니 세어주자
+                countGosts++;//if not, count latch counter as much as the number of null workers
             }
         }
 
@@ -65,10 +65,10 @@ public class MetaSearchFacadeImpl implements MetaSearchFacade {
             System.out.println("wait for workers");
 
             for (int i = 0; i < countGosts; ++i) {
-                latch.countDown();//null인 worker 수 만큼 latch를 카운트다운 시킨다.
+                latch.countDown();//countdown the latch counter as much as the number of null workers. 
             }
 
-            //count가 0이 될때까지 기다린다. 즉, worker 스레드들이 작업을 다 완료하기를 기다려줌.
+            //wait until counter become 0. That is, wait until worker threads complete their job.
             latch.await();
 
             System.out.println("worker finished");
@@ -86,5 +86,4 @@ public class MetaSearchFacadeImpl implements MetaSearchFacade {
         System.out.println("returns resultList");
         return resultList;
     }
-
 }

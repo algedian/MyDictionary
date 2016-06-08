@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package metasearch.manager;
 
 import java.util.ArrayList;
@@ -24,7 +19,7 @@ import metasearch.workers.YoutubeSearchWorker;
 public class MetaSearchWorkerFactoryImpl implements MetaSearchWorkerFactory {
 
     /**
-     * - returns specific NaverSearcher class by category.
+     * returns specific NaverSearcher class by category.
      *
      * @param vendor
      * @param latch
@@ -56,7 +51,7 @@ public class MetaSearchWorkerFactoryImpl implements MetaSearchWorkerFactory {
     }
 
     /**
-     * - provide vendors which provide search service for specific category.
+     * provide vendors which provide search service for specific category.
      *
      * @param category
      * @return Vendor[]: array of Vendors

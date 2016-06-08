@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package naver.searchImpl;
 
 import java.util.HashMap;
@@ -13,8 +8,8 @@ import naver.search.NaverSearchResult;
 import naver.search.NaverSearcher;
 
 /**
- * - Searcher class for Naver Web search.
- * 
+ * Searcher class for Naver Web search.
+ *
  * @author Yewon Kim
  */
 @Stateless
@@ -22,7 +17,7 @@ import naver.search.NaverSearcher;
 public class NaverWebSearcher extends NaverSearcher {
 
     public NaverWebSearcher() {
-        
+
     }
 
     @Override

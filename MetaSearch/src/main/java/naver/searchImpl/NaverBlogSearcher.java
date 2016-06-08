@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package naver.searchImpl;
 
 import java.util.HashMap;
@@ -21,7 +16,7 @@ import naver.search.NaverSearchResult;
 @LocalBean
 public class NaverBlogSearcher extends NaverSearcher {
 
-    private String sort = "sim";//선택,sim(기본값), date   정렬 옵션: sim (유사도순), date (날짜순)
+    private String sort = "sim"; //selected. sim(default), date. sort option: sim (similarity), date (order of date)
 
     public NaverBlogSearcher() {
 

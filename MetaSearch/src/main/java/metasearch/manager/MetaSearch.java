@@ -11,32 +11,34 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
- * 실질적으로 메타서치 서비스에 대한 첫 http requet를 받는 곳.
+ * Class that receives about 'MetaSearch service' first request actually.
+ *
  * @author Yewon Kim
  */
 @Path("metasearch")
 public class MetaSearch {
 
-    @EJB//서비스 해줄 비지니스 로직을 가진 객체 레퍼런스를 여기에!
+    @EJB//Object reference that has business logic about providing service
     MetaSearchFacade search;
 
     /**
+     * result's characterset = UTF-8
      *
      * @param keyword
      * @param category
      * @return
      */
     @GET
-    @Produces(MediaType.APPLICATION_JSON+";charset=utf8")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf8")
     public String getSearchResult(@QueryParam("q") String keyword, @QueryParam("category") String category) {
         System.out.println("MetaSearch.getSearchResult");
-        
+
         ArrayList<HashMap> result = search.search(keyword, category);
-        
+
         System.out.println(result);
-        
+
         String json = new Gson().toJson(result);
-        
+
         return json;
     }
 }

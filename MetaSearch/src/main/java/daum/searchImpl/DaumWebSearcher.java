@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package daum.searchImpl;
 
 import daum.search.DaumSearchResult;
@@ -13,34 +8,61 @@ import javax.ejb.Stateless;
 import metasearch.common.SearchCategory;
 
 /**
- *
- * @author user
+ * Searcher class for Daum web documents search. search 50 results.
+ * 
+ * @author kyeonghee
  */
 @Stateless
 @LocalBean
-public class DaumWebSearcher extends DaumSearcher{
-    private String output = "json";
-    //private String result; //한 페이지에 출력될 결과수
-    //private String pageno; //검색 결과 페이지 번호
-    //private String advance; //상세 검색 기능 사용 여부
-    
-    public DaumWebSearcher(){
-    
+public class DaumWebSearcher extends DaumSearcher {
+
+    private String output = "json"; //output type
+    private String result; //number of result in one page. 10(default), 1(min), 20(max)
+    private String pageno; //page number of search result. 1 to 3 are available.
+    //private String advance; //advanced search. y: use, n: not use
+
+    public DaumWebSearcher() {
+
     }
-    
+
     @Override
     public HashMap search(String keyword) {
         System.out.println("DaumWebSearcher.search");
-        
-        url += "web?apikey=" + apiKey + "" + "&output=" + output + "";
-        
+
+        url += "web?apikey=" + apiKey + "" + "&output=" + output + "" + "&pageno=" + pageno + "&result=" + result;
+
         daumSearchResult = new DaumSearchResult(SearchCategory.WEB.getName());
-        
+
         daumSearchResult.parseJson(requestToDaum(keyword));
-                
+
         HashMap map = daumSearchResult.getResultHashMap();
-        
+
         System.out.println("DaumWebSearcher returns");
-        return map; 
-    }    
+        return map;
+    }
+    
+    /**
+     *search web contents in daum using keyword and other string ('sort' | 'pageno')
+     *
+     * @param keyword
+     * @param string
+     * @return
+     */
+    public HashMap search(String keyword, String string) {
+        System.out.println("DaumWebSearcher.search + string value");
+
+        HashMap map = daumSearchResult.getResultHashMap();
+
+        if (string.equals("1") || string.equals("2") || string.equals("3")) {
+            url += "web?apikey={" + apiKey + "}&q=" + keyword + "&pageno=" + string + "&pageno=" + pageno + "&result=" + result;
+        } else{
+            System.err.println("wrong parameter: " + string);
+        }
+
+        daumSearchResult = new DaumSearchResult(SearchCategory.WEB.getName());
+        daumSearchResult.parseJson(requestToDaum(keyword));
+
+        System.out.println("DaumWebSearcher returns");
+        return map;
+    }
 }
