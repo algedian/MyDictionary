@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Sample Page</title>
+
+	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Specify google app client ID -->
+	<meta name="google-signin-scope" content="profile email">
+	<meta name="google-signin-client_id"
+		content="768889397569-ifca7s46aplo8i4ikt95ba6ihjmmfdlf.apps.googleusercontent.com">
+		
+	<!-- jQuery -->
+	<script	src="js/jquery-1.12.4.min.js"></script>
+</head>
+
+<body>
+	<h1>This is a test page for google web login</h1>
+
+	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	<a href="#" onclick="signOut();">Sign out</a>
+	
+	<script src="js/googleAuth.js"></script>
+	
+	<!-- Google Platfom Library api -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<!-- bootstrap -->
+	<script src="js/bootstrap/tether.min.js"></script>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+</body>
+</html>

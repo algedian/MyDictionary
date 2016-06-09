@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+ */
+
+body {
+    background-color: #f5f8fa;
+}
+
+#main-container {
+	border: 1px solid #a7d7f9;
+	background-color: #eef6ff;
+}
+
+#friend-name {
+	background-color: #d9edf7;
+	border-bottom-style: hidden;
+	border-color: #bce8f1;
+}
+
+#friend-email {
+	border-top-style: hidden;
+	border-color: #bce8f1;
+}
+
+#test-red {
+	background-color: red;
+}
+
+#test-blue {
+	background-color: blue;
+}

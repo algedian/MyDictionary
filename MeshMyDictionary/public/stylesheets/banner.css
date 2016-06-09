@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+#banner-wrapper {
+	padding-left: 0px;
+	padding-right: 0px;
+	background-color: #000000;
+}
+
+#banner-wrapper img {
+	/* display: none; */
+  max-width:100%; 
+  height:auto;
+}
+
+#banner-wrapper p {
+	text-align:center;
+}
+
+#banner-wrapper.currently-loading img {
+	display: block;
+    margin: 0 auto;
+}
