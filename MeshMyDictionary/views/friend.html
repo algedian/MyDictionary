@@ -10,6 +10,7 @@
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap/bootstrap-theme.min.css" rel="stylesheet">
 	
+	<link href="css/button.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<link href="css/banner.css" rel="stylesheet">
 	
@@ -32,13 +33,13 @@
 					<ul class="nav navbar-nav navbar-left">
 						<li class="nav-item"><a class="nav-link" href="/main">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="/friend">Friends</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Dictionaries</a></li>
+						<li class="nav-item"><a class="nav-link" href="/documentRoadMap">Dictionaries</a></li>
 						<li class="nav-item"><a class="nav-link" href="/" onclick="signOut();">Logout</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">Help</a></li>
 					</ul>
-					<form class="navbar-form navbar-right">
-						<input type="text" class="form-control" placeholder="Search...">
-						<button class="btn btn-default" type="button">Search</button>
+					<form class="navbar-form navbar-right" method="get" action="search">
+						<input type="text" class="form-control" name="keyword" placeholder="Search...">
+						<button class="btn btn-default" id="search-button" type="submit">Search</button>
 					</form>
 				</div> <!-- end of container -->
 			</nav>
@@ -46,8 +47,21 @@
 	</div> <!-- end of header -->
 	
 	<!-- body -->
-	<div class="body">		
-		<div class="container" id="friendList">
+	<div class="body">
+		<div class="container">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-xs-8"><h1>Friends</h1></div>
+					<div class="col-xs-4 pull-down">
+						<a class="btn icon-btn btn-success pull-right" data-toggle="modal" data-target="#myModal">
+							<span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+							Add
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="list-group" id="friendList">
+			</div>
 		</div> <!-- end of container -->
 	</div> <!-- end of body -->
 	
@@ -55,7 +69,36 @@
 	<div class="footer">
 	
 	</div> <!-- end of footer -->
-	
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+					<h4 class="modal-title">Add Friend</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="friend-add" role="form">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">E-mail</label>
+							<div class="col-sm-10">
+								<input class="form-control" id="friend-email" type="text" placeholder="example@example.com" />
+								<p></p><div class="alert alert-danger" id="friend-add-result"></div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" id="friend-add-btn">Submit</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script src="js/googleAuth.js"></script>
 	<script src="js/friend.js"></script>
 	

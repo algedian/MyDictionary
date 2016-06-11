@@ -1,20 +1,14 @@
-$.getScript("js/header.js");
+$.holdReady(true);
+$.getScript("js/endpoint.js", function() {
+    $.holdReady(false);
+});
+
 
 function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
 	auth2.signOut().then(function() {
 		console.log('User signed out.');
-		$.ajax({
-			url : meshServerAddress + '/logout',
-			type : 'post',
-			contentType : 'application/json;charset=UTF-8',
-			success : function(result) {
-				console.log("result: ", result);
-			},
-		    error: function(err){
-		        console.log("err: ", err);
-		    }
-		});
+		setSignOut();
 	});
 }
 
@@ -32,17 +26,13 @@ function onSignIn(googleUser) {
 	var idToken = googleUser.getAuthResponse().id_token;
 	console.log("ID Token: " + idToken);
 	
-	$.ajax({
-		url : meshServerAddress + '/login',
-		type : 'post',
-		contentType : 'application/json;charset=UTF-8',
-		data : JSON.stringify({idToken:idToken}),
-		success : function(result) {
-			console.log("result: ", result);
-			location.href = '/main';
-		},
-	    error: function(err){
-	        console.log("err: ", err);
-	    }
-	});
+	var success = function(result) {
+		console.log("result: ", result);
+		location.href = '/main';
+	};
+    var fail = function(err){
+        console.log("err: ", err);
+    };
+    
+    login(idToken, success, fail);
 }

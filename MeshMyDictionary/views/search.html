@@ -5,13 +5,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>Main</title>
+	<title>Search Page</title>
 
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap/bootstrap-theme.min.css" rel="stylesheet">
 	
+	<link href="css/button.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
-	<link href="css/banner.css" rel="stylesheet">
 	
 	<!-- Specify google app client ID -->
 	<meta name="google-signin-scope" content="profile email">
@@ -26,9 +26,6 @@
 	<!-- header -->
 	<div class="header">
 		<div id="banner-wrapper">
-			<a href="#">
-				<p><img src="images/ho.gif" alt=""/><img src="images/asd.gif" alt=""/><img src="images/unnamed2.gif" alt=""/></p>
-			</a>
 			<nav class="navbar navbar-full navbar-inverse">
 				<div class="container">	
 					<a class="navbar-brand" href="#">MyDictionary</a>
@@ -49,27 +46,76 @@
 	</div> <!-- end of header -->
 	
 	<!-- body -->
-	<div class="body">
-<!--  		<div class="container"> -->
-<!-- 			<div class="input-group"> -->
-<!-- 				<input type="text" class="form-control" placeholder="Search..." aria-describedby="basic-addon2"> -->
-<!-- 				<span class="input-group-btn"> -->
-<!-- 					<button class="btn btn-default" type="button">Search</button> -->
-<!-- 				</span> -->
-<!-- 			</div> -->
-<!-- 		</div> /.container -->
-		
-		<div class="container" id="documentList">
+	<div class="body success">
+<!-- 		<div class="container"> -->
+		<div class="container-fluid">
+			<div class="container col-xs-6" id="dictionary">
+				<div class="page-header" id="dictionary-header">
+					<h1>Dictionary: </h1>
+				</div>
+<!-- 				<div class="jumbotron" id="main-container"> -->
+				<form class="form-group" id="dictionary">
+					<div class="date" id="date"></div>
+					<textarea class="form-control" id="document" rows="10" placeholder="make your dictionary!"></textarea>
+					<button class="btn btn-success pull-right" id="document-submit" type="button">Submit</button>
+				</form>
+<!-- 				</div> -->
+				<div class="page-header">
+					<h2>Friends' Dictionary</h2>
+				</div>
+				<div class="list-group" id="dictionaryList">
+				</div>
+			</div>
+			<div class="container col-xs-6" id="metasearch">
+				<div class="page-header">
+					<h1>Search</h1>
+				</div>
+				<div class="list-group" id="searchList">
+				</div>
+			</div>
 		</div> <!-- end of container -->
 	</div> <!-- end of body -->
 	
+	<div class="body fail">
+		<div class="container">
+			<div class="page-header">
+				<h1>There are no keyword</h1>
+			</div>
+		</div>
+	</div>
+
+	<!-- modal -->
+	<div class="modal fade" id="submit-result-modal-success">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header bg-info text-primary text-center">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+					<h4>Update Success!</h4>
+				</div>
+				<!-- <div class="modal-body">Modal Content</div> -->
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="submit-result-modal-fail">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header bg-danger text-primary text-center">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+					<h4>Update Fail!</h4>
+				</div>
+				<!-- <div class="modal-body">Modal Content</div> -->
+			</div>
+		</div>
+	</div>
+
 	<!-- footer -->
 	<div class="footer">
 	
 	</div> <!-- end of footer -->
-	
+
+	<script src="js/search.js"></script>
 	<script src="js/googleAuth.js"></script>
-	<script src="js/main.js"></script>
 	
 	<!-- Google Platfom Library api -->
 	<script src="https://apis.google.com/js/platform.js" async defer></script>

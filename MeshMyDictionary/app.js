@@ -15,7 +15,7 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended : false
@@ -45,19 +45,30 @@ app.use(function(req, res, next) {
  * route list
  * */
 var serviceManager = require('./routes/servicemanager');
-app.all('/', serviceManager.index);
-app.all('/main', serviceManager.main);
-app.all('/friend', serviceManager.friend);
+app.get('/', serviceManager.index);
+app.get('/main', serviceManager.main);
+app.get('/friend', serviceManager.friend);
+app.get('/documentRoadMap', serviceManager.documentRoadMap);
+
+app.get('/search', serviceManager.search);
 
 /**
  * end point
  * */
-app.post('/login', serviceManager.login);
-app.post('/logout', serviceManager.logout);
-app.post('/getUserDocumentList', serviceManager.getUserDocumentList);
-app.post('/getFriendList', serviceManager.getFriendList);
+app.post('/endpoint/login', serviceManager.login);
+app.post('/endpoint/logout', serviceManager.logout);
+app.post('/endpoint/initSession', serviceManager.initSession);
+app.post('/endpoint/getUserDocumentList', serviceManager.getUserDocumentList);
+app.post('/endpoint/getDocumentRoadMap', serviceManager.getDocumentRoadMap);
+app.post('/endpoint/getFriendList', serviceManager.getFriendList);
+app.post('/endpoint/followFriend', serviceManager.followFriend);
+app.post('/endpoint/unfollowFriend', serviceManager.unfollowFriend);
 
-app.all('/getDocument', serviceManager.getDocument);
+app.post('/endpoint/searchDocumentByKeyword', serviceManager.searchDocumentByKeyword);
+app.post('/endpoint/searchMetaByKeyword', serviceManager.searchMetaByKeyword);
+
+app.post('/endpoint/documentUpdate', serviceManager.documentUpdate);
+app.post('/endpoint/documentDelete', serviceManager.documentDelete);
 
 // error handlers
 // catch 404 and forward to error handler
