@@ -39,95 +39,6 @@ var makeDictionaryTime = function(dictionary) {
 	return date;
 };
 
-var makeBlogResult = function(daum, naver) {
-	var html = "";
-	
-	if(typeof(daum) !== 'undefined') {
-		for(var i = daum.items.length - 1; i >= 0; i--) {
-			html += "<a class='list-group-item' id='search-result-title' href='#'>" + daum.items[i].comment + "<strong> -- Daum</strong>" + "</a>";
-			html += "<div class='list-group-item' id='search-result-content'>" + daum.items[i].comment + "</div><p></p>";
-		}
-	}
-	if(typeof(naver) !== 'undefined') {
-		for(var i = naver.items.length - 1; i >= 0; i--) {
-			html += "<a class='list-group-item' id='search-result-title' href='" + naver.items[i].link + "' target='_blank'>" + naver.items[i].title + "<strong> -- Naver</strong>" + "</a>";
-			html += "<div class='list-group-item' id='search-result-content'>" + naver.items[i].description + "</div><p></p>";
-		}
-	}
-	
-	return html;
-};
-
-var makeEncyclopediaResult = function(naver) {
-	var html = "";
-	
-	if(typeof(naver) !== 'undefined') {
-		for(var i = naver.items.length - 1; i >= 0; i--) {
-			html += "<a class='list-group-item' id='search-result-title' href='" + naver.items[i].link + "' target='_blank'>" + naver.items[i].title + "<strong> -- Naver</strong>" + "</a>";
-			html += "<div class='list-group-item' id='search-result-content'>";
-			html += "<div class='row'>"
-			html += "<div class='col-xs-2'>"
-				  + "<img src='" + naver.items[i].thumbnail + "' class='img-rounded' alt='Cinque Terre' width='100%' height='30'>"
-				  + "</div>";
-			html += "<div class='col-xs-10' id='search-result-content'>" + naver.items[i].description + "</div>"
-			html += "</div></div>";
-			html += "<p></p>";
-		}
-	}
-	
-	return html;
-};
-
-var makeImageResult = function(daum, naver) {
-	var html = "";
-	
-	if(typeof(daum) !== 'undefined') {
-/*		for(var i = daum.items.length - 1; i >= 0; i--) {
-			html += "<a class='list-group-item' id='search-result-title' href='#'>" + daum.items[i].comment + "<strong> -- Daum</strong>" + "</a>";
-			html += "<div class='list-group-item' id='search-result-content'>" + daum.items[i].comment + "</div><p></p>";
-		}*/
-	}
-	if(typeof(naver) !== 'undefined') {
-		var j = 0;
-		for(var i = naver.items.length - 1; i >= 0; i--) {
-			if(j === 0) {
-				html += "<div class='row'>";
-				j = 6;
-			}
-			html += "<div class='list-group-item col-xs-2' id='search-result-image-content'>";
-			html += "<a href='" + naver.items[i].link + "' target='_blank'>"
-				  + "<img src='" + naver.items[i].thumbnail + "' class='img-rounded' alt='Cinque Terre' width='100%' height='60'>"
-				  + "</div>"
-				  + "</a>";
-			if(j - 1 === 0) {
-				html += "</div>";
-			}
-			j--;
-		}
-	}
-	
-	return html;
-};
-
-var makeSearchResult = function(result) {
-	var html = "";
-	
-	if(result.blog !== null && result.blog.length !== 0) {
-		html = "<div class='page-header'><h4>Blog</h4></div>";
-		html += makeBlogResult(result.blog[0].daum, result.blog[1].naver);
-	}
-	if(result.encyclopedia !== null && result.encyclopedia.length !== 0) {
-		html += "<div class='page-header'><h4>Encyclopedia</h4></div>";
-		html += makeEncyclopediaResult(result.encyclopedia[0].naver);
-	}
-	if(result.image !== null && result.image.length !== 0) {
-		html += "<div class='page-header'><h4>Image</h4></div>";
-		html += makeImageResult(result.image[0].daum, result.image[1].naver);
-	}
-	
-	return html;
-};
-
 $(document).ready(function() {
 	var keyword = getParameter('keyword');
 	
@@ -154,12 +65,6 @@ $(document).ready(function() {
 			}
 			// dictionaryList
 			console.log(result);
-		});
-		
-		search(keyword, function(result) {
-			console.log(result);
-			$('#searchList').append(makeSearchResult(result));
-			$('.loading').hide();
 		});
 	}
 	

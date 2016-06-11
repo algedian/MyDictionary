@@ -1,4 +1,7 @@
-var meshServerAddress = 'http://localhost:3000';
+$.holdReady(true);
+$.getScript("js/header.js", function() {
+    $.holdReady(false);
+});
 
 var call = function(url, type, contentType, data, success, error) {
 	if(data) {
@@ -91,12 +94,6 @@ var documentUpdate = function(keyword, document, success, error) {
 
 var documentDelete = function(keyword, success) {
 	var url = meshServerAddress + '/endpoint/documentDelete';
-	
-	call(url, 'POST', commonContentType, JSON.stringify({keyword:keyword}), success, commonErr);
-};
-
-var search = function(keyword, success) {
-	var url = meshServerAddress + '/endpoint/searchMetaByKeyword';
 	
 	call(url, 'POST', commonContentType, JSON.stringify({keyword:keyword}), success, commonErr);
 };

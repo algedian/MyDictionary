@@ -1,10 +1,9 @@
 package metasearch.manager;
- 
+
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;

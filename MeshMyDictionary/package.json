@@ -14,7 +14,6 @@
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "express-session": "^1.7.6",
-    "xmlhttprequest": "1.4.0",
-    "request": "*"
+    "xmlhttprequest": "1.4.0"
   }
 }
