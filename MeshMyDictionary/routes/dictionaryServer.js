@@ -5,7 +5,6 @@ var logErr = require('./common').logErr;
 
 var dictionaryServerAddress = 'http://dijkstra.ajou.ac.kr:8080/MyDictionaryMVC';
 // var dictionaryServerAddress = 'localhost';
-var dictionaryServerPort = '8080';
 
 exports.request = function(path, method, data, success, fail) {
 	logYellow('ServiceManager::requestDictionaryServer');

@@ -1,6 +1,7 @@
 package metasearch.common;
 
 import java.util.Set;
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 /**

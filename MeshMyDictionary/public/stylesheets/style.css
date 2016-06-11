@@ -29,6 +29,20 @@ body {
 	border-color: #bce8f1;
 }
 
+#search-result-title {
+	background-color: #d9edf7;
+	border-bottom-style: hidden;
+	border-color: #bce8f1;
+}
+
+#search-result-content {
+	border-top-style: hidden;
+	border-color: #bce8f1;
+}
+#search-result-image-content {
+	border-style:hidden;
+}
+
 #test-red {
 	background-color: red;
 }

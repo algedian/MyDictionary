@@ -3,8 +3,20 @@
     <head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script>
+		$.get("http://dijkstra.ajou.ac.kr:8181/MetaSearch-1.0-SNAPSHOT/metasearch/getSearchResult", {q:'flower', category:'blog'},function(data) {
+                console.log("Data Loaded: " + data);  
+            }, function(e) {
+                console.log('err');
+                console.log(e);
+            });  
+        </script>
     </head>
     <body>
         <h1>Hello World!</h1>
     </body>
+    
+    
 </html>

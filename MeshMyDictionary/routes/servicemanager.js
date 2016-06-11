@@ -10,6 +10,7 @@ var logErr = require('./common').logErr;
 
 var models = require('./models');
 var dictionaryServer = require('./dictionaryServer');
+var metasearchServer = require('./metasearchServer');
 
 
 exports.index = function(req, res) {
@@ -478,5 +479,54 @@ exports.documentDelete = function(req, res) {
 exports.searchMetaByKeyword = function(req, res) {
 	logYellow('ServiceManager::searchMetaByKeyword');
 	
-	// 여따 메타 서치랑 연결하면 됨
+	var keyword = req.body.keyword;
+	
+	/**
+	 *     BLOG("blog")
+	 *     ENCYCLOPEDIA("encyclopedia")
+	 *     IMAGE("image")
+	 *     NEWS("news")
+	 *     VIDEO("video")
+	 *     WEB("web")
+	 * */
+	// 시발 나도 모르겠다 지옥 ㄱ
+	var searchModel = {
+		q: keyword,
+		category: 'blog'
+	};
+	var result = {
+		blog: null,
+		encyclopedia: null,
+		image: null,
+		news: null,
+		video: null,
+		web: null
+	};
+	process.nextTick(function() {
+		metasearchServer.request({q:keyword, category:'blog'}, function(body) {	result.blog = JSON.parse(body);	});	});
+	process.nextTick(function() {
+		metasearchServer.request({q:keyword, category:'encyclopedia'}, function(body) {	result.encyclopedia = JSON.parse(body);	});	});
+	process.nextTick(function() {
+		metasearchServer.request({q:keyword, category:'image'}, function(body) { result.image = JSON.parse(body); });	});
+	process.nextTick(function() {
+		metasearchServer.request({q:keyword, category:'news'}, function(body) {	result.news = JSON.parse(body);	});	});
+	process.nextTick(function() {
+		metasearchServer.request({q:keyword, category:'video'}, function(body) {result.video = JSON.parse(body); });	});
+	process.nextTick(function() {
+		metasearchServer.request({q:keyword, category:'web'}, function(body) {
+			result.web = JSON.parse(body);
+				logBlue(result.blog === null ? 'null' : 'blog');
+				logBlue(result.encyclopedia === null ? 'null' : 'encyclopedia');
+				logBlue(result.image === null ? 'null' : 'image');
+				logBlue(result.news === null ? 'null' : 'news');
+				logBlue(result.video === null ? 'null' : 'video');
+				logBlue(result.web === null ? 'null' : 'web');
+				
+				// video가 계속 null 뜬당
+				
+				return res.status(200).type('application/json;charset=UTF-8').json(result);
+			}, function(err) {
+				return res.status(500).json({err:'MetasearchServer return:' + err});
+			});
+		}); 
 };
