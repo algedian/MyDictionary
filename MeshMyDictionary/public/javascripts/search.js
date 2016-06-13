@@ -39,11 +39,12 @@ var makeDictionaryTime = function(dictionary) {
 	return date;
 };
 
-var makeScrapHtml = function(link, data) {
+var makeScrapHtml = function(title, link, data) {
+	title = title.replace(/'/g, "");
 	link = link.replace(/'/g, "");
 	data = data.replace(/'/g, "");
 	var html = "<div class='col-xs-1'>";
-		html += "<button type='button' class='btn btn-info btn-sm scrap' data-link='" + link + "' data-data='" + data + "'>Scrap</button>";
+		html += "<button type='button' class='btn btn-info btn-sm scrap' data-title='" + title + "' data-link='" + link + "' data-data='" + data + "'>Scrap</button>";
 		html += "</div>";
 	return html;
 };
@@ -55,7 +56,7 @@ var makeTextHTML = function(site, link, title, content) {
     html += "<div class='list-group-item' id='search-result-content'>";
     html += "<div class='row'>";
     html += "<div class='col-xs-11'>" + content + "</div>";
-    html += makeScrapHtml(link, content);
+    html += makeScrapHtml(title, link, content);
     html += "</div>"; /* end of row */
     html += "</div>"; /* end of list-group-item */
 	
@@ -96,7 +97,7 @@ var makeEncyclopediaResult = function(naver) {
 			html += "<img src='" + naver.items[i].thumbnail + "' class='img-rounded' alt='Null img' width='100%' height='30'>";
 			html += "</div>"; /* end of col-xs-2 */
 			html += "<div class='col-xs-9' id='search-result-content'>" + naver.items[i].description + "</div>"
-			html += makeScrapHtml(naver.items[i].link, naver.items[i].description);
+			html += makeScrapHtml(naver.items[i].title, naver.items[i].link, naver.items[i].description);
 			html += "</div>"; /* end of row */
 			html += "</div>"; /* end of list-group-item */
 			html += "<p></p>";
@@ -183,20 +184,22 @@ var makeSearchResult = function(result) {
 		html += "<div class='page-header'><h4>Image</h4></div>";
 		html += makeImageResult(result.image[0].daum, result.image[1].naver);
 	}
-/*	if(typeof(result.video) !== 'undefined' && result.video !== null && result.video.length !== 0) {
+	if(typeof(result.video) !== 'undefined' && result.video !== null && result.video.length !== 0) {
 		html += "<div class='page-header'><h4>Video</h4></div>";
 		html += makeVideoResult(result.video[0].daum, result.video[1].youtube);
-	}*/
+	}
 	
 	return html;
 };
 
 var scrapHandler = function() {
 	$('.scrap').click(function() {
+		var title = $(this).data('title');
 		var link = $(this).data('link');
 		var data = $(this).data('data');
 		
-		$('#document').val($('#document').val() + "\n" + data + "\nref: " + link);
+		var linkHTML = "<a href='" + link + "'>" + title + "</a>";
+		$('#document').val($('#document').val() + "\n" + data + "\nref: " + linkHTML + "\n");
 	    if($('#document').length) {
 	    	$('#document').scrollTop($('#document')[0].scrollHeight - $('#document').height());
 	    }
@@ -223,7 +226,7 @@ $(document).ready(function() {
 			}
 			
 			if(friendsDictionaryList.length === 0 ) {
-				// 아몰랑!
+				$('#dictionaryList').hide();
 			} else {
 				$('#dictionaryList').append(makeFriendsDictionaryList(friendsDictionaryList, keyword));
 			}

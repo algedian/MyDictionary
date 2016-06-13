@@ -41,3 +41,7 @@ body {
 #test-blue {
 	background-color: blue;
 }
+.document-view{
+    white-space: pre-line;
+}
+
