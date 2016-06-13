@@ -39,26 +39,27 @@ var makeDictionaryTime = function(dictionary) {
 	return date;
 };
 
-var makeScrapHtml = function(title, link, data) {
-	title = title.replace(/'/g, "");
-	link = link.replace(/'/g, "");
-	data = data.replace(/'/g, "");
+var makeScrapHtml = function(title) {
+	title = encodeURI(title);
+
 	var html = "<div class='col-xs-1'>";
-		html += "<button type='button' class='btn btn-info btn-sm scrap' data-title='" + title + "' data-link='" + link + "' data-data='" + data + "'>Scrap</button>";
+		html += "<button type='button' class='btn btn-info btn-sm scrap' data-title='" + title + "'>Scrap</button>";
 		html += "</div>";
 	return html;
 };
 
 var makeTextHTML = function(site, link, title, content) {
-	var html = "<a class='list-group-item' id='search-result-title' href='" + link + "' target='_blank'>";
+	var html = "<div class='list-item-wrapper'>"; 
+	html += "<a class='list-group-item' id='search-result-title' href='" + link + "' target='_blank'>";
 	html += title + "<strong> -- " + site + "</strong>";
 	html += "</a>";
     html += "<div class='list-group-item' id='search-result-content'>";
     html += "<div class='row'>";
     html += "<div class='col-xs-11'>" + content + "</div>";
-    html += makeScrapHtml(title, link, content);
+    html += makeScrapHtml(title);
     html += "</div>"; /* end of row */
     html += "</div>"; /* end of list-group-item */
+    html += "</div>"; /* end of list-item-wrapper */
 	
     return html;
 };
@@ -88,18 +89,20 @@ var makeEncyclopediaResult = function(naver) {
 	
 	if(typeof(naver) !== 'undefined') {
 		for(var i = naver.items.length - 1; i >= 0; i--) {
+			html += "<div class='list-item-wrapper'>";
 			html += "<a class='list-group-item' id='search-result-title' href='" + naver.items[i].link + "' target='_blank'>";
 			html += naver.items[i].title + "<strong> -- Naver</strong>";
 			html += "</a>";
 			html += "<div class='list-group-item' id='search-result-content'>";
 			html += "<div class='row'>"
-			html += "<div class='col-xs-2'>";
+			html += "<div class='col-xs-1'>";
 			html += "<img src='" + naver.items[i].thumbnail + "' class='img-rounded' alt='Null img' width='100%' height='30'>";
 			html += "</div>"; /* end of col-xs-2 */
-			html += "<div class='col-xs-9' id='search-result-content'>" + naver.items[i].description + "</div>"
-			html += makeScrapHtml(naver.items[i].title, naver.items[i].link, naver.items[i].description);
+			html += "<div class='col-xs-10' id='search-result-content'>" + naver.items[i].description + "</div>"
+			html += makeScrapHtml(naver.items[i].title);
 			html += "</div>"; /* end of row */
 			html += "</div>"; /* end of list-group-item */
+			html += "</div>"; /* end of list-item-wrapper */
 			html += "<p></p>";
 		}
 	}
@@ -194,9 +197,9 @@ var makeSearchResult = function(result) {
 
 var scrapHandler = function() {
 	$('.scrap').click(function() {
-		var title = $(this).data('title');
-		var link = $(this).data('link');
-		var data = $(this).data('data');
+		var title = decodeURI($(this).data('title'));
+		var link = $(this).closest('.list-item-wrapper').find('a.list-group-item').attr('href');
+		var data = $(this).closest('.list-item-wrapper').find('div.col-xs-11').html();
 		
 		var linkHTML = "<a href='" + link + "'>" + title + "</a>";
 		$('#document').val($('#document').val() + "\n" + data + "\nref: " + linkHTML + "\n");
