@@ -18,15 +18,6 @@ import metasearch.workers.YoutubeSearchWorker;
 @Stateless
 public class MetaSearchWorkerFactoryImpl implements MetaSearchWorkerFactory {
 
-    /**
-     * returns specific NaverSearcher class by category.
-     *
-     * @param vendor
-     * @param latch
-     * @param category
-     * @param keyword
-     * @return MetaSearchWorker: specific search worker object
-     */
     @Override
     public MetaSearchWorker getMetaSearchWorker(String vendor, CountDownLatch latch, String keyword, String category) {
         System.out.println("MetaSearchWorkerFactoryImpl.getMetaSearchWorker");
@@ -46,16 +37,9 @@ public class MetaSearchWorkerFactoryImpl implements MetaSearchWorkerFactory {
             worker = new YoutubeSearchWorker();
             worker.initialize(latch, keyword, category);
         }
-
         return worker;
     }
 
-    /**
-     * provide vendors which provide search service for specific category.
-     *
-     * @param category
-     * @return Vendor[]: array of Vendors
-     */
     @Override
     public Vendor[] getVendors(String category) {
         System.out.println("MetaSearchWorkerFactoryImpl.getVendors");

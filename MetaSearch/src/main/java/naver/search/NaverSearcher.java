@@ -24,14 +24,13 @@ public abstract class NaverSearcher {
     protected String clientSecret = "hhMIIS1Ci5";
 
     protected String query; //required, search query encoding to UTF-8.
-    protected int display = 10; //selected, 10(default),100(maximum) set number of displayed result
+    protected int display = 20; //selected, 10(default),100(maximum) set number of displayed result
     protected int start = 1; //selected ,1(default), 1000(maximum). search starting point.
     protected String url = "https://openapi.naver.com/v1/search/"; //base url about request
 
     protected NaverSearchResult result = null;
 
     /**
-     *
      * search and return the search results with keyword
      *
      * @param keyword

@@ -10,5 +10,12 @@ import java.util.HashMap;
  */
 public interface MetaSearchFacade {
 
+    /**
+     * It returns about search result that 'MetaSearchWorker' using keyword, category
+     * 
+     * @param keyword
+     * @param category
+     * @return ArrayList<HashMap> - success: search result / fail: null ArrayList
+     */
     public ArrayList<HashMap> search(String keyword, String category);
 }

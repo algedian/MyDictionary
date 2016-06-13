@@ -1,7 +1,5 @@
 package metasearch.manager;
 
-import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import metasearch.workers.MetaSearchWorker;
 import metasearch.common.Vendor;
@@ -13,7 +11,22 @@ import metasearch.common.Vendor;
  */
 public interface MetaSearchWorkerFactory {
 
+    /**
+     * returns specific MetaSearcher class by category and the worker is initialized. (Naver, Daum, Youtube)
+     *
+     * @param vendor
+     * @param latch
+     * @param category
+     * @param keyword
+     * @return MetaSearchWorker: specific search worker object
+     */
     public MetaSearchWorker getMetaSearchWorker(String vendor, CountDownLatch latch, String keyword, String category);
 
+    /**
+     * provides vendors which provide search service for specific category.
+     *
+     * @param category
+     * @return Vendor[]: array of Vendors
+     */
     public Vendor[] getVendors(String category);
 }

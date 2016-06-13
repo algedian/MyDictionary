@@ -14,12 +14,6 @@ import naver.searchImpl.NaverWebSearcher;
  */
 public class NaverSearcherFactoryImpl implements NaverSearcherFactory {
 
-    /**
-     * returns specific NaverSearcher class by category.
-     *
-     * @param category
-     * @return NaverSearcher: specific searcher object
-     */
     @Override
     public NaverSearcher getNaverSearcher(String category) {
         System.out.println("NaverSearcherFactory.getNaverSearcher");

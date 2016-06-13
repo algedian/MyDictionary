@@ -25,8 +25,7 @@ public class DaumSearchResult {
     private String result; //number of displayed results in one page
     private String totalCount; //whole count of result(estimation)
     private String pageCount; //number of available results (estimation)
-    //private String start; //starting point in results //maybe not in daum api
-    //private String display; //the number of searched result //maybe not in daum api
+
     private ArrayList<HashMap<String, String>> searchItems; //each item is one search result including title, link, property according to category.
 
     public DaumSearchResult() {
@@ -45,7 +44,7 @@ public class DaumSearchResult {
      */
     public void parseJson(String jsonString) {
         System.out.println("DaumSearchResult.constructor with jsonString");
-
+        //System.out.println("jsonString: " + jsonString);
         searchItems.clear();
 
         Gson gson = new Gson();
@@ -53,32 +52,44 @@ public class DaumSearchResult {
         }.getType();
         HashMap<String, Object> queryResult = gson.fromJson(jsonString, type);
 
-        LinkedTreeMap<String, Object> channel = (LinkedTreeMap<String, Object>) queryResult.get("channel");
-        //wrap over 'channel'
-
-        for (Map.Entry<String, Object> entry : channel.entrySet()) {
-            //System.out.println(entry.getKey() + ": " + entry.getValue());
-            if (entry.getKey().equalsIgnoreCase("result")) {
-                result = (String) (entry.getValue());
-            } else if (entry.getKey().equalsIgnoreCase("totalCount")) {
-                totalCount = (String) (entry.getValue());
-            } else if (entry.getKey().equalsIgnoreCase("pageCount")) {
-                pageCount = (String) (entry.getValue());
-            } else if (entry.getKey().equalsIgnoreCase("item")) {
-                //System.out.println(entry.getValue());
-                ArrayList<LinkedTreeMap<String, String>> itemlist = (ArrayList<LinkedTreeMap<String, String>>) entry.getValue();
-                for (LinkedTreeMap<String, String> item : itemlist) {
-                    //LinkedTreeMap<String, String> item = itemlist.get(0);
-                    //System.out.println("itemlist size: " + itemlist.size());
-                    HashMap<String, String> temp = new HashMap<>();
-                    for (Map.Entry<String, String> entry2 : item.entrySet()) {
-                        //System.out.println(entry2.getKey() + ":: " + entry2.getValue());                    
-                        temp.put(entry2.getKey(), entry2.getValue());
+        if (queryResult != null) {
+            LinkedTreeMap<String, Object> channel = (LinkedTreeMap<String, Object>) queryResult.get("channel");
+            //wrap over 'channel'
+            if (channel != null) {
+                for (Map.Entry<String, Object> entry : channel.entrySet()) {
+                    //System.out.println(entry.getKey() + ": " + entry.getValue());
+                    if (entry.getKey().equalsIgnoreCase("result")) {
+                        result = (String) (entry.getValue());
+                    } else if (entry.getKey().equalsIgnoreCase("totalCount")) {
+                        totalCount = (String) (entry.getValue());
+                    } else if (entry.getKey().equalsIgnoreCase("pageCount")) {
+                        pageCount = (String) (entry.getValue());
+                    } else if (entry.getKey().equalsIgnoreCase("item")) {
+                        //System.out.println(entry.getValue());
+                        ArrayList<LinkedTreeMap<String, String>> itemlist = (ArrayList<LinkedTreeMap<String, String>>) entry.getValue();
+                        for (LinkedTreeMap<String, String> item : itemlist) {
+                            //LinkedTreeMap<String, String> item = itemlist.get(0);
+                            //System.out.println("itemlist size: " + itemlist.size());
+                            HashMap<String, String> temp = new HashMap<>();
+                            for (Map.Entry<String, String> entry2 : item.entrySet()) {
+                                //System.out.println(entry2.getKey() + ":: " + entry2.getValue());
+                                String str = entry2.getValue();
+                                /*
+                                System.out.println(str);
+                                if(str.length() > 0)
+                                    str = str.substring(1, str.length()-1);
+                                System.out.println(str);
+                                */
+                                temp.put(entry2.getKey(), str);
+                            }
+                            searchItems.add(temp);
+                            //System.out.println(temp);
+                        }
                     }
-                    searchItems.add(temp);
-                    //System.out.println(temp);
                 }
             }
+        } else {
+
         }
     }
 

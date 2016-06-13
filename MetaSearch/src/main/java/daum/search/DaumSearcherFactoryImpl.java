@@ -13,12 +13,6 @@ import metasearch.common.SearchCategory;
  */
 public class DaumSearcherFactoryImpl implements DaumSearcherFactory {
 
-    /**
-     * returns specific DaumSearcher class by category.
-     *
-     * @param category
-     * @return DaumSearcher: specific searcher object (blog, image, video, web)
-     */
     @Override
     public DaumSearcher getDaumSearcher(String category) {
         System.out.println("DaumSearcherFactory.getDaumSearcher");

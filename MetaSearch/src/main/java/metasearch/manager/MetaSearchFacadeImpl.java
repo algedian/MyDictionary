@@ -21,7 +21,7 @@ public class MetaSearchFacadeImpl implements MetaSearchFacade {
     @EJB
     private MetaSearchWorkerFactory factory;
 
-    private ArrayList<HashMap> resultList; //최종적으로 MetaSearch 쪽으로 리턴할 결과 컨테이너 hashmap
+    private ArrayList<HashMap> resultList; //hashmap about result container that is returned to 'MetaSearch'finally
     private CountDownLatch latch; //It is need to have a latch counter that collect all thread's finished job
 
     public MetaSearchFacadeImpl() {
