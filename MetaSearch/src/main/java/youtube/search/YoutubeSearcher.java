@@ -29,7 +29,7 @@ public class YoutubeSearcher {
     private final JsonFactory JSON_FACTORY = new JacksonFactory();
 
     //upper limit per page = 50
-    private final long MAX_RETURNED_SIZE = 20;  //should be long type
+    private final long MAX_RETURNED_SIZE = 5;  //should be long type
 
     // Global instance of Youtube object to make all API requests
     private YouTube youtube;
