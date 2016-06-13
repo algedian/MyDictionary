@@ -1,6 +1,7 @@
 var meshServerAddress = 'http://dijkstra.ajou.ac.kr:3000';
 // var meshServerAddress = 'http://localhost:3000';
 
+
 var call = function(url, type, contentType, data, success, error) {
 	if(data) {
 		$.ajax({
