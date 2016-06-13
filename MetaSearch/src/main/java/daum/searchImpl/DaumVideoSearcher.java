@@ -26,6 +26,7 @@ public class DaumVideoSearcher extends DaumSearcher {
     public HashMap search(String keyword) {
         System.out.println("DaumVideoSearcher.search");
 
+        result = "5";
         url += "vclip?apikey=" + apiKey + "&output=" + output + "&pageno=" + pageno + "&result=" + result + "&sort=" + sort;
 
         daumSearchResult = new DaumSearchResult(SearchCategory.VIDEO.getName());

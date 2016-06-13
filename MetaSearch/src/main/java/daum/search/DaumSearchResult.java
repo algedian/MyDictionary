@@ -75,11 +75,11 @@ public class DaumSearchResult {
                                 //System.out.println(entry2.getKey() + ":: " + entry2.getValue());
                                 String str = entry2.getValue();
                                 /*
-                                System.out.println(str);
-                                if(str.length() > 0)
-                                    str = str.substring(1, str.length()-1);
-                                System.out.println(str);
-                                */
+                                 System.out.println(str);
+                                 if(str.length() > 0)
+                                 str = str.substring(1, str.length()-1);
+                                 System.out.println(str);
+                                 */
                                 temp.put(entry2.getKey(), str);
                             }
                             searchItems.add(temp);

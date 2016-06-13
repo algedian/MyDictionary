@@ -1,5 +1,6 @@
 package metasearch.manager;
 
+import metasearch.facade.MetaSearchFacade;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;

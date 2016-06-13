@@ -1,4 +1,4 @@
-package metasearch.manager;
+package metasearch.facade;
 
 import java.util.ArrayList;
 import java.util.HashMap;

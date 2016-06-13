@@ -1,4 +1,4 @@
-package metasearch.manager;
+package metasearch.facade;
 
 import java.util.concurrent.CountDownLatch;
 import metasearch.workers.MetaSearchWorker;
