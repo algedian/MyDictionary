@@ -40,6 +40,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserModel login(String idTokenString) throws Exception {
+		
+		//this code are from https://developers.google.com/identity/sign-in/web/server-side-flow#step_6_send_the_authorization_code_to_the_server
 		httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 
 		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(httpTransport, JSON_FACTORY)
