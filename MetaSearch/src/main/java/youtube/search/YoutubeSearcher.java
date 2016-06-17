@@ -55,12 +55,12 @@ public class YoutubeSearcher {
 
     }
 
-    public String requestYoutube(String keyword) { //currently we get the result as list
-
+    public String requestYoutube(String keyword) {
         String resultJsonString = "";
 
         try {
             /*
+            Borrowed from https://developers.google.com/youtube/v3/docs/search/list 
              * The YouTube object is used to make all API requests. The last argument is required, but
              * because we don't need anything initialized when the HttpRequest is initialized, we override
              * the interface and provide a no-op function.
@@ -75,9 +75,7 @@ public class YoutubeSearcher {
             search.setKey(API_KEY);
             search.setQ(keyword);
             search.setType("video"); //this is our category.  Could be playlist,channel,...
-
-            ////select necessary fields to make calls more efficient
-            //search.setFields("items(id/kind,id/videoId,snippet/title,snippet/thumbnails/default/url)"); //in that case:  kind, videoId, title, thumbnails(default)
+            
             search.setMaxResults(MAX_RETURNED_SIZE);
 
             SearchListResponse searchResponse = search.execute();
