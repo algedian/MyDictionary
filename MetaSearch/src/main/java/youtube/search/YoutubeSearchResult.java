@@ -2,8 +2,9 @@ package youtube.search;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.ejb.Stateless;
+
 import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,9 +24,10 @@ public class YoutubeSearchResult {
     private String regionCode;
     private ArrayList<HashMap<String, String>> searchItems;
 
+    // There are more parameters in youtube api, but we will not need
     //// Statistics part
     // long viewCount, likeCount, dislikeCount, favoriteCount, commentCount
-    //// Status part - I think these we will not need
+    //// Status part
     // string uploadStatus, failureReason, rejectionReason, privacyStatus
     public YoutubeSearchResult() {
         searchItems = new ArrayList<>();
@@ -109,7 +111,7 @@ public class YoutubeSearchResult {
         map.put("resultsPerPage", resultsPerPage);
         map.put("regionCode", regionCode);
         map.put("items", searchItems);
-        return map;
-    }
+		return map;
+	}
 
 }
