@@ -30,7 +30,6 @@ public class DaumSearchWorker extends MetaSearchWorker {
      * @param keyword
      * @param category
      */
-    //-
     @Override
     public void initialize(CountDownLatch latch, String keyword, String category) {
         super.initialize(latch, keyword, category);

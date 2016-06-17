@@ -1,11 +1,11 @@
-$.holdReady(true);
-$.getScript("js/header.js", function() {
-    $.holdReady(false);
-});
+var meshServerAddress = 'http://dijkstra.ajou.ac.kr:3000';
+// var meshServerAddress = 'http://localhost:3000';
+
 
 var call = function(url, type, contentType, data, success, error) {
 	if(data) {
 		$.ajax({
+			timeout: 20000,
 			url : url,
 			type : type,
 			contentType : contentType,
@@ -35,12 +35,10 @@ var login = function(idToken, success, fail) {
 	call(url, 'POST', commonContentType, JSON.stringify({idToken:idToken}), success, fail);
 }
 
-var setSignOut = function() {
+var setSignOut = function(success) {
 	var url = meshServerAddress + '/endpoint/logout';
 	
-	call(url, 'POST', commonContentType, null, function(result) {
-		console.log("result: ", result);
-	}, commonErr);
+	call(url, 'POST', commonContentType, null, success, commonErr);
 };
 
 var initSession = function(success) {
@@ -96,4 +94,10 @@ var documentDelete = function(keyword, success) {
 	var url = meshServerAddress + '/endpoint/documentDelete';
 	
 	call(url, 'POST', commonContentType, JSON.stringify({keyword:keyword}), success, commonErr);
+};
+
+var search = function(keyword, success, error) {
+	var url = meshServerAddress + '/endpoint/searchMetaByKeyword';
+	
+	call(url, 'POST', commonContentType, JSON.stringify({keyword:keyword}), success, error);
 };

@@ -5,10 +5,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>Sample Page</title>
+	<title>Login Page</title>
 
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap/bootstrap-theme.min.css" rel="stylesheet">
+
+	<link href="css/style.css" rel="stylesheet">
 
 	<!-- Specify google app client ID -->
 	<meta name="google-signin-scope" content="profile email">
@@ -20,15 +22,49 @@
 </head>
 
 <body>
-	<h1>This is a test page for google web login</h1>
-
-	<div class="g-signin2" data-onsuccess="onSignIn"></div>
-	<a href="#" onclick="signOut();">Sign out</a>
+<!-- header -->
+	<div class="header">
+		<div id="banner-wrapper">
+			<nav class="navbar navbar-full navbar-inverse">
+				<div class="container">	
+					<a class="navbar-brand" href="#">MyDictionary</a>
+<!-- 					<ul class="nav navbar-nav navbar-left">
+						<li class="nav-item"><a class="nav-link" href="/main">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="/friend">Friends</a></li>
+						<li class="nav-item"><a class="nav-link" href="/documentRoadMap">Dictionaries</a></li>
+						<li class="nav-item"><a class="nav-link" href="/?q=signOut">Logout</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">Help</a></li>
+					</ul>
+					<form class="navbar-form navbar-right" method="get" action="search">
+						<input type="text" class="form-control" name="keyword" placeholder="Search...">
+						<button class="btn btn-default" id="search-button" type="submit">Search</button>
+					</form> -->
+				</div> <!-- end of container -->
+			</nav>
+		</div> <!-- end of banner-wrapper -->
+	</div> <!-- end of header -->
+	
+	<!-- body -->
+	<div class="body">
+		<div class="container">
+<!--  			<div class="g-signin2" data-onsuccess="onSignIn"></div>
+			<a href="#" onclick="signOut();">Sign out</a> -->
+<!--  			<div class="jumbotron text-center" id="main-container"> -->
+ 				<div class="row gSignInWrapper">
+ 					<div class="col-xs-4"></div>
+ 					<div class="col-xs-4">
+						<div class="customGPlusSignIn" id="customBtn">
+		<!-- 					<span class="icon"></span> <span class="buttonText">Google</span> -->
+						</div>
+					</div>
+					<div class="col-xs-4"></div>
+				</div>
+			</div>
+		<!-- </div> --> <!-- end of container -->
+	</div> <!-- end of body -->
 	
 	<script src="js/googleAuth.js"></script>
 	
-	<!-- Google Platfom Library api -->
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<!-- bootstrap -->
 	<script src="js/bootstrap/tether.min.js"></script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>

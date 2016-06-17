@@ -12,7 +12,7 @@ $(document).ready(function() {
 					+ "<h1>" + document.keyword + "</h1>"
 					+ "</div>"
 					+ "<div class='jumbotron' id='main-container'>"
-					+ "<xmp>" + document.document + "</xmp>"
+					+ "<div class='document-view'>" + document.document + "</div>"
 					+ "<br/><br/><strong>This document was created by " + result.userName + " at " + new Date(document.createTime).toUTCString() + "</strong>";
 				if(document.updateTime && document.updateTime !== document.createTime) {
 					html += "<p></p><strong>This document was modified at " + new Date(document.updateTime).toUTCString() + "</strong>";

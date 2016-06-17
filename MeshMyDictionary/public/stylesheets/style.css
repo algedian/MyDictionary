@@ -1,13 +1,4 @@
 @CHARSET "UTF-8";
-/* body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
- */
 
 body {
     background-color: #f5f8fa;
@@ -29,6 +20,20 @@ body {
 	border-color: #bce8f1;
 }
 
+#search-result-title {
+	background-color: #d9edf7;
+	border-bottom-style: hidden;
+	border-color: #bce8f1;
+}
+
+#search-result-content {
+	border-top-style: hidden;
+	border-color: #bce8f1;
+}
+#search-result-image-content {
+	border-style:hidden;
+}
+
 #test-red {
 	background-color: red;
 }
@@ -36,3 +41,7 @@ body {
 #test-blue {
 	background-color: blue;
 }
+.document-view{
+    white-space: pre-line;
+}
+

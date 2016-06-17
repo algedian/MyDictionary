@@ -8,7 +8,7 @@ import naver.search.NaverSearcher;
 import naver.search.NaverSearchResult;
 
 /**
- * - Searcher class for Naver Blog search.
+ * Searcher class for Naver Blog search.
  *
  * @author Yewon Kim
  */
@@ -37,5 +37,4 @@ public class NaverBlogSearcher extends NaverSearcher {
         System.out.println("NaverBlogSearcher returns");
         return map;
     }
-
 }

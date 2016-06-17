@@ -1,5 +1,6 @@
 package metasearch.manager;
 
+import metasearch.facade.MetaSearchFacade;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +23,8 @@ public class MetaSearch {
     MetaSearchFacade search;
 
     /**
-     * result's characterset = UTF-8
+     * Returns JSON string that is result about keyword and category
+     * The string is encoded by UTF-8.
      *
      * @param keyword
      * @param category

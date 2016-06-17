@@ -10,6 +10,7 @@ var logErr = require('./common').logErr;
 
 var models = require('./models');
 var dictionaryServer = require('./dictionaryServer');
+var metasearchServer = require('./metasearchServer');
 
 
 exports.index = function(req, res) {
@@ -121,12 +122,16 @@ exports.initSession = function(req, res) {
 exports.logout = function(req, res) {
 	logYellow('ServiceManager::logout');
 
-	req.session = null;
-	res.clearCookie('fhdlldfdfjfdj');
-	log('clear session');
-
-	return res.status(200).type('application/json;charset=UTF-8').json({
-		success : 'success'
+	req.session.destroy(function(err) {
+		if(err) {
+			logErr(err);
+		}
+		req.session = null;
+		res.clearCookie('fhdlldfdfjfdj');
+		log('clear session');
+		return res.status(200).type('application/json;charset=UTF-8').json({
+			success : 'success'
+		});
 	});
 };
 
@@ -478,5 +483,70 @@ exports.documentDelete = function(req, res) {
 exports.searchMetaByKeyword = function(req, res) {
 	logYellow('ServiceManager::searchMetaByKeyword');
 	
-	// 여따 메타 서치랑 연결하면 됨
+	var keyword = req.body.keyword;
+	
+	/**
+	 *     BLOG("blog")
+	 *     ENCYCLOPEDIA("encyclopedia")
+	 *     IMAGE("image")
+	 *     NEWS("news")
+	 *     VIDEO("video")
+	 *     WEB("web")
+	 * */
+	var searchModel = {
+		q: keyword,
+		category: 'blog'
+	};
+	var result = {
+		blog: null,
+		encyclopedia: null,
+		image: null,
+		news: null,
+		video: null,
+		web: null
+	};
+	var endLog = function() {
+		logBlue(result.blog === null ? 'null' : 'blog');
+		logBlue(result.encyclopedia === null ? 'null' : 'encyclopedia');
+		logBlue(result.image === null ? 'null' : 'image');
+		logBlue(result.news === null ? 'null' : 'news');
+		logBlue(result.video === null ? 'null' : 'video');
+		logBlue(result.web === null ? 'null' : 'web');
+	};
+	var end = function() {
+		log('success');
+		endLog();
+		
+		return res.status(200).type('application/json;charset=UTF-8').json(result);
+	};
+	var endErr = function(e) {
+		log('error');
+		endLog();
+		
+		return res.status(500).type('application/json;charset=UTF-8').json({ err : 'MetasearchServer return:' + e,	result : result});
+	};
+	var commonErr = function(e) {
+		logErr(e);
+	};
+	
+	var searchImage = function() {
+		metasearchServer.request({q:keyword, category:'image'}, function(body) { result.image = JSON.parse(body); end();}, endErr); };
+	var searchVideo = function() {
+		metasearchServer.request({q:keyword, category:'video'}, function(body) { result.video = JSON.parse(body); searchImage();}, searchImage); };
+
+	var searchBlog = function() {
+		metasearchServer.request({q:keyword, category:'blog'}, function(body) {	result.blog = JSON.parse(body);	}, commonErr);	};
+	var searchEncy = function() {
+		metasearchServer.request({q:keyword, category:'encyclopedia'}, function(body) {	result.encyclopedia = JSON.parse(body);	}, commonErr);	};
+	var searchNews = function() {
+		metasearchServer.request({q:keyword, category:'news'}, function(body) {	result.news = JSON.parse(body);},commonErr);	};
+	var searchWeb = function() {
+		metasearchServer.request({q : keyword, category : 'web'}, function(body) { result.web = JSON.parse(body);}, commonErr); };
+		
+	process.nextTick(searchBlog);
+	process.nextTick(searchEncy);
+	process.nextTick(searchNews);
+	process.nextTick(searchWeb);
+	
+	process.nextTick(searchVideo);
 };

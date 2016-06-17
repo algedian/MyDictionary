@@ -21,18 +21,20 @@ import org.apache.http.util.EntityUtils;
  */
 public abstract class DaumSearcher {
 
-    protected String apiKey = "968f9849c4eaa0ee861f2540e94390f8";
+    protected final String apiKey = "968f9849c4eaa0ee861f2540e94390f8";
 
     protected String query; //required, search query encoding to UTF-8.
-    //protected int display = 10; //selected, 10(default),100(maximum) set number of displayed result //maybe not in daum api
-    //protected int start = 1; //selected ,1(default), 1000(maximum). search starting point. //maybe not in daum api
+    protected String output = "json"; //output type
+    protected String result = "20"; //number of result in one page. 10(default), 1(min), 20(max)
+    protected String pageno = "1"; //page number of search result. 1 to 3 are available.
 
     protected String url = "https://apis.daum.net/search/"; //base url about request
 
     protected DaumSearchResult daumSearchResult = null;
 
     /**
-     * search and return the search results about keyword
+     * search and return the search results about keyword common param in url:
+     * output type, result size, pageno
      *
      * @param keyword
      * @return HashMap: search result container map

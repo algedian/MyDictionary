@@ -10,14 +10,11 @@
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap/bootstrap-theme.min.css" rel="stylesheet">
 	
-	<link href="css/button.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
-	
-	<!-- Specify google app client ID -->
-	<meta name="google-signin-scope" content="profile email">
-	<meta name="google-signin-client_id"
-		content="768889397569-ifca7s46aplo8i4ikt95ba6ihjmmfdlf.apps.googleusercontent.com">
-	
+	<link href="css/button.css" rel="stylesheet">
+
+	<link href="css/loadingbar.css" rel="stylesheet">
+
 	<!-- jQuery -->
 	<script	src="js/jquery-1.12.4.min.js"></script>
 </head>
@@ -33,7 +30,7 @@
 						<li class="nav-item"><a class="nav-link" href="/main">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="/friend">Friends</a></li>
 						<li class="nav-item"><a class="nav-link" href="/documentRoadMap">Dictionaries</a></li>
-						<li class="nav-item"><a class="nav-link" href="/" onclick="signOut();">Logout</a></li>
+						<li class="nav-item"><a class="nav-link" href="/?q=signOut">Logout</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">Help</a></li>
 					</ul>
 					<form class="navbar-form navbar-right" method="get" action="search">
@@ -69,6 +66,16 @@
 			<div class="container col-xs-6" id="metasearch">
 				<div class="page-header">
 					<h1>Search</h1>
+				</div>
+				<div class="loading bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
 				</div>
 				<div class="list-group" id="searchList">
 				</div>
@@ -115,10 +122,7 @@
 	</div> <!-- end of footer -->
 
 	<script src="js/search.js"></script>
-	<script src="js/googleAuth.js"></script>
 	
-	<!-- Google Platfom Library api -->
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<!-- bootstrap -->
 	<script src="js/bootstrap/tether.min.js"></script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>

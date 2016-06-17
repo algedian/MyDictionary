@@ -6,23 +6,20 @@ $.getScript("js/endpoint.js", function() {
 var makeFriendList = function(friendList) {
 	var html = "";
 	for(var i = 0; i < friendList.length; i++) {
-		html += "<div class='row'>"
-			+ "<div class='list-group-item' id='friend-name'>" + friendList[i].name
-			//+ "<button type='button' class='btn btn-danger pull-right' onclick='unfollowFriend(" + friend.index + ")'><span class='glyphicon glyphicon-minus' aria-hidden='true'></span></button>"
+		html += "<div class='list-group-item' id='friend-name'>"
+			+ "<div class='row'>"
+			+ "<div class='col-xs-10'><strong>" + friendList[i].name + "</strong></div>"
+			+ "<div class='col-xs-2'>"
 			+ "<a class='btn icon-btn btn-danger pull-right unfollow' data-index='" + friendList[i].index + "' href='#'>"
 			+ "<span class='glyphicon btn-glyphicon glyphicon-minus img-circle text-danger'></span>"
 			+ "Remove"
 			+ "</a>"
-			+ "</div>"
+			+ "</div>" /* end of col-xs-2 */
+			+ "</div>" /* end of row */
+			+ "</div>" /* end of list-group-item */
 			+ "<div class='list-group-item' id='friend-email'>" + friendList[i].email + "</div>"
-			+ "</div>"
-			+ "<p></p>";
-			
-		/*html += "<div class='list-group-item'>"
-			+ "<div class='container-fluid' id='test-red'><h4 class='list-group-item-heading'>" + friend.name + "</h4></div>"
-			+ "<div class=container-fluid' id='test-blue'><button type='button' class='btn btn-default'><span class='glyphicon glyphicon-minus' aria-hidden='true'></span</button></div>" 
-			+ "<p class='list-group-item-text'>" + friend.email + "</p>"
-			+ "</div>";*/
+			+ "<br />"
+			+ "<br />";
 	}
 	
 	return html;

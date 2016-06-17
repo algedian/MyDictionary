@@ -11,15 +11,10 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
 import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.model.ResourceId;
 import com.google.api.services.youtube.model.SearchListResponse;
-import com.google.api.services.youtube.model.SearchResult;
-import com.google.api.services.youtube.model.Thumbnail;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  *
@@ -34,7 +29,7 @@ public class YoutubeSearcher {
     private final JsonFactory JSON_FACTORY = new JacksonFactory();
 
     //upper limit per page = 50
-    private final long MAX_RETURNED_SIZE = 15;  //should be long type
+    private final long MAX_RETURNED_SIZE = 5;  //should be long type
 
     // Global instance of Youtube object to make all API requests
     private YouTube youtube;
@@ -81,7 +76,7 @@ public class YoutubeSearcher {
             search.setQ(keyword);
             search.setType("video"); //this is our category.  Could be playlist,channel,...
 
-           ////select necessary fields to make calls more efficient
+            ////select necessary fields to make calls more efficient
             //search.setFields("items(id/kind,id/videoId,snippet/title,snippet/thumbnails/default/url)"); //in that case:  kind, videoId, title, thumbnails(default)
             search.setMaxResults(MAX_RETURNED_SIZE);
 
