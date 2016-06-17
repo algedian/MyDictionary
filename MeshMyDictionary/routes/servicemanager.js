@@ -147,7 +147,7 @@ exports.getUserDocumentList = function(req, res) {
 			documentList : req.session.documentList
 		});
 	} else {
-		// 하지만 이 블록이 작동 되는 경우는 없었다고 한다...
+		// but this block may be not executed.
 		var user = req.session.user;
 		var success = function(result) {
 			log(result);
@@ -200,7 +200,7 @@ exports.getFriendList = function(req, res) {
 		
 		return res.status(200).type('application/json;charset=UTF-8').json({friendList: req.session.friendList});
 	} else {
-		// 하지만 이 블록이 작동 되는 경우는 없었다고 한다...
+		// but this block may be not executed.
 		var success = function(result) {
 			log(result);
 			req.session.friendList = JSON.parse(result); 
@@ -245,7 +245,7 @@ var getUserByEmail = function(email, success) {
 exports.followFriend = function(req, res) {
 	logYellow('ServiceManager::followFriend');
 
-	//형식 체크는 귀찮으므로 생략
+	// expression format check is skipped.
 	// /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	
 	if(!req.session.user) {
@@ -387,11 +387,11 @@ exports.searchDocumentByKeyword = function(req, res) {
 	var keyword = req.body.keyword;
 	var user = req.session.user;
 	
-	// document는 모두 session에 있음
+	// documents are all in session.
 	var document = getSessionDocument(req.session.documentList, keyword);
 	
 	dictionaryServer.request('/search/getFriendDocuments', 'POST', models.getSearchModel(user.index, user.userId, keyword), function(result) {
-		// 콜백 지옥 될꺼 같으니, metaSearch에서 가져오는 부분은 따로 하는게 좋을 거 가틈.
+		// It is good to seperate get from metasearch part because of callback hell.
 		var friendsDictionaryList = JSON.parse(result);
 		for(var i = friendsDictionaryList.length - 1; i >= 0 ; i--) {
 			friendsDictionaryList[i].userId = getSessionFriend(req.session.friendList, friendsDictionaryList[i].userId);

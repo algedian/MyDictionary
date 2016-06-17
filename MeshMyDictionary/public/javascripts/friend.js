@@ -80,7 +80,7 @@ $('button#friend-add-btn').click(function() {
 			$('#friend-add-result').empty();
 			$('#friend-add-result').html('<strong>Warning!</strong> This email is not exist');
 		} else {
-			// 이런 경우가 있나?
+			// no such cases
 		}
 	});
 });

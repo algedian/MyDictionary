@@ -50,7 +50,7 @@ function signOut() {
 }
 
 var onSignIn = function(googleUser) {
-	// Useful data for your client-side scripts:
+	// Useful data for client-side scripts:
 	var profile = googleUser.getBasicProfile();
 	console.log("ID: " + profile.getId());
 	console.log('Full Name: ' + profile.getName());
@@ -59,7 +59,7 @@ var onSignIn = function(googleUser) {
 	console.log("Image URL: " + profile.getImageUrl());
 	console.log("Email: " + profile.getEmail());
 
-	// The ID token you need to pass to your backend:
+	// The ID token need to pass to backend:
 	var idToken = googleUser.getAuthResponse().id_token;
 	console.log("ID Token: " + idToken);
     
