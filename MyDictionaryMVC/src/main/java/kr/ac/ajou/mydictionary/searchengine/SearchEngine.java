@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import kr.ac.ajou.mydictionary.document.DocumentModel;
 import kr.ac.ajou.mydictionary.user.UserModel;
 
+/**
+ *
+ * @author kyeonghee
+ *
+ */
 public interface SearchEngine {
 
 	/**

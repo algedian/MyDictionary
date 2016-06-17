@@ -16,7 +16,9 @@ import org.apache.http.util.EntityUtils;
 /**
  * Abstract searcher class for Daum search API. Each searchers of specific
  * categories extends this class.
- *
+ * 
+ * reference url about Daum API: http://developers.daum.net/services/apis/search
+ * 
  * @author kyeonghee
  */
 public abstract class DaumSearcher {
