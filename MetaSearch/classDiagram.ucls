@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.9" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="daum.searchImpl.DaumVideoSearcher" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/daum/searchImpl/DaumVideoSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="749" y="1106"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="daum.searchImpl.DaumWebSearcher" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/daum/searchImpl/DaumWebSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="809" y="1154"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="metasearch.manager.MetaSearchFacade" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/manager/MetaSearchFacade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="232" x="2343" y="590"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="4" language="java" name="metasearch.workers.NaverSearchWorker" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/workers/NaverSearchWorker.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1557" y="637"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="metasearch.workers.MetaSearchWorker" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/workers/MetaSearchWorker.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="619" y="356"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="naver.searchImpl.NaverEncyclopediaSearcher" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/naver/searchImpl/NaverEncyclopediaSearcher.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1445" y="1169"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="naver.searchImpl.NaverBlogSearcher" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/naver/searchImpl/NaverBlogSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1459" y="1222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="metasearch.manager.MetaSearchFacadeImpl" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/manager/MetaSearchFacadeImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="232" x="2456" y="271"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="youtube.search.YoutubeSearcher" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/youtube/search/YoutubeSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="473" y="945"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="daum.search.DaumSearcherFactoryImpl" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/daum/search/DaumSearcherFactoryImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="755" y="713"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="naver.searchImpl.NaverWebSearcher" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/naver/searchImpl/NaverWebSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1486" y="1259"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="12" language="java" name="daum.search.DaumSearcherFactory" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/daum/search/DaumSearcherFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="752" y="847"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <enumeration id="13" language="java" name="metasearch.common.SearchCategory" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/common/SearchCategory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1565" y="379"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="14" language="java" name="metasearch.workers.YoutubeSearchWorker" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/workers/YoutubeSearchWorker.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="498" y="644"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="metasearch.manager.MetaSearch" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/manager/MetaSearch.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="204" x="2212" y="271"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="daum.search.DaumSearcher" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/daum/search/DaumSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1012" y="934"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="17" language="java" name="metasearch.manager.MetaSearchWorkerFactory" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/manager/MetaSearchWorkerFactory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="415" x="2615" y="590"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="18" language="java" name="metasearch.common.SearchResultBean" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/common/SearchResultBean.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1275" y="150"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="metasearch.manager.MetaSearchWorkerFactoryImpl" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/manager/MetaSearchWorkerFactoryImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="415" x="2728" y="271"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="naver.search.NaverSearchResult" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/naver/search/NaverSearchResult.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="243" x="1673" y="1115"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="metasearch.common.ApplicationConfig" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/common/ApplicationConfig.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1917" y="187"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="22" language="java" name="metasearch.common.Vendor" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/common/Vendor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1024" y="318"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="23" language="java" name="metasearch.workers.DaumSearchWorker" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/metasearch/workers/DaumSearchWorker.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1038" y="639"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="daum.searchImpl.DaumBlogSearcher" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/daum/searchImpl/DaumBlogSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="864" y="1220"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="naver.searchImpl.NaverImageSearcher" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/naver/searchImpl/NaverImageSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1509" y="1314"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="naver.search.NaverSearcherFactoryImpl" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/naver/search/NaverSearcherFactoryImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1292" y="759"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="youtube.search.YoutubeSearchResult" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/youtube/search/YoutubeSearchResult.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="487" y="1262"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="naver.searchImpl.NaverNewsSearcher" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/naver/searchImpl/NaverNewsSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1546" y="1340"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="daum.search.DaumSearchResult" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/daum/search/DaumSearchResult.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1168" y="1232"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="daum.searchImpl.DaumImageSearcher" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/daum/searchImpl/DaumImageSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="908" y="1270"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="31" language="java" name="naver.search.NaverSearcherFactory" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/naver/search/NaverSearcherFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1293" y="880"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="32" language="java" name="naver.search.NaverSearcher" project="MetaSearch" 
+    file="/MetaSearch/src/main/java/naver/search/NaverSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1552" y="974"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="33">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="34">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <realization id="35">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <generalization id="36">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <association id="38">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="39" name="searcher"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="42" name="search"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="44">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="32"/>  
+  </generalization>  
+  <association id="45">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="46" name="category"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="48">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="49" name="vendor"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="51">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <association id="52">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="53" name="result"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="56" name="factory"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="59" name="searcher"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="61">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="62">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="63" name="daumSearchResult"/>      
+      <multiplicity id="64" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="65">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="32"/>  
+  </generalization>  
+  <generalization id="66">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <association id="67">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="68" name="searcher"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="70">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="31"/>  
+  </realization>  
+  <generalization id="71">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="32"/>  
+  </generalization>  
+  <generalization id="72">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="32"/>  
+  </generalization>  
+  <realization id="73">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="17"/>  
+  </realization>  
+  <association id="74">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="75" name="result"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="78" name="factory"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="80">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <association id="81">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="82" name="vendor"/>      
+      <multiplicity id="83" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="84">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="32"/>  
+  </generalization>  
+  <association id="85">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="86" name="factory"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
