@@ -10,7 +10,7 @@ import naver.search.NaverSearcherFactoryImpl;
 
 /**
  * SearchWorker thread class for Naver search API that extends MetaSearchWorker.
- *
+ * https://developers.naver.com/products/search
  * @author Yewon Kim
  */
 @Stateless
