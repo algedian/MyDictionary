@@ -14,7 +14,7 @@ derby.log
 spring-test/test-output/
 .gradle
 argfile*
-pom.xml
+# pom.xml
 activemq-data/
 
 /build
@@ -43,5 +43,3 @@ atlassian-ide-plugin.xml
 /JavaApplication1/nbproject/private/
 *.class
 MetaSearch/target/maven-archiver/pom.properties
-*.class
-*.class
