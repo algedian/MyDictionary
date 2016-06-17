@@ -22,6 +22,8 @@ public class MetaSearchFacadeImpl implements MetaSearchFacade {
     private MetaSearchWorkerFactory factory;
 
     private ArrayList<HashMap> resultList; //hashmap about result container that is returned to 'MetaSearch'finally
+   
+    //ref:https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/CountDownLatch.html
     private CountDownLatch latch; //It is need to have a latch counter that collect all thread's finished job
 
     public MetaSearchFacadeImpl() {
